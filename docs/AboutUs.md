@@ -21,14 +21,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Ang Tze Haw Bryan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brainybryan69.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/brainybryan69)]
+[[portfolio](team/brainybryan69.md)]
 
-* Role: Team Lead
+* Role: Team member
 * Responsibilities: UI
 
 ### Johnny Doe
