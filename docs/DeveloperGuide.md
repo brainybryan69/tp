@@ -277,7 +277,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * food and beverage entrepreneurs/business owners
 * manages a high volume of contacts
 * manages a high volume of transactions
-* prefers digital solutions over paper-based methods
+* prefers digital solutions over paper-based methods  
 * time-conscious and efficiency-oriented
 * may lack dedicated administrative or IT support
 
@@ -286,19 +286,18 @@ Manage suppliers, contractors, employees and even transactions easily
 * Saves data locally without the need for remote servers
 
 
-
 ### User stories
 
-Priorities: High (must have) - ``, Medium (nice to have) - `MED`, Low (unlikely to have) - `LOW`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `HIGH`   | user                                       | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `HIGH`   | user                                       | add a new person             |                                                                        |
-| `HIGH`   | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `HIGH`   | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `MED`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `LOW`    | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                   | I want to …​                                                                                                          | So that I can…​                                                           |
+|----------|---------------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | As an F&B business owner  | I can add contact details of stakeholders (such as suppliers, customers, and delivery partners)                       | keep track of everyone involved in my business operations                 |
+| `* * *`  | As an F&B business owner  | I can view all the contact details of my stakeholders                                                                 | easily see who I work with and identify any missing or new contacts to add |
+| `* * *`  | As an F&B business owner  | I can delete outdated or irrelevant stakeholder contacts                                                              | maintain an up-to-date and organized contact list                         |
+| `* * *`  | As an F&B business owner  | record sales and expense transactions linked to my stakeholders (e.g., daily sales, supplier payments, utility bills) | monitor my business finances accurately                                                                          |
+| `* * *`  | As an F&B business owner  | hide private contact details                                                                                          | minimize chance of someone else seeing them by accident                   |
+| `* * *`  | As an F&B business owner  | delete incorrect or duplicate sales and expense transactions                                                                                                                      | keep my financial records clean and accurate                                                    |
 
 *{More to be added}*
 
