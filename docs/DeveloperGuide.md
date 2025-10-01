@@ -274,56 +274,73 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* food and beverage entrepreneurs/business owners
+* manages a high volume of contacts
+* manages a high volume of transactions
+* prefers digital solutions over paper-based methods
+* time-conscious and efficiency-oriented
+* may lack dedicated administrative or IT support
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+Manage suppliers, contractors, employees and even transactions easily
+* Saves data locally without the need for remote servers
+
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - ``, Medium (nice to have) - `MED`, Low (unlikely to have) - `LOW`
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `HIGH`   | user                                       | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `HIGH`   | user                                       | add a new person             |                                                                        |
+| `HIGH`   | user                                       | delete a person              | remove entries that I no longer need                                   |
+| `HIGH`   | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `MED`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `LOW`    | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Atlas` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add a contact
+2.  System requests for details of the contact
+3.  User enters the requested details
+4.  System adds the contact and tells user operation is successful
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. User does not enter the requested details.
+    * 3a1. System shows error to user.
 
-  Use case ends.
+    Use case resumes at step 3.
 
-* 3a. The given index is invalid.
+**Use case: UC02 - Delete a contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User searches contact to delete
+2.  User chooses to delete contact
+3.  System deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Searched contact does not exist.
+    * 1a1. System shows error message
+
+    Use case repeats from step 1.
+
 
 *{More to be added}*
 
@@ -331,7 +348,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  Should be able to run without internet connection
+4.  Should be able to support colour-coded output for readability (e.g success = green, errors = red)
+5.  The app should adhere to data protection principles
 
 *{More to be added}*
 
