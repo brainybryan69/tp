@@ -281,7 +281,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * time-conscious and efficiency-oriented
 * may lack dedicated administrative or IT support
 
-**Value proposition**: 
+**Value proposition**:
 Manage suppliers, contractors, employees and even transactions easily
 * Saves data locally without the need for remote servers
 
@@ -321,7 +321,7 @@ Priorities: High (must have) - ``, Medium (nice to have) - `MED`, Low (unlikely 
 
 * 3a. User does not enter the requested details.
     * 3a1. System shows error to user.
-    
+
     Use case resumes at step 3.
 
 **Use case: UC02 - Delete a contact**
