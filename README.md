@@ -12,4 +12,4 @@
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named Atlas because an atlas helps you navigate the world; this app helps you navigate your network of contacts.
 * For the detailed documentation of this project, see the [Atlas Product Website](https://ay2526s1-cs2103t-w13-3.github.io/tp/).
-* This project is a part of the [se-education.org](https://se-education.org/#contributing-to-se-edu) initiative. If you would like to contribute code to this project, see se-education.org for more info
+* This project is a part of the [se-education.org](https://se-education.org/#contributing-to-se-edu) initiative. If you would like to contribute code to this project, see se-education.org for more info.
