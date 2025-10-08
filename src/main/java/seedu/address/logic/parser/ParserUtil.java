@@ -21,6 +21,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount cannot be zero.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +121,26 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Positive amounts represent income, negative amounts represent expenses.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static double parseTransactionAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        try {
+            double parsedAmount = Double.parseDouble(trimmedAmount);
+            if (parsedAmount == 0) {
+                throw new ParseException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
+            }
+            return parsedAmount;
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        }
     }
 }

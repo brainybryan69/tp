@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -40,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private VBox transactions;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +59,19 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Display transactions
+        if (!person.getTransactions().isEmpty()) {
+            Label transactionHeader = new Label("Transactions:");
+            transactionHeader.setStyle("-fx-font-weight: bold; -fx-padding: 5 0 2 0;");
+            transactions.getChildren().add(transactionHeader);
+
+            for (int i = 0; i < person.getTransactions().size(); i++) {
+                Transaction txn = person.getTransactions().get(i);
+                Label transactionLabel = new Label(String.format("%d. %s", i + 1, txn.toString()));
+                transactionLabel.setStyle("-fx-font-size: 11px; -fx-padding: 1 0 1 10;");
+                transactions.getChildren().add(transactionLabel);
+            }
+        }
     }
 }
