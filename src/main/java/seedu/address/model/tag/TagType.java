@@ -1,5 +1,17 @@
 package seedu.address.model.tag;
 
+/**
+ * Represents the valid categories (types) that a {@link Tag} can belong to.
+ * <p>
+ * Each {@code TagType} corresponds to a specific aspect of business operations
+ * such as finance, logistics, utilities, and personnel.
+ * </p>
+ *
+ * <p>Example usage:</p>
+ * <pre>
+ *     TagType type = TagType.CUSTOMER;
+ * </pre>
+ */
 public enum TagType {
     LANDLORD, //Physical location management
     DELIVERY, //For F&B businesses with delivery
