@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and not NULL";
-    public static final String TYPE_CONSTRAINTS = "Each tag can only belong to one of the following: \n" +
+    public static final String TYPE_CONSTRAINTS = "Each tag should only belong to one of the following: \n" +
             "-LANDLORD \n" +
             "-DELIVERY \n" +
             "-SUPPLIER \n" +
