@@ -94,7 +94,8 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different name, phone and email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
