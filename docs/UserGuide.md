@@ -146,6 +146,32 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a transaction : `addtxn`
+
+Adds a transaction to a specified contact
+
+Format: `addtxn i/INDEXPerson n/NAMETXN a/TXNAMOUNT`
+
+* Adds a transaction named in n/NAMETXN to the contact specified by INDEXPerson
+* Each transaction contains a TXNAMOUNT field that specifies the amount associated to the transaction
+* the transaction will be classified as either an INCOME or an EXPENSE based on whether the TXNAMOUNT is 
+positive or negative
+
+Examples: 
+* addtxn i/1 n/food a/-5 adds an expense transaction named food to the contact at index 1 with an amount 5
+* addtxn i/2 n/sales a/50  adds an income transaction named sales to the contact at index 2 with an amount 50
+
+### deleting a transaction : `deletetxn`
+
+deletes a specified transaction to a specified contact
+
+Format: `deletetxn i/CONTACT_INDEX t/TRANSACTION_INDEX`
+
+* deletes a transaction specified by TRANSACTION_INDEX for a contact specified by i/CONTACT_INDEX 
+
+Examples:
+* deletetxn i/1 t/2 deletes the 2nd transaction for the contact at index 1
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

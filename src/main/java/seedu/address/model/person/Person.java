@@ -103,8 +103,13 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity fields.
+     * Two persons are considered equal if they have the same name (case-insensitive) and
+     * either the same phone number or the same email (case-insensitive).
+     * Note: Address and tags are not considered in equality comparison.
+     *
+     * @param other The object to compare with.
+     * @return True if the other object is a Person with matching identity fields, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -142,5 +147,4 @@ public class Person {
                 .add("transactions", transactions)
                 .toString();
     }
-
 }
