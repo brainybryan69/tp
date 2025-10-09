@@ -71,6 +71,27 @@ public class Email {
         return value.equals(otherEmail.value);
     }
 
+    /**
+     * Returns true if both emails have the same value, ignoring case differences.
+     * This provides a case-insensitive comparison between two Email objects.
+     *
+     * @param other The object to compare with.
+     * @return True if the other object is an Email with the same value (ignoring case), false otherwise.
+     */
+    public boolean equalsIgnoreCase(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Email)) {
+            return false;
+        }
+
+        Email otherEmail = (Email) other;
+        return value.equalsIgnoreCase(otherEmail.value);
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
