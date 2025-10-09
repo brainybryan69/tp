@@ -30,10 +30,11 @@ public class Person {
     private final List<Transaction> transactions = new ArrayList<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field except address must be present and not null.
+     * Address can be null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,12 +43,12 @@ public class Person {
     }
 
     /**
-     * Every field must be present and not null.
-     * Includes transactions.
+     * Every field except address must be present and not null.
+     * Address can be null. Includes transactions.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   List<Transaction> transactions) {
-        requireAllNonNull(name, phone, email, address, tags, transactions);
+        requireAllNonNull(name, phone, email, tags, transactions);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -102,8 +103,13 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity fields.
+     * Two persons are considered equal if they have the same name (case-insensitive) and
+     * either the same phone number or the same email (case-insensitive).
+     * Note: Address and tags are not considered in equality comparison.
+     *
+     * @param other The object to compare with.
+     * @return True if the other object is a Person with matching identity fields, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -120,7 +126,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && Objects.equals(address, otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -141,5 +147,4 @@ public class Person {
                 .add("transactions", transactions)
                 .toString();
     }
-
 }

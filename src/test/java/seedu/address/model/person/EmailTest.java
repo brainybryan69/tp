@@ -85,4 +85,24 @@ public class EmailTest {
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }
+
+    @Test
+    public void equalsIgnoreCaps() {
+        Email email = new Email("valid@email");
+
+        // same values -> returns true
+        assertTrue(email.equalsIgnoreCase(new Email("valid@email")));
+
+        // same object -> returns true
+        assertTrue(email.equalsIgnoreCase(email));
+
+        // null -> returns false
+        assertFalse(email.equalsIgnoreCase(null));
+
+        // different types -> returns false
+        assertFalse(email.equalsIgnoreCase(5.0f));
+
+        // different values -> returns false
+        assertFalse(email.equalsIgnoreCase(new Email("other.valid@email")));
+    }
 }
