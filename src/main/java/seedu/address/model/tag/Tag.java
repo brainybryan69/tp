@@ -9,7 +9,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and not NULL";
+    public static final String TYPE_CONSTRAINTS = "Each tag can only belong to one of the following: \n" +
+            "-LANDLORD \n" +
+            "-DELIVERY \n" +
+            "-SUPPLIER \n" +
+            "-CUSTOMER \n" +
+            "-REGULATORY \n" +
+            "-FINANCES \n" +
+            "-UTILITY \n" +
+            "-EMPLOYEE \n" +
+            "-OTHERS \n"
+            ;
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -21,8 +32,10 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
+        tagName = tagName.trim();
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        checkArgument(isValidTagType(tagName), TYPE_CONSTRAINTS);
+        this.tagName = tagName.toUpperCase();
     }
 
     /**
@@ -30,6 +43,15 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isValidTagType(String test) {
+        try {
+            TagType.valueOf(test.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override
