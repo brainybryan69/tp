@@ -73,35 +73,37 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // only different phone -> returns true
+        // only different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // only different email -> returns true
+        // only different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // only different address -> returns true
+        // only different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // only different tags -> returns true
+        // only different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
         // same name but different phone and email -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different name, phone and email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
+                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", transactions=" + ALICE.getTransactions() + "}";
         assertEquals(expected, ALICE.toString());
     }
