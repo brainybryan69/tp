@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Atlas User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Atlas is a **desktop app for managing contacts and transactions for F&B business owners, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Atlas can get your contact and transaction management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -20,7 +20,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for Atlas.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -31,7 +31,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to Atlas.
+
+   * `addtxn i/1 n/Coffee beans a/-50` : Adds an expense transaction to the 1st contact.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,18 +80,24 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to Atlas.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
-<box type="tip" seamless>
+* `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
+* `ADDRESS` is **optional**. You can add contacts without an address.
+* Phone numbers must contain at least 3 digits.
+* A person cannot be added if another person with the **same name** already exists in Atlas.
 
-**Tip:** A person can have any number of tags (including 0)
+<box type="tip" seamless">
+
+**Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer, VIP).
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/friend t/supplier`
+* `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
 ### Listing all persons : `list`
 
@@ -148,29 +156,41 @@ Examples:
 
 ### Adding a transaction : `addtxn`
 
-Adds a transaction to a specified contact
+Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
 
-Format: `addtxn i/INDEXPerson n/NAMETXN a/TXNAMOUNT`
+Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
-* Adds a transaction named in n/NAMETXN to the contact specified by INDEXPerson
-* Each transaction contains a TXNAMOUNT field that specifies the amount associated to the transaction
-* the transaction will be classified as either an INCOME or an EXPENSE based on whether the TXNAMOUNT is 
-positive or negative
+* Adds a transaction to the contact at the specified `PERSON_INDEX`.
+* The `AMOUNT` determines the transaction type:
+  * **Positive amount** (e.g., `50`) = INCOME transaction
+  * **Negative amount** (e.g., `-50`) = EXPENSE transaction
+* The amount cannot be zero.
+* All transactions are saved automatically and will persist after restarting the app.
 
-Examples: 
-* addtxn i/1 n/food a/-5 adds an expense transaction named food to the contact at index 1 with an amount 5
-* addtxn i/2 n/sales a/50  adds an income transaction named sales to the contact at index 2 with an amount 50
+<box type="info" seamless>
 
-### deleting a transaction : `deletetxn`
-
-deletes a specified transaction to a specified contact
-
-Format: `deletetxn i/CONTACT_INDEX t/TRANSACTION_INDEX`
-
-* deletes a transaction specified by TRANSACTION_INDEX for a contact specified by i/CONTACT_INDEX 
+**Note:** Transactions are displayed on the contact card below their email address.
+</box>
 
 Examples:
-* deletetxn i/1 t/2 deletes the 2nd transaction for the contact at index 1
+* `addtxn i/1 n/Coffee beans a/-150.50` - Adds an expense of $150.50 for coffee beans to contact #1
+* `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
+* `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
+
+### Deleting a transaction : `deletetxn`
+
+Deletes a specified transaction from a contact.
+
+Format: `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
+
+* Deletes the transaction at `TRANSACTION_INDEX` from the person at `PERSON_INDEX`.
+* The person index refers to the index shown in the displayed person list.
+* The transaction index refers to the transaction number shown on the person's card (starting from 1).
+* Both indices **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
+* `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
 
 ### Clearing all entries : `clear`
 
@@ -186,17 +206,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -208,7 +228,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Atlas home folder.
+
+**Q**: What happens if I try to add a person with the same name?<br>
+**A**: Atlas will reject the addition and show an error message. Each person must have a unique name.
+
+**Q**: Can I add a contact without an address?<br>
+**A**: Yes! Only name, phone number, and email are required. Address is optional.
+
+**Q**: How do I view my transactions?<br>
+**A**: Transactions are automatically displayed on each person's contact card in the main list view.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -221,12 +250,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action              | Format, Examples
+--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/supplier`
+**Add Transaction** | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
+**Clear**           | `clear`
+**Delete**          | `delete INDEX`<br> e.g., `delete 3`
+**Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
+**Edit**            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**            | `list`
+**Help**            | `help`
