@@ -277,7 +277,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * food and beverage entrepreneurs/business owners
 * manages a high volume of contacts
 * manages a high volume of transactions
-* prefers digital solutions over paper-based methods  
+* prefers digital solutions over paper-based methods
 * time-conscious and efficiency-oriented
 * may lack dedicated administrative or IT support
 
