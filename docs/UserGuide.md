@@ -1,9 +1,3 @@
----
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
----
-
 # Atlas User Guide
 
 Atlas is a **desktop app for managing contacts and transactions for F&B business owners, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Atlas can get your contact and transaction management tasks done faster than traditional GUI apps.
@@ -24,7 +18,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/AtlasUi.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -154,7 +148,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Deleting a person : `delete`
 
