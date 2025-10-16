@@ -14,7 +14,8 @@ public class JsonAdaptedTransactionTest {
     private static final double VALID_AMOUNT = 100.0;
     private static final String VALID_TYPE = "INCOME";
 
-    private static final Transaction VALID_TRANSACTION = new Transaction(VALID_NAME, VALID_AMOUNT, Transaction.Type.INCOME);
+    private static final Transaction VALID_TRANSACTION = new Transaction(VALID_NAME, VALID_AMOUNT,
+            Transaction.Type.INCOME);
 
     @Test
     public void validTransactionDetails_returnsTransaction() throws Exception {
