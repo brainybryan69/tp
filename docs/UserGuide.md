@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # Atlas User Guide
@@ -18,30 +18,30 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Atlas.
+3. Copy the file to the folder you want to use as the _home folder_ for Atlas.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to Atlas.
+    * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to Atlas.
 
-   * `addtxn i/1 n/Coffee beans a/-50` : Adds an expense transaction to the 1st contact.
+    * `addtxn i/1 n/Coffee beans a/-50` : Adds an expense transaction to the 1st contact.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,9 +67,11 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
-### Viewing help : `help`
+### General Commands
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -77,8 +79,21 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+#### Clearing all entries : `clear`
 
-### Adding a person: `add`
+Clears all entries from the address book.
+
+Format: `clear`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Person Management Commands
+
+#### Adding a person: `add`
 
 Adds a person to Atlas.
 
@@ -87,11 +102,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
 * `ADDRESS` is **optional**. You can add contacts without an address.
 * Phone numbers must contain at least 3 digits.
-* A person cannot be added if another person with the **same name** already exists in Atlas.
 
 <box type="tip" seamless">
 
 **Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer, VIP).
+
+**Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**.
 </box>
 
 Examples:
@@ -99,13 +115,13 @@ Examples:
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/friend t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -115,14 +131,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person's tags by typing `t/` without
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -140,7 +156,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -154,7 +170,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding a transaction : `addtxn`
+### Transaction Management Commands
+
+#### Adding a transaction : `addtxn`
 
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
 
@@ -162,8 +180,8 @@ Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
 * Adds a transaction to the contact at the specified `PERSON_INDEX`.
 * The `AMOUNT` determines the transaction type:
-  * **Positive amount** (e.g., `50`) = INCOME transaction
-  * **Negative amount** (e.g., `-50`) = EXPENSE transaction
+    * **Positive amount** (e.g., `50`) = INCOME transaction
+    * **Negative amount** (e.g., `-50`) = EXPENSE transaction
 * The amount cannot be zero.
 * All transactions are saved automatically and will persist after restarting the app.
 
@@ -177,7 +195,7 @@ Examples:
 * `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
 * `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
 
-### Deleting a transaction : `deletetxn`
+#### Deleting a transaction : `deletetxn`
 
 Deletes a specified transaction from a contact.
 
@@ -192,23 +210,13 @@ Examples:
 * `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
 * `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
 
-### Clearing all entries : `clear`
+### Data Management
 
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
+#### Saving the data
 
 Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -219,7 +227,7 @@ If your changes to the data file makes its format invalid, Atlas will discard al
 Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+#### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -250,14 +258,27 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action              | Format, Examples
---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/supplier`
-**Add Transaction** | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
-**Clear**           | `clear`
-**Delete**          | `delete INDEX`<br> e.g., `delete 3`
+### General Commands
+
+Action     | Format, Examples
+-----------|------------------
+**Help**   | `help`
+**Clear**  | `clear`
+**Exit**   | `exit`
+
+### Person Management Commands
+
+Action       | Format, Examples
+-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/supplier`
+**List**     | `list`
+**Edit**     | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete**   | `delete INDEX`<br> e.g., `delete 3`
+
+### Transaction Management Commands
+
+Action                 | Format, Examples
+-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add Transaction**    | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
-**Edit**            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**            | `list`
-**Help**            | `help`
