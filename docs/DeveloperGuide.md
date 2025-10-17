@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Atlas Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -158,7 +158,50 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Transaction Management
+
+The transaction management feature allows users to add and delete financial transactions associated with a person in the address book. This is useful for tracking income and expenses related to a contact.
+
+#### Add Transaction Command (`addtxn`)
+
+The `addtxn` command adds a new transaction to a person. The implementation involves parsing the user input, creating a `Transaction` object, and adding it to the person's transaction list.
+
+The following sequence diagram illustrates the process:
+
+<puml src="diagrams/AddTransactionSequenceDiagram.puml" alt="Add Transaction Sequence Diagram" />
+
+**Implementation Details:**
+
+1.  **Parsing:** The `AddressBookParser` identifies the `addtxn` command word and passes the arguments to the `AddTransactionCommandParser`.
+2.  **Index and Transaction Creation:** The `AddTransactionCommandParser` parses the person's index, transaction name, and amount to create an `AddTransactionCommand` object.
+3.  **Execution:** The `AddTransactionCommand` retrieves the `Person` from the `Model` using the provided index.
+4.  **Person Update:** A new `Person` object is created with the updated transaction list.
+5.  **Model Update:** The `Model` is updated with the new `Person` object.
+
+
+
+The `deletetxn` command removes a transaction from a person. The implementation is similar to `addtxn`, but it removes the transaction from the person's transaction list instead of adding one.
+
+The following sequence diagram illustrates the process:
+
+<puml src="diagrams/DeleteTransactionSequenceDiagram.puml" alt="Delete Transaction Sequence Diagram" />
+
+**Implementation Details:**
+
+1.  **Parsing:** The `AddressBookParser` identifies the `deletetxn` command word and passes the arguments to the `DeleteTransactionCommandParser`.
+2.  **Index and Transaction Creation:** The `DeleteTransactionCommandParser` parses the person's index and the transaction's index to create a `DeleteTransactionCommand` object.
+3.  **Execution:** The `DeleteTransactionCommand` retrieves the `Person` from the `Model` using the provided index.
+4.  **Person Update:** A new `Person` object is created with the transaction removed from the transaction list.
+5.  **Model Update:** The `Model` is updated with the new `Person` object.
+
+
+### Undo/redo feature
+
+<box type="info" seamless>
+
+**Note:** This feature is not yet implemented.
+
+</box>
 
 #### Proposed Implementation
 
@@ -251,9 +294,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+<box type="info" seamless>
+
+**Note:** This feature is not yet implemented.
+
+</box>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -338,8 +385,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. Searched contact does not exist.
     * 1a1. System shows error message
 
-    Use case repeats from step 1.
+    **Use case: UC03 - Add a transaction**
 
+**MSS**
+
+1.  User chooses to add a transaction to a person
+2.  System requests for the person's index, transaction name, and amount
+3.  User enters the requested details
+4.  System adds the transaction to the person and tells user operation is successful
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User does not enter the requested details.
+    * 3a1. System shows error to user.
+
+    Use case resumes at step 3.
+
+**Use case: UC04 - Delete a transaction**
+
+**MSS**
+
+1.  User chooses to delete a transaction from a person
+2.  System requests for the person's index and transaction index
+3.  User enters the requested details
+4.  System deletes the transaction from the person and tells user operation is successful
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User does not enter the requested details.
+    * 3a1. System shows error to user.
+
+    Use case resumes at step 3.
 
 *{More to be added}*
 
@@ -357,6 +437,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Transaction**: A financial record associated with a person, which can be either an income or an expense.
+* **Income**: A transaction that increases the amount of money.
+* **Expense**: A transaction that decreases the amount of money.
 
 --------------------------------------------------------------------------------------------------------------------
 
