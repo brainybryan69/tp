@@ -23,3 +23,6 @@ src/test/data/sandbox/
 docs/_site/
 docs/_markbind/logs/
 /untitled/
+
+# Project status tracking (for AI assistant context)
+PROJECT_STATUS.txt
