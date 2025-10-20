@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NUMBER;
 
 import java.util.stream.Stream;
@@ -22,17 +22,17 @@ public class DeleteTransactionCommandParser implements Parser<DeleteTransactionC
      */
     public DeleteTransactionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NUMBER);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_TRANSACTION_NUMBER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NUMBER)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_TRANSACTION_NUMBER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteTransactionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NUMBER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_TRANSACTION_NUMBER);
 
-        Index personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_INDEX).get());
+        Index personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         Index transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
 
         return new DeleteTransactionCommand(personIndex, transactionIndex);
