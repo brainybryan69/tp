@@ -21,12 +21,16 @@ public class SummaryCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null : "Filtered person list should not be null";
 
         double totalCashflow = 0;
         for (Person person : lastShownList) {
+            assert person != null : "Person object should not be null";
             // Assuming Person class has getTransactions() returning List<Transaction>
             // and Transaction class has getAmount() returning a double.
+            assert person.getTransactions() != null : "Person's transactions list should not be null";
             for (Transaction transaction : person.getTransactions()) {
+                assert transaction != null : "Transaction object in list should not be null";
                 totalCashflow += transaction.getTransactionAmount();
             }
         }
