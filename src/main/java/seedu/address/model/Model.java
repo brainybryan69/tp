@@ -40,17 +40,35 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' archive file path.
+     */
+    Path getArchiveFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Sets the user prefs' archive file path.
+     */
+    void setArchiveFilePath(Path archiveFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setArchive(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getArchive();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

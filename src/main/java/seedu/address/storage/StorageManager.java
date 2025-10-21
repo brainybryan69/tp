@@ -18,14 +18,16 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private ArchiveStorage archiveStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage, ArchiveStorage archiveStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.archiveStorage = archiveStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +77,29 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public Path getArchiveFilePath() {
+        return archiveStorage.getArchiveFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readFromAddressBook() throws DataLoadingException {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readFromAddressBook(Path filePath) throws DataLoadingException {
+        return Optional.empty();
+    }
+
+    @Override
+    public void saveArchive(ReadOnlyAddressBook addressBook) throws IOException {
+        saveArchive(addressBook, archiveStorage.getArchiveFilePath());
+    }
+
+    @Override
+    public void saveArchive(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to archive data file: " + filePath);
+        archiveStorage.saveArchive(addressBook, filePath);
+    }
 }
