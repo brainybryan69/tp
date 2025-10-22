@@ -36,8 +36,11 @@ public class DeleteFollowUpCommandParser implements Parser<DeleteFollowUpCommand
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if all given prefixes contain non-empty values in the {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap the map of argument prefixes to their values
+     * @param prefixes prefixes to check for presence
+     * @return true if all prefixes are present and have associated values
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

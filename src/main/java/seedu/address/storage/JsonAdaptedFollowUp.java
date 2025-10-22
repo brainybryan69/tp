@@ -3,7 +3,6 @@ package seedu.address.storage;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.followUp.FollowUp;
 import seedu.address.model.followUp.FollowUpUrgency;
-import seedu.address.model.transaction.Transaction;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +15,10 @@ public class JsonAdaptedFollowUp {
     private final String urgency;
 
     /**
-     * Constructs a {@code JsonAdaptedTransaction} with the given transaction details.
+     * Constructs a {@code JsonAdaptedFollowUp} with the given follow-up details.
+     *
+     * @param followUpName the name or description of the follow-up
+     * @param urgency the urgency level of the follow-up (e.g., "HIGH", "MEDIUM", "LOW")
      */
     @JsonCreator
     public JsonAdaptedFollowUp(@JsonProperty("followUpName") String followUpName,
@@ -26,7 +28,9 @@ public class JsonAdaptedFollowUp {
     }
 
     /**
-     * Converts a given {@code Transaction} into this class for Jackson use.
+     * Converts a given {@code FollowUp} into this class for Jackson use.
+     *
+     * @param source the {@code FollowUp} object to be converted into a JSON-adapted form
      */
     public JsonAdaptedFollowUp(FollowUp source) {
         followUpName = source.getFollowUpName();
@@ -34,9 +38,10 @@ public class JsonAdaptedFollowUp {
     }
 
     /**
-     * Converts this Json-friendly adapted FollowUp object into the model's {@code Transaction} object.
+     * Converts this JSON-adapted follow-up object into the model's {@link FollowUp} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted transaction.
+     * @return the corresponding {@code FollowUp} object in the model
+     * @throws IllegalValueException if any required field is missing or has invalid data
      */
     public FollowUp toModelType() throws IllegalValueException {
         if (followUpName == null) {

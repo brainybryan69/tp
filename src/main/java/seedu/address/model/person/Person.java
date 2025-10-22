@@ -92,7 +92,10 @@ public class Person {
         return Collections.unmodifiableList(transactions);
     }
 
-
+    /**
+     * Returns an immutable transaction list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public List<FollowUp> getFollowUps() {
         return Collections.unmodifiableList(followUps);
     }
