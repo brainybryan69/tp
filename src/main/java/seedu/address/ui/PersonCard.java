@@ -1,13 +1,19 @@
 package seedu.address.ui;
 
+import java.awt.*;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+import seedu.address.model.followUp.FollowUp;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 
@@ -44,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox transactions;
+    @FXML
+    private VBox followUps;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,6 +79,45 @@ public class PersonCard extends UiPart<Region> {
                 Label transactionLabel = new Label(String.format("%d. %s", i + 1, txn.toString()));
                 transactionLabel.setStyle("-fx-font-size: 11px; -fx-padding: 1 0 1 10;");
                 transactions.getChildren().add(transactionLabel);
+            }
+        }
+
+        // Display FollowUps
+        if (!person.getFollowUps().isEmpty()) {
+            Label followUpHeader = new Label("FollowUps:");
+            followUpHeader.setStyle("-fx-font-weight: bold; -fx-padding: 5 0 2 0;");
+            followUps.getChildren().add(followUpHeader);
+
+            for (int i = 0; i < person.getFollowUps().size(); i++) {
+                FollowUp fu = person.getFollowUps().get(i);
+                // Create a circle and label in an HBox (for horizontal alignment)
+                HBox hbox = new HBox(10); // 10 is the spacing between elements
+
+                // Create and style the circle
+                Circle circle = new Circle(5); // 5 is the radius
+                circle.setStyle(" -fx-padding: 0 0 0 0;");
+
+
+                switch (fu.getUrgency()) {
+                case HIGH:
+                    circle.setFill(Color.RED);
+                    break;
+                case MEDIUM:
+                    circle.setFill(Color.ORANGE);
+                    break;
+                case LOW:
+                    circle.setFill(Color.YELLOW);
+                    break;
+                }
+
+                // Create the label
+                Label followUpLabel = new Label(String.format("%d. %s", i + 1, fu.toString()));
+                followUpLabel.setStyle("-fx-font-size: 11px; -fx-padding: 1 0 1 10;");
+
+                // Add circle and label to HBox
+                hbox.getChildren().addAll(followUpLabel, circle);
+                hbox.setAlignment(Pos.CENTER_LEFT);
+                followUps.getChildren().add(hbox);
             }
         }
     }

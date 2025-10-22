@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.followUp.FollowUp;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
+    private final List<JsonAdaptedFollowUp> followUps = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +41,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("transactions") List<JsonAdaptedTransaction> transactions) {
+            @JsonProperty("transactions") List<JsonAdaptedTransaction> transactions,
+                             @JsonProperty("followUps") List<JsonAdaptedFollowUp> followUps) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,6 +52,9 @@ class JsonAdaptedPerson {
         }
         if (transactions != null) {
             this.transactions.addAll(transactions);
+        }
+        if (followUps != null) {
+            this.followUps.addAll(followUps);
         }
     }
 
@@ -66,6 +72,9 @@ class JsonAdaptedPerson {
         transactions.addAll(source.getTransactions().stream()
                 .map(JsonAdaptedTransaction::new)
                 .collect(Collectors.toList()));
+        followUps.addAll(source.getFollowUps().stream()
+                .map(JsonAdaptedFollowUp::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -82,6 +91,11 @@ class JsonAdaptedPerson {
         final List<Transaction> personTransactions = new ArrayList<>();
         for (JsonAdaptedTransaction transaction : transactions) {
             personTransactions.add(transaction.toModelType());
+        }
+
+        final List<FollowUp> personFollowUps = new ArrayList<>();
+        for (JsonAdaptedFollowUp followUp: followUps) {
+            personFollowUps.add(followUp.toModelType());
         }
 
         if (name == null) {
@@ -120,7 +134,7 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, personTransactions);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, personTransactions, personFollowUps);
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.followUp.FollowUp;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Transaction;
 
@@ -28,6 +29,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Transaction> transactions = new ArrayList<>();
+    private final List<FollowUp> followUps = new ArrayList<>();
 
     /**
      * Every field except address must be present and not null.
@@ -47,7 +49,7 @@ public class Person {
      * Address can be null. Includes transactions.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  List<Transaction> transactions) {
+                  List<Transaction> transactions, List<FollowUp> followUps) {
         requireAllNonNull(name, phone, email, tags, transactions);
         this.name = name;
         this.phone = phone;
@@ -55,6 +57,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.transactions.addAll(transactions);
+        this.followUps.addAll(followUps);
     }
 
     public Name getName() {
@@ -87,6 +90,14 @@ public class Person {
      */
     public List<Transaction> getTransactions() {
         return Collections.unmodifiableList(transactions);
+    }
+
+    /**
+     * Returns an immutable transaction list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<FollowUp> getFollowUps() {
+        return Collections.unmodifiableList(followUps);
     }
 
     /**

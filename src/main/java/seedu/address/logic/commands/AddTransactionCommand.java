@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -31,14 +31,14 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to the person identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: "
-            + PREFIX_TRANSACTION_INDEX + "INDEX "
+            + PREFIX_INDEX + "INDEX "
             + PREFIX_TRANSACTION_NAME + "TRANSACTION_NAME "
             + PREFIX_TRANSACTION_AMOUNT + "AMOUNT (positive for income, negative for expense)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TRANSACTION_INDEX + "1 "
+            + PREFIX_INDEX + "1 "
             + PREFIX_TRANSACTION_NAME + "Coffee beans "
             + PREFIX_TRANSACTION_AMOUNT + "-150.50 (expense) OR "
-            + PREFIX_TRANSACTION_INDEX + "1 "
+            + PREFIX_INDEX + "1 "
             + PREFIX_TRANSACTION_NAME + "Sales revenue "
             + PREFIX_TRANSACTION_AMOUNT + "500.00 (income)";
 
@@ -91,7 +91,7 @@ public class AddTransactionCommand extends Command {
         List<Transaction> updatedTransactions = new ArrayList<>(person.getTransactions());
         updatedTransactions.add(transaction);
 
-        return new Person(name, phone, email, address, person.getTags(), updatedTransactions);
+        return new Person(name, phone, email, address, person.getTags(), updatedTransactions, person.getFollowUps());
     }
 
     @Override
