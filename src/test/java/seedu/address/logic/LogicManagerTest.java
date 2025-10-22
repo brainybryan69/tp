@@ -29,6 +29,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonArchiveStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -47,9 +48,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonArchiveStorage archiveStorage = new JsonArchiveStorage(temporaryFolder.resolve("archive.json"));
 
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, archiveStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -88,6 +90,20 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void execute_archive_success() throws Exception {
+        // Arrange: Add a person first
+        logic.execute(AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY);
+
+        // Act: Run archive command
+        CommandResult result = logic.execute("archive");
+
+        // Assert: Successful archive message
+        assertEquals(String.format("Successfully archived %d contacts.", 1),
+                result.getFeedbackToUser());
+    }
+
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -124,7 +140,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getArchive());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -158,10 +174,11 @@ public class LogicManagerTest {
                 throw e;
             }
         };
+        JsonArchiveStorage archiveStorage = new JsonArchiveStorage(temporaryFolder.resolve("archive.json"));
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, archiveStorage);
 
         logic = new LogicManager(model, storage);
 

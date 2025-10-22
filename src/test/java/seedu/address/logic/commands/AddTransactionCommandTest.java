@@ -14,7 +14,7 @@ import seedu.address.model.transaction.Transaction;
 
 public class AddTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalAddressBook());
 
     @Test
     public void execute_addTransaction_success() {
@@ -24,7 +24,7 @@ public class AddTransactionCommandTest {
         String expectedMessage = String.format(AddTransactionCommand.MESSAGE_ADD_TRANSACTION_SUCCESS,
                 model.getFilteredPersonList().get(0), transaction);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getArchive());
         expectedModel.setPerson(model.getFilteredPersonList().get(0),
                 model.getFilteredPersonList().get(0));
 

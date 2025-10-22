@@ -51,9 +51,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            if (commandText.equals("archive") || commandText.equals("unarchive")) {
-                storage.saveArchive(model.getArchive());
-            }
+            storage.saveArchive(model.getArchive());
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
