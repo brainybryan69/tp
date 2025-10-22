@@ -24,7 +24,8 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage, ArchiveStorage archiveStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          ArchiveStorage archiveStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.archiveStorage = archiveStorage;
@@ -83,13 +84,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readFromAddressBook() throws DataLoadingException {
-        return Optional.empty();
+    public Optional<ReadOnlyAddressBook> readFromArchive() throws DataLoadingException {
+        return readFromArchive(archiveStorage.getArchiveFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readFromAddressBook(Path filePath) throws DataLoadingException {
-        return Optional.empty();
+    public Optional<ReadOnlyAddressBook> readFromArchive(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to write to archive file: " + filePath);
+        return archiveStorage.readFromArchive(filePath);
     }
 
     @Override

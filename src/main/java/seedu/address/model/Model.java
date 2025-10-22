@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -86,6 +87,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds a list of given persons.
+     * {@code person} must not already exist in the address book.
+     */
+    void addPersons(List<Person> persons);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

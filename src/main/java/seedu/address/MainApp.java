@@ -77,23 +77,33 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using archive file: " + storage.getArchiveFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyAddressBook> archiveFileOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook archiveData;
         try {
             addressBookOptional = storage.readAddressBook();
+            archiveFileOptional = storage.readFromArchive();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            if (!archiveFileOptional.isPresent()) {
+                logger.info("Creating a new archive data file " + storage.getArchiveFilePath()
+                        + " empty archive.");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            archiveData = archiveFileOptional.orElseGet(AddressBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            archiveData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialData);
+        return new ModelManager(initialData, userPrefs, archiveData);
     }
 
     private void initLogging(Config config) {

@@ -14,9 +14,9 @@ public interface ArchiveStorage {
      */
     Path getArchiveFilePath();
 
-    Optional<ReadOnlyAddressBook> readFromAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyAddressBook> readFromArchive() throws DataLoadingException;
 
-    Optional<ReadOnlyAddressBook> readFromAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyAddressBook> readFromArchive(Path filePath) throws DataLoadingException;
 
     void saveArchive(ReadOnlyAddressBook addressBook) throws IOException;
 
