@@ -89,6 +89,12 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds a list of given persons to archive.
+     * {@code person} must not already exist in the address book.
+     */
+    void addArchivedPersons(List<Person> persons);
+
+    /**
      * Adds a list of given persons.
      * {@code person} must not already exist in the address book.
      */

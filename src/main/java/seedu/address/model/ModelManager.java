@@ -129,8 +129,15 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    public void addPersons(List<Person> persons) {
+    @Override
+    public void addArchivedPersons(List<Person> persons) {
         archive.addPersons(persons);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPersons(List<Person> persons) {
+        addressBook.addPersons(persons);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

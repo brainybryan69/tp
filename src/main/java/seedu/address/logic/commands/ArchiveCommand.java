@@ -3,10 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
-import java.io.IOException;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
@@ -24,12 +22,13 @@ public class ArchiveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> persons = model.getAddressBook().getPersonList();
+        int size = persons.size();
 
         if (persons.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY_LIST);
         }
-        model.addPersons(persons);
+        model.addArchivedPersons(persons);
         model.setAddressBook(new AddressBook());
-        return new CommandResult("Archive Success!");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, size));
     }
 }

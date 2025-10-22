@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            if (commandText.equals("archive")) {
+            if (commandText.equals("archive") || commandText.equals("unarchive")) {
                 storage.saveArchive(model.getArchive());
             }
             storage.saveAddressBook(model.getAddressBook());
