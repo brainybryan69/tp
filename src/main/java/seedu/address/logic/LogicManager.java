@@ -64,7 +64,9 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
-    public ReadOnlyAddressBook getArchive() { return model.getArchive(); }
+    public ReadOnlyAddressBook getArchive() {
+        return model.getArchive();
+    }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

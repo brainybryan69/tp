@@ -75,6 +75,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Adds all {@link Person} objects in the given list to the address book.
+     * <p>
+     * Each person is only added if they do not already exist in the address book,
+     * as determined by {@link #hasPerson(Person)}. Duplicate entries are ignored.
+     *
+     * @param p The list of persons to add. Must not be null.
+     */
     public void addPersons(List<Person> p) {
         for (Person person : p) {
             if (!hasPerson(person)) {
