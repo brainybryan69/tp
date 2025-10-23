@@ -70,6 +70,11 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
+        // Check if the prefix is at the very beginning of the string
+        if (fromIndex == 0 && argsString.startsWith(prefix)) {
+            return 0;
+        }
+        // Otherwise, look for the prefix preceded by a whitespace
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
