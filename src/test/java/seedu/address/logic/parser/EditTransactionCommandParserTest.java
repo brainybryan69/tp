@@ -68,7 +68,7 @@ public class EditTransactionCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = PREAMBLE_WHITESPACE + "i/" + targetIndex.getOneBased()
+        String userInput = "i/" + targetIndex.getOneBased()
                 + " t/1" + TRANSACTION_NAME_DESC_COFFEE + TRANSACTION_AMOUNT_DESC_COFFEE;
 
         EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder().withName("Coffee")
