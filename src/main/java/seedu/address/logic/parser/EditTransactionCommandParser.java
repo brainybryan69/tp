@@ -34,7 +34,6 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         if (!argMultimap.getValue(PREFIX_INDEX).isPresent() || !argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE));
         }
-
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
@@ -57,7 +56,6 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TRANSACTION_NAME, PREFIX_TRANSACTION_AMOUNT);
-
         return new EditTransactionCommand(personIndex, transactionIndex, editTransactionDescriptor);
     }
 
