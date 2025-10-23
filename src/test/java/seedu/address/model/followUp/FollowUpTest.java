@@ -32,29 +32,29 @@ public class FollowUpTest {
     @Test
     public void constructor_validInputs_createsFollowUp() {
         // Test with HIGH urgency
-        FollowUp followUpHigh = new FollowUp("High priority follow-up", "high");
+        FollowUp followUpHigh = new FollowUp("High priority follow-up", "HIGH");
         assertEquals("High priority follow-up", followUpHigh.getFollowUpName());
-        assertEquals(FollowUpUrgency.HIGH, followUpHigh.getUrgency());
+        assertEquals(FollowUpUrgency.HIGH.toString(), followUpHigh.getUrgency().toString());
 
         // Test with MEDIUM urgency
         FollowUp followUpMedium = new FollowUp("Medium priority follow-up", "MEDIUM");
         assertEquals("Medium priority follow-up", followUpMedium.getFollowUpName());
-        assertEquals(FollowUpUrgency.MEDIUM, followUpMedium.getUrgency());
+        assertEquals(FollowUpUrgency.MEDIUM.toString(), followUpMedium.getUrgency().toString());
 
         // Test with LOW urgency
         FollowUp followUpLow = new FollowUp("Low priority follow-up", "Low");
         assertEquals("Low priority follow-up", followUpLow.getFollowUpName());
-        assertEquals(FollowUpUrgency.LOW, followUpLow.getUrgency());
+        assertEquals(FollowUpUrgency.LOW.toString(), followUpLow.getUrgency().toString());
 
         // Test with mixed case
         FollowUp followUpMixedCase = new FollowUp("Mixed case follow-up", "MeDiUm");
         assertEquals("Mixed case follow-up", followUpMixedCase.getFollowUpName());
-        assertEquals(FollowUpUrgency.MEDIUM, followUpMixedCase.getUrgency());
+        assertEquals(FollowUpUrgency.MEDIUM.toString(), followUpMixedCase.getUrgency().toString());
 
         // Test with spaces
         FollowUp followUpWithSpaces = new FollowUp("  Trimmed follow-up  ", "  high  ");
         assertEquals("Trimmed follow-up", followUpWithSpaces.getFollowUpName());
-        assertEquals(FollowUpUrgency.HIGH, followUpWithSpaces.getUrgency());
+        assertEquals(FollowUpUrgency.HIGH.toString(), followUpWithSpaces.getUrgency().toString());
     }
 
     @Test

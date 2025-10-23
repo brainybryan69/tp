@@ -85,7 +85,7 @@ public class DeleteFollowUpCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        if (followUpIndex.getZeroBased() >= personToEdit.getTransactions().size()) {
+        if (followUpIndex.getZeroBased() >= personToEdit.getFollowUps().size()) {
             throw new CommandException(MESSAGE_INVALID_FOLLOWUP_INDEX);
         }
 
@@ -133,7 +133,7 @@ public class DeleteFollowUpCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof DeleteTransactionCommand)) {
+        if (!(other instanceof DeleteFollowUpCommand)) {
             return false;
         }
 
