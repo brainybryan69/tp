@@ -90,7 +90,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readFromArchive(Path filePath) throws DataLoadingException {
-        logger.fine("Attempting to write to archive file: " + filePath);
+        logger.fine("Attempting to read from archive file: " + filePath);
         return archiveStorage.readFromArchive(filePath);
     }
 

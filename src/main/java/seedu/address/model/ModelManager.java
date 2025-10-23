@@ -99,7 +99,6 @@ public class ModelManager implements Model {
     @Override
     public void setArchive(ReadOnlyAddressBook addressBook) {
         this.archive.resetData(addressBook);
-        System.out.println(this.archive);
     }
 
     @Override
