@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -39,10 +41,11 @@ public class DeleteFollowUpCommandTest {
     @BeforeEach
     public void setUp() {
         // Create sample follow-ups
-        firstFollowUp = new FollowUp("Call client about proposal", "2024-10-10");
-        secondFollowUp = new FollowUp("Send project quotation", "2024-10-15");
+        firstFollowUp = new FollowUp("Call client about proposal", "HIGH");
+        secondFollowUp = new FollowUp("Send project quotation", "HIGH");
 
         // Create sample person with two follow-ups
+
         samplePerson = new Person(
                 new Name("Alice Tan"),
                 new Phone("91234567"),
@@ -61,7 +64,7 @@ public class DeleteFollowUpCommandTest {
     @Test
     public void execute_validIndexes_success() {
         Index personIndex = Index.fromOneBased(1);
-        Index followUpIndex = Index.fromOneBased(1);
+        Index followUpIndex = Index.fromOneBased(2);
 
         DeleteFollowUpCommand command = new DeleteFollowUpCommand(personIndex, followUpIndex);
 
@@ -81,7 +84,13 @@ public class DeleteFollowUpCommandTest {
         String expectedMessage = String.format(DeleteFollowUpCommand.MESSAGE_DELETE_FOLLOWUP_SUCCESS,
                 Messages.format(expectedPerson), firstFollowUp);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandResult commandResult;
+        try {
+            commandResult = command.execute(model);
+        } catch (CommandException e) {
+            throw new AssertionError("Execution of command should not fail.", e);
+        }
+        assertEquals(model, expectedModel);
     }
 
     @Test

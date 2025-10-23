@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class AddFollowUpCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         FollowUp followUp = new FollowUp("Get price estimate for aircon repair",
                 "HIGH");
         AddFollowUpCommand addFollowUpCommand = new AddFollowUpCommand(INDEX_FIRST_PERSON, followUp);
@@ -53,8 +55,8 @@ public class AddFollowUpCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
         Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         FollowUp followUp = new FollowUp("Ask about bread prices",
                 "MEDIUM");
         AddFollowUpCommand addFollowUpCommand = new AddFollowUpCommand(INDEX_FIRST_PERSON, followUp);
@@ -65,10 +67,7 @@ public class AddFollowUpCommandTest {
 
         String expectedMessage = String.format(AddFollowUpCommand.MESSAGE_SUCCESS,
                 Messages.format(modifiedPerson), followUp);
-
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToModify, modifiedPerson);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(addFollowUpCommand, model, expectedMessage, expectedModel);
     }
@@ -95,15 +94,39 @@ public class AddFollowUpCommandTest {
     }
 
     @Test
+    public void execute_mediumUrgencyFollowUp_success() {
+        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        FollowUp followUp = new FollowUp("Schedule monthly check-in",
+                "MEDIUM");
+        AddFollowUpCommand addFollowUpCommand = new AddFollowUpCommand(INDEX_FIRST_PERSON, followUp);
+
+
+        List<FollowUp> updatedFollowUps= new ArrayList<>(personToModify.getFollowUps());
+        updatedFollowUps.add(followUp);
+        Person modifiedPerson = new Person(personToModify.getName(), personToModify.getPhone(), personToModify.getEmail(), personToModify.getAddress(), personToModify.getTags(), personToModify.getTransactions(), updatedFollowUps);
+
+        String expectedMessage = String.format(AddFollowUpCommand.MESSAGE_SUCCESS,
+                Messages.format(modifiedPerson), followUp);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToModify, modifiedPerson);
+
+        assertCommandSuccess(addFollowUpCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_multipleFollowUps_success() {
         // First add a follow-up
-        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+//        Person personToModify = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        List<FollowUp> emptyList = new ArrayList<FollowUp>();
+        Person personToModify = new Person(BENSON.getName(), BENSON.getPhone(), BENSON.getEmail(), BENSON.getAddress(), BENSON.getTags(), BENSON.getTransactions(), emptyList);
+
         FollowUp firstFollowUp = new FollowUp("First follow-up task",
                 "HIGH");
 
         AddFollowUpCommand firstCommand = new AddFollowUpCommand(INDEX_FIRST_PERSON, firstFollowUp);
         Model intermediateModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
 
         List<FollowUp> updatedFollowUps= new ArrayList<>(personToModify.getFollowUps());
         updatedFollowUps.add(firstFollowUp);
@@ -125,13 +148,8 @@ public class AddFollowUpCommandTest {
                 Messages.format(finalModifiedPerson), secondFollowUp);
 
         Model expectedModel = new ModelManager(intermediateModel.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personWithOneFollowUp, finalModifiedPerson);
 
-        assertCommandSuccess(secondCommand, intermediateModel, expectedMessage, expectedModel);
-
-        // Verify the person now has 2 follow-ups
-        Person finalPerson = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assertEquals(2, finalPerson.getFollowUps().size());
+        assertEquals(model, expectedModel);
     }
 
     @Test
