@@ -36,7 +36,8 @@ public class EditTransactionCommand extends Command {
             + PREFIX_TRANSACTION_NAME + "Coffee "
             + PREFIX_TRANSACTION_AMOUNT + "-5.0";
 
-    public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited transaction for Person: %1$s\nTransaction: %2$s";
+    public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited transaction for Person: "
+            + "%1$s\nTransaction: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_TRANSACTION_INDEX = "The transaction index provided is invalid.";
 

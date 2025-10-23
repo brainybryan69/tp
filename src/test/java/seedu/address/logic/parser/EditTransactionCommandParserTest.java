@@ -47,16 +47,20 @@ public class EditTransactionCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative person index
-        assertParseFailure(parser, " i/-5 t/1" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " i/-5 t/1" + TRANSACTION_NAME_DESC_COFFEE,
+                ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero person index
-        assertParseFailure(parser, " i/0 t/1" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " i/0 t/1" + TRANSACTION_NAME_DESC_COFFEE,
+                ParserUtil.MESSAGE_INVALID_INDEX);
 
         // negative transaction index
-        assertParseFailure(parser, " i/1 t/-5" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " i/1 t/-5" + TRANSACTION_NAME_DESC_COFFEE,
+                ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero transaction index
-        assertParseFailure(parser, " i/1 t/0" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, " i/1 t/0" + TRANSACTION_NAME_DESC_COFFEE,
+                ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -73,7 +77,8 @@ public class EditTransactionCommandParserTest {
 
         EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder().withName("Coffee")
                 .withAmount(-2.5).build();
-        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex, Index.fromOneBased(1), descriptor);
+        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex,
+                Index.fromOneBased(1), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -84,7 +89,8 @@ public class EditTransactionCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = " i/" + targetIndex.getOneBased() + " t/1" + TRANSACTION_NAME_DESC_COFFEE;
         EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder().withName("Coffee").build();
-        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex, Index.fromOneBased(1), descriptor);
+        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex,
+                Index.fromOneBased(1), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // amount
@@ -98,12 +104,16 @@ public class EditTransactionCommandParserTest {
     public void parse_multipleRepeatedFields_failure() {
         // multiple names
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = " i/" + targetIndex.getOneBased() + " t/1" + TRANSACTION_NAME_DESC_COFFEE + TRANSACTION_NAME_DESC_COFFEE;
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_TRANSACTION_NAME));
+        String userInput = " i/" + targetIndex.getOneBased() + " t/1" + TRANSACTION_NAME_DESC_COFFEE
+                + TRANSACTION_NAME_DESC_COFFEE;
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_TRANSACTION_NAME));
 
         // multiple amounts
-        userInput = " i/" + targetIndex.getOneBased() + " t/1" + TRANSACTION_AMOUNT_DESC_COFFEE + TRANSACTION_AMOUNT_DESC_COFFEE;
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_TRANSACTION_AMOUNT));
+        userInput = " i/" + targetIndex.getOneBased() + " t/1" + TRANSACTION_AMOUNT_DESC_COFFEE
+                + TRANSACTION_AMOUNT_DESC_COFFEE;
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_TRANSACTION_AMOUNT));
 
     }
 }
