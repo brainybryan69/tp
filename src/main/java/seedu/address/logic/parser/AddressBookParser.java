@@ -23,8 +23,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.commands.SummaryCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -93,8 +93,8 @@ public class AddressBookParser {
 
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);
-        
-        case "editTxn":
+
+        case EditTransactionCommand.COMMAND_WORD:
             return new EditTransactionCommandParser().parse(arguments);
 
         case AddFollowUpCommand.COMMAND_WORD:

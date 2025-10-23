@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.followup.FollowUp;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonAdaptedFollowUpTest {
 

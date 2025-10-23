@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +55,7 @@ public class DeleteFollowUpCommandTest {
         );
 
         // Initialize model with sample person
-        model = new ModelManager(new AddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new UserPrefs(), new AddressBook());
         model.addPerson(samplePerson);
     }
 
@@ -78,7 +76,7 @@ public class DeleteFollowUpCommandTest {
                 new ArrayList<>(List.of(secondFollowUp)) // first follow-up removed
         );
 
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), new AddressBook());
         expectedModel.addPerson(expectedPerson);
 
         String expectedMessage = String.format(DeleteFollowUpCommand.MESSAGE_DELETE_FOLLOWUP_SUCCESS,
@@ -115,14 +113,17 @@ public class DeleteFollowUpCommandTest {
 
     @Test
     public void equals() {
-        DeleteFollowUpCommand deleteFirstFollowUp = new DeleteFollowUpCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        DeleteFollowUpCommand deleteSecondFollowUp = new DeleteFollowUpCommand(Index.fromOneBased(1), Index.fromOneBased(2));
+        DeleteFollowUpCommand deleteFirstFollowUp = new DeleteFollowUpCommand(Index.fromOneBased(1),
+                Index.fromOneBased(1));
+        DeleteFollowUpCommand deleteSecondFollowUp = new DeleteFollowUpCommand(Index.fromOneBased(1),
+                Index.fromOneBased(2));
 
         // same object → returns true
         assertTrue(deleteFirstFollowUp.equals(deleteFirstFollowUp));
 
         // same values → returns true
-        DeleteFollowUpCommand deleteFirstFollowUpCopy = new DeleteFollowUpCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        DeleteFollowUpCommand deleteFirstFollowUpCopy = new DeleteFollowUpCommand(Index.fromOneBased(1),
+                Index.fromOneBased(1));
         assertTrue(deleteFirstFollowUp.equals(deleteFirstFollowUpCopy));
 
         // different types → returns false

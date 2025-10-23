@@ -31,8 +31,10 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         Index personIndex;
         Index transactionIndex;
 
-        if (!argMultimap.getValue(PREFIX_INDEX).isPresent() || !argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE));
+        if (!argMultimap.getValue(PREFIX_INDEX).isPresent() || !argMultimap.getValue(PREFIX_TRANSACTION_NUMBER)
+                .isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTransactionCommand.MESSAGE_USAGE));
         }
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
@@ -51,7 +53,8 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
                     ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap
+                .getValue(PREFIX_TRANSACTION_AMOUNT).isEmpty()) {
             throw new ParseException(EditTransactionCommand.MESSAGE_NOT_EDITED);
         }
 
