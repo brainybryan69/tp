@@ -36,10 +36,14 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         }
 
         try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-            transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
-            System.out.println("personIndex: " + personIndex.getOneBased());
-            System.out.println("transactionIndex: " + transactionIndex.getOneBased());
+            String personIndexString = argMultimap.getValue(PREFIX_INDEX).get();
+            String transactionIndexString = argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get();
+            System.out.println("Raw personIndexString: " + personIndexString);
+            System.out.println("Raw transactionIndexString: " + transactionIndexString);
+            personIndex = ParserUtil.parseIndex(personIndexString);
+            transactionIndex = ParserUtil.parseIndex(transactionIndexString);
+            System.out.println("Parsed personIndex: " + personIndex.getOneBased());
+            System.out.println("Parsed transactionIndex: " + transactionIndex.getOneBased());
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), EditTransactionCommand.MESSAGE_USAGE), pe);
         }
@@ -49,12 +53,14 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isPresent()) {
             String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
             editTransactionDescriptor.setName(transactionName);
-            System.out.println("transactionName: " + transactionName);
+            System.out.println("Raw transactionName: " + transactionName);
         }
         if (argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isPresent()) {
-            double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get());
+            String transactionAmountString = argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get();
+            System.out.println("Raw transactionAmountString: " + transactionAmountString);
+            double transactionAmount = ParserUtil.parseTransactionAmount(transactionAmountString);
             editTransactionDescriptor.setAmount(transactionAmount);
-            System.out.println("transactionAmount: " + transactionAmount);
+            System.out.println("Parsed transactionAmount: " + transactionAmount);
         }
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isEmpty()) {
