@@ -1,4 +1,4 @@
-package seedu.address.model.followUp;
+package seedu.address.model.followup;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -15,7 +15,7 @@ public class FollowUp {
     private final String followUpName;
     private final FollowUpUrgency urgency;
 
-     /**
+    /**
      * Constructs a follow-up with the specified name and urgency.
      *
      * @param followUpName The name or description of the follow-up action.

@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.followUp.FollowUp;
+import seedu.address.model.followup.FollowUp;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -86,7 +86,7 @@ public class AddFollowUpCommand extends Command {
         Email email = person.getEmail();
         Address address = person.getAddress();
 
-        List<FollowUp> updatedFollowUps= new ArrayList<>(person.getFollowUps());
+        List<FollowUp> updatedFollowUps = new ArrayList<>(person.getFollowUps());
         updatedFollowUps.add(followUp);
 
         return new Person(name, phone, email, address, person.getTags(), person.getTransactions(), updatedFollowUps);

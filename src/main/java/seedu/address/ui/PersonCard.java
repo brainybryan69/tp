@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.*;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -12,8 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.paint.Color;
-import seedu.address.model.followUp.FollowUp;
+import seedu.address.model.followup.FollowUp;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 
@@ -107,6 +105,8 @@ public class PersonCard extends UiPart<Region> {
                     break;
                 case LOW:
                     circle.setFill(Color.YELLOW);
+                    break;
+                default:
                     break;
                 }
 

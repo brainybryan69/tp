@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddFollowUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.followUp.FollowUp;
+import seedu.address.model.followup.FollowUp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteFollowUpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
+import java.util.stream.Stream;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteFollowUpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new DeleteFollowUpCommand object
+ */
 public class DeleteFollowUpCommandParser implements Parser<DeleteFollowUpCommand> {
 
     /**
