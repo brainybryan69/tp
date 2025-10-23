@@ -56,6 +56,8 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
             throw new ParseException(EditTransactionCommand.MESSAGE_NOT_EDITED);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TRANSACTION_NAME, PREFIX_TRANSACTION_AMOUNT);
+
         return new EditTransactionCommand(personIndex, transactionIndex, editTransactionDescriptor);
     }
 
