@@ -38,6 +38,8 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
+            System.out.println("personIndex: " + personIndex.getOneBased());
+            System.out.println("transactionIndex: " + transactionIndex.getOneBased());
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), EditTransactionCommand.MESSAGE_USAGE), pe);
         }
@@ -45,11 +47,14 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isPresent()) {
-            editTransactionDescriptor.setName(argMultimap.getValue(PREFIX_TRANSACTION_NAME).get());
+            String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
+            editTransactionDescriptor.setName(transactionName);
+            System.out.println("transactionName: " + transactionName);
         }
         if (argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isPresent()) {
-            editTransactionDescriptor.setAmount(
-                    ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get()));
+            double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get());
+            editTransactionDescriptor.setAmount(transactionAmount);
+            System.out.println("transactionAmount: " + transactionAmount);
         }
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isEmpty()) {
