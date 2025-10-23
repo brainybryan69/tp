@@ -30,6 +30,10 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         Index personIndex;
         Index transactionIndex;
 
+        if (!argMultimap.getValue(PREFIX_INDEX).isPresent() || !argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE));
+        }
+
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
