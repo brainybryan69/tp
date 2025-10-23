@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.followUp.FollowUp;
+import seedu.address.model.followup.FollowUp;
 
 import static org.junit.jupiter.api.Assertions.*;
 

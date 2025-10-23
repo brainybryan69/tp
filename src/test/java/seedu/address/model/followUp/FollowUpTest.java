@@ -1,4 +1,4 @@
-package seedu.address.model.followUp;
+package seedu.address.model.followup;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -109,13 +109,5 @@ public class FollowUpTest {
     public void toString_returnsFollowUpName() {
         FollowUp followUp = new FollowUp("Test follow-up", "high");
         assertEquals("Test follow-up", followUp.toString());
-    }
-
-    /**
-     * Helper enum for testing - represents the expected FollowUpUrgency enum
-     * in the actual codebase.
-     */
-    private enum FollowUpUrgency {
-        HIGH, MEDIUM, LOW
     }
 }

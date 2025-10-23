@@ -1,12 +1,15 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.followUp.FollowUp;
-import seedu.address.model.followUp.FollowUpUrgency;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.followup.FollowUp;
+import seedu.address.model.followup.FollowUpUrgency;
+
+/**
+ * Jackson-friendly version of {@link FollowUp}.
+ */
 public class JsonAdaptedFollowUp {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Transaction's %s field is missing!";

@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.followUp.FollowUp;
+import seedu.address.model.followup.FollowUp;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Transaction;
 
