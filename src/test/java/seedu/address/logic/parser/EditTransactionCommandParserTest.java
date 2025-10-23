@@ -47,16 +47,16 @@ public class EditTransactionCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative person index
-        assertParseFailure(parser, " i/-5 t/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " i/-5 t/1" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero person index
-        assertParseFailure(parser, " i/0 t/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " i/0 t/1" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // negative transaction index
-        assertParseFailure(parser, " i/1 t/-5" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " i/1 t/-5" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // zero transaction index
-        assertParseFailure(parser, " i/1 t/0" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " i/1 t/0" + TRANSACTION_NAME_DESC_COFFEE, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
