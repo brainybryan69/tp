@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -40,17 +41,35 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' archive file path.
+     */
+    Path getArchiveFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Sets the user prefs' archive file path.
+     */
+    void setArchiveFilePath(Path archiveFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setArchive(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getArchive();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -68,6 +87,18 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds a list of given persons to archive.
+     * {@code person} must not already exist in the address book.
+     */
+    void addArchivedPersons(List<Person> persons);
+
+    /**
+     * Adds a list of given persons.
+     * {@code person} must not already exist in the address book.
+     */
+    void addPersons(List<Person> persons);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

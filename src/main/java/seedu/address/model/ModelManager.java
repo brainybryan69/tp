@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final AddressBook archive;
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -26,18 +28,19 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyAddressBook archive) {
+        requireAllNonNull(addressBook, userPrefs, archive);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.archive = new AddressBook(archive);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new AddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -70,9 +73,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getArchiveFilePath() {
+        return userPrefs.getArchiveFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public void setArchiveFilePath(Path archiveFilePath) {
+        requireNonNull(archiveFilePath);
+        userPrefs.setArchiveFilePath(archiveFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -83,8 +97,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setArchive(ReadOnlyAddressBook addressBook) {
+        this.archive.resetData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public ReadOnlyAddressBook getArchive() {
+        return archive;
     }
 
     @Override
@@ -101,6 +125,18 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addArchivedPersons(List<Person> persons) {
+        archive.addPersons(persons);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPersons(List<Person> persons) {
+        addressBook.addPersons(persons);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

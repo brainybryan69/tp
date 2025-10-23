@@ -50,9 +50,13 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
+
+
         commandResult = command.execute(model);
 
         try {
+            storage.saveArchive(model.getArchive());
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
@@ -61,6 +65,10 @@ public class LogicManager implements Logic {
         }
 
         return commandResult;
+    }
+
+    public ReadOnlyAddressBook getArchive() {
+        return model.getArchive();
     }
 
     @Override
