@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
 
 import java.util.stream.Stream;
@@ -24,20 +24,20 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      */
     public AddTransactionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NAME,
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_TRANSACTION_NAME,
                         PREFIX_TRANSACTION_AMOUNT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NAME,
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_TRANSACTION_NAME,
                 PREFIX_TRANSACTION_AMOUNT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTransactionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TRANSACTION_INDEX, PREFIX_TRANSACTION_NAME,
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_TRANSACTION_NAME,
                 PREFIX_TRANSACTION_AMOUNT);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
         double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
                 .get());

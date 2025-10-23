@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -31,10 +31,10 @@ public class DeleteTransactionCommand extends Command {
             + ": Deletes a transaction from the person identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: "
-            + PREFIX_TRANSACTION_INDEX + "PERSON_INDEX "
+            + PREFIX_INDEX + "PERSON_INDEX "
             + PREFIX_TRANSACTION_NUMBER + "TRANSACTION_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TRANSACTION_INDEX + "1 "
+            + PREFIX_INDEX + "1 "
             + PREFIX_TRANSACTION_NUMBER + "1";
 
     public static final String MESSAGE_DELETE_TRANSACTION_SUCCESS =
@@ -94,7 +94,7 @@ public class DeleteTransactionCommand extends Command {
         List<Transaction> updatedTransactions = new ArrayList<>(person.getTransactions());
         updatedTransactions.remove(transactionIndex.getZeroBased());
 
-        return new Person(name, phone, email, address, person.getTags(), updatedTransactions);
+        return new Person(name, phone, email, address, person.getTags(), updatedTransactions, person.getFollowUps());
     }
 
     @Override
