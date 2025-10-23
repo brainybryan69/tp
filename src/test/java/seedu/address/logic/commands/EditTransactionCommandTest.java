@@ -35,8 +35,8 @@ public class EditTransactionCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Transaction transactionToEdit = personToEdit.getTransactions().get(0);
-        EditTransactionCommand.EditTransactionDescriptor descriptor
-                = new EditTransactionDescriptorBuilder(transactionToEdit)
+        EditTransactionCommand.EditTransactionDescriptor descriptor =
+                new EditTransactionDescriptorBuilder(transactionToEdit)
                 .withName("New Name").withAmount(100.0).build();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_PERSON,
                 Index.fromZeroBased(0), descriptor);
