@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_AMOUNT_DESC_COFFEE;
 import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_COFFEE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;

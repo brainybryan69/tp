@@ -1,14 +1,17 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteFollowUpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteFollowUpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class DeleteFollowUpCommandParserTest {
 

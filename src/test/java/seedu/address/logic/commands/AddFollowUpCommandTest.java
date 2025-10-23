@@ -158,7 +158,7 @@ public class AddFollowUpCommandTest {
         AddFollowUpCommand firstCommand = new AddFollowUpCommand(INDEX_FIRST_PERSON, firstFollowUp);
         Model intermediateModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getArchive());
 
-        List<FollowUp> updatedFollowUps= new ArrayList<>(personToModify.getFollowUps());
+        List<FollowUp> updatedFollowUps = new ArrayList<>(personToModify.getFollowUps());
         updatedFollowUps.add(firstFollowUp);
         Person intermediateModifiedPerson = new Person(personToModify.getName(),
                 personToModify.getPhone(),

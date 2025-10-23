@@ -1,10 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddFollowUpCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.followup.FollowUp;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP_NAME;
@@ -12,6 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP_URGENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddFollowUpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.followup.FollowUp;
 
 public class AddFollowUpCommandParserTest {
     private AddFollowUpCommandParser parser = new AddFollowUpCommandParser();
