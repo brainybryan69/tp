@@ -22,7 +22,7 @@ import seedu.address.model.transaction.Transaction;
  */
 public class EditTransactionCommand extends Command {
 
-    public static final String COMMAND_WORD = "editt";
+    public static final String COMMAND_WORD = "editTxn";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a transaction of the person identified "
             + "by the index number used in the displayed person list. "
