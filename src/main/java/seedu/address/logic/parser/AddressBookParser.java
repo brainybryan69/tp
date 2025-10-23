@@ -92,7 +92,7 @@ public class AddressBookParser {
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);
         
-        case EditTransactionCommand.COMMAND_WORD:
+        case "editTxn":
             return new EditTransactionCommandParser().parse(arguments);
 
         case AddFollowUpCommand.COMMAND_WORD:
