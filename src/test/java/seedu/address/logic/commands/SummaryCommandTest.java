@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -50,7 +51,8 @@ public class SummaryCommandTest {
         Model model = new ModelManager(ab, new UserPrefs());
         Person person = new Person(new Name("Bob"), new Phone("23456"), new Email("b@b.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Collections.singletonList(new Transaction("Project A", 150.50)));
+                Collections.singletonList(new Transaction("Project A", 150.50)),
+                new ArrayList<>());
         model.addPerson(person);
         CommandResult result = new SummaryCommand().execute(model);
         String expectedMessage = "Total cashflow from all contacts: +$150.50";
@@ -63,7 +65,8 @@ public class SummaryCommandTest {
         Model model = new ModelManager(ab, new UserPrefs());
         Person person = new Person(new Name("Charlie"), new Phone("34567"), new Email("c@c.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Collections.singletonList(new Transaction("Lunch", -25.00)));
+                Collections.singletonList(new Transaction("Lunch", -25.00)),
+                new ArrayList<>());
         model.addPerson(person);
         CommandResult result = new SummaryCommand().execute(model);
         String expectedMessage = "Total cashflow from all contacts: -$25.00";
@@ -76,10 +79,12 @@ public class SummaryCommandTest {
         Model model = new ModelManager(ab, new UserPrefs());
         Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Collections.singletonList(new Transaction("Freelance", 1000.00)));
+                Collections.singletonList(new Transaction("Freelance", 1000.00)),
+                new ArrayList<>());
         Person p2 = new Person(new Name("Eve"), new Phone("56789"), new Email("e@e.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Arrays.asList(new Transaction("Rent", -450.55), new Transaction("Groceries", -49.00)));
+                Arrays.asList(new Transaction("Rent", -450.55), new Transaction("Groceries", -49.00)),
+                new ArrayList<>());
         model.addPerson(p1);
         model.addPerson(p2);
         CommandResult result = new SummaryCommand().execute(model);
