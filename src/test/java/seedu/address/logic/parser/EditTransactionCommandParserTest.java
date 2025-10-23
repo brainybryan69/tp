@@ -25,11 +25,20 @@ public class EditTransactionCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        // no person index specified
+        assertParseFailure(parser, "t/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+
+        // no transaction index specified
+        assertParseFailure(parser, "i/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, " i/1 t/1", EditTransactionCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "i/1 t/1", EditTransactionCommand.MESSAGE_NOT_EDITED);
+
+        // no person index and no field specified
+        assertParseFailure(parser, "t/1", MESSAGE_INVALID_FORMAT);
+
+        // no transaction index and no field specified
+        assertParseFailure(parser, "i/1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -37,11 +46,17 @@ public class EditTransactionCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        // negative person index
+        assertParseFailure(parser, "i/-5 t/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+        // zero person index
+        assertParseFailure(parser, "i/0 t/1" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+
+        // negative transaction index
+        assertParseFailure(parser, "i/1 t/-5" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
+
+        // zero transaction index
+        assertParseFailure(parser, "i/1 t/0" + TRANSACTION_NAME_DESC_COFFEE, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
