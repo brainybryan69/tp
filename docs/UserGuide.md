@@ -234,7 +234,7 @@ Format: `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOU
 *   Both indices must be positive integers (1, 2, 3, ...).
 *   At least one of the optional fields (`n/` or `a/`) must be provided.
 *   Existing values will be overwritten by the new input values.
-*   The `AMOUNT` must be an integer.
+*   The `AMOUNT` can be a decimal number.
 
 <box type="info" seamless>
 
