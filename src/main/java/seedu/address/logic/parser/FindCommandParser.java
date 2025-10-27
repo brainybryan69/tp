@@ -4,7 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
@@ -42,6 +44,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (hasNamePrefix) {
             String nameKeywordsString = argMultimap.getValue(PREFIX_NAME).get();
+            if (nameKeywordsString.trim().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
             String[] nameKeywords = nameKeywordsString.trim().split("\\s+");
             namePredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
         }
@@ -54,6 +60,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             String[] tagKeywords = tagKeywordsString.trim().split("\\s+");
             tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords));
+            // Get all tag values to support multiple t/ prefixes
+            List<String> allTagValues = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> tagKeywords = new ArrayList<>();
+
+            for (String tagValue : allTagValues) {
+                String trimmedValue = tagValue.trim();
+                if (trimmedValue.isEmpty()) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                }
+                // Split by whitespace and add all keywords
+                String[] keywords = trimmedValue.split("\\s+");
+                tagKeywords.addAll(Arrays.asList(keywords));
+            }
+
+            tagPredicate = new TagContainsKeywordsPredicate(tagKeywords);
         }
 
         // Return appropriate predicate
