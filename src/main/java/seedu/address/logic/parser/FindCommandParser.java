@@ -53,13 +53,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (hasTagPrefix) {
-            String tagKeywordsString = argMultimap.getValue(PREFIX_TAG).get();
-            if (tagKeywordsString.isBlank()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            String[] tagKeywords = tagKeywordsString.trim().split("\\s+");
-            tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords));
             // Get all tag values to support multiple t/ prefixes
             List<String> allTagValues = argMultimap.getAllValues(PREFIX_TAG);
             List<String> tagKeywords = new ArrayList<>();
