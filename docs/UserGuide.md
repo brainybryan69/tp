@@ -224,6 +224,28 @@ Examples:
 * `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
 * `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
 
+#### Editing a transaction : `editTxn`
+
+Edits an existing transaction for a specific contact.
+
+Format: `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
+
+*   Edits the transaction at the specified `TRANSACTION_INDEX` for the person at the specified `PERSON_INDEX`.
+*   Both indices must be positive integers (1, 2, 3, ...).
+*   At least one of the optional fields (`n/` or `a/`) must be provided.
+*   Existing values will be overwritten by the new input values.
+*   The `AMOUNT` must be an integer.
+
+<box type="info" seamless>
+
+**Note:** Upon successful execution, a confirmation message is displayed, showing the contact's details and the updated transaction. For example: `Edited transaction for Person: John Doe; ... Transaction: Coffee: $1.00 (EXPENSE)`
+</box>
+
+Examples:
+*   `editTxn i/1 t/1 n/Coffee Powder` - Edits the name of the 1st transaction of the 1st person to "Coffee Powder".
+*   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
+*   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
+
 ### Data Management
 
 #### Saving the data
@@ -295,4 +317,5 @@ Action       | Format, Examples
 Action                 | Format, Examples
 -----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Transaction**    | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
+**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
