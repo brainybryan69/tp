@@ -286,7 +286,7 @@ Examples:
 *   `editTxn i/1 t/1 n/Coffee Powder` - Edits the name of the 1st transaction of the 1st person to "Coffee Powder".
 *   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
 *   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
-
+--------------------------------------------------------------------------------------------------------------------
 ### Follow-up Management Commands
 
 #### Adding a follow-up : `addfu`
