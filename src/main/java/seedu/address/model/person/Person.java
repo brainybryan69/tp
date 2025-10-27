@@ -112,6 +112,9 @@ public class Person {
                 && (otherPerson.getName().equals(getName()) && isSameContactDetails(otherPerson));
     }
 
+    /**
+     * Returns true if both persons have the same email or phone number.
+     */
     public boolean isSameContactDetails(Person otherPerson) {
         boolean sameEmail = otherPerson.getEmail().equals(this.getEmail());
         boolean samePhone = otherPerson.getPhone().equals(this.getPhone());
