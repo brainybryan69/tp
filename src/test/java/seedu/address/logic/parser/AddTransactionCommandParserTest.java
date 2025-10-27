@@ -31,7 +31,6 @@ public class AddTransactionCommandParserTest {
     public void parse_missingFields_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTransactionCommand.MESSAGE_USAGE);
-
         // missing person index
         assertParseFailure(parser, " n/Coffee beans a/150.50", expectedMessage);
 
@@ -55,7 +54,7 @@ public class AddTransactionCommandParserTest {
 
         // zero amount
         assertParseFailure(parser, " i/1 n/Coffee a/0", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
-        assertParseFailure(parser," i/1 n/Coffee a/0.001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
-        assertParseFailure(parser," i/1 n/Coffee a/0.00000001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser, " i/1 n/Coffee a/0.001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser, " i/1 n/Coffee a/0.00000001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
     }
 }
