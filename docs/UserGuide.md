@@ -54,7 +54,14 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+Each Feature is represented by a command. In general, Atlas' features can be categorised into
+5 different aspects to tailor to the needs of our target users. <br>
 
+### 1. [General Commands](#general-commands)
+### 2. [Contact Management Commands](#contact-management-commands)
+### 3. [Transaction Management Commands](#transaction-management-commands)
+### 4. [Follow-Up Management Commands](#follow-up-management-commands)
+### 5. [Data Management Commands](#data-management)
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -107,31 +114,37 @@ Format `summary`
 
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
 --------------------------------------------------------------------------------------------------------------------
-## Person Management Commands
+## Contact Management Commands
 
 #### Adding a person: `add`
 
 Adds a person to Atlas.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/addContact.mp4" type="video/mp4">
+</video>
+g
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
 * `ADDRESS` is **optional**. You can add contacts without an address.
 * Phone numbers must contain at least 3 digits.
-* Tags must be one of the tags listed below
-  1. LANDLORD
-  2. DELIVERY
-  3. SUPPLIER
-  4. CUSTOMER
-  5. REGULATORY
-  6. FINANCES
-  7. UTILITY
-  8. EMPLOYEE
-  9. OTHERS
+* Tags must be one of the tags listed below:
+  * `LANDLORD`
+  * `DELIVERY`
+  * `SUPPLIER`
+  * `CUSTOMER`
+  * `REGULATORY`
+  * `FINANCES`
+  * `UTILITY`
+  * `EMPLOYEE`
+  * `OTHERS`
+
+<box type="info" seamless>
 
 **Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer).
 
-**Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**. <br>
+**Note:** A person cannot be added if another contact already exists with **either the same phone number or the same email address**. <br>
 
 **Note:** The `NAME` of a person is case-insensitive. `John Doe` is equal to `JOHN DOE`
 
@@ -143,7 +156,7 @@ Example:
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/friend t/supplier`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
 #### Listing all persons : `list`
@@ -222,6 +235,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Transaction Management Commands
@@ -286,7 +300,9 @@ Examples:
 *   `editTxn i/1 t/1 n/Coffee Powder` - Edits the name of the 1st transaction of the 1st person to "Coffee Powder".
 *   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
 *   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
+
 --------------------------------------------------------------------------------------------------------------------
+
 ### Follow-up Management Commands
 
 #### Adding a follow-up : `addfu`
@@ -314,6 +330,8 @@ Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 * deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
 * there is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Data Management
 
