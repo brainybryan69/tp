@@ -55,5 +55,7 @@ public class AddTransactionCommandParserTest {
 
         // zero amount
         assertParseFailure(parser, " i/1 n/Coffee a/0", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser," i/1 n/Coffee a/0.001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser," i/1 n/Coffee a/0.00000001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
     }
 }

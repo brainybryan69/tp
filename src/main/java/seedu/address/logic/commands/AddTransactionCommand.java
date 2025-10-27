@@ -42,6 +42,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_TRANSACTION_NAME + "Sales revenue "
             + PREFIX_TRANSACTION_AMOUNT + "500.00 (income)";
 
+
     public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added transaction to Person: %1$s\nTransaction: %2$s";
 
     private final Index index;

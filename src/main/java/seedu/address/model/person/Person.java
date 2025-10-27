@@ -108,8 +108,7 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-        return otherPerson != null
-                && (otherPerson.getName().equals(getName()) && isSameContactDetails(otherPerson));
+        return otherPerson != null && isSameContactDetails(otherPerson);
     }
 
     /**

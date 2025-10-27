@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,8 @@ public class EditTransactionCommand extends Command {
             + "%1$s\nTransaction: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_TRANSACTION_INDEX = "The transaction index provided is invalid.";
+    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "The transaction amount provided cannot be zero "
+            + "(2 decimal places).";
 
     private final Index personIndex;
     private final Index transactionIndex;
@@ -98,13 +102,26 @@ public class EditTransactionCommand extends Command {
      * edited with {@code editTransactionDescriptor}.
      */
     private static Transaction createEditedTransaction(Transaction transactionToEdit,
-                                                       EditTransactionDescriptor editTransactionDescriptor) {
+                                                       EditTransactionDescriptor editTransactionDescriptor)
+            throws CommandException{
         assert transactionToEdit != null;
 
         String updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getTransactionName());
         double updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getTransactionAmount());
-
+        if (roundOffAmount(updatedAmount) == 0f) {
+            throw new CommandException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        }
         return new Transaction(updatedName, updatedAmount);
+    }
+
+    /**
+     * Rounds off a given double to 2 decimal places
+     *
+     * @param transactionAmount a double transaction amount.
+     */
+    public static double roundOffAmount(double transactionAmount) {
+        return BigDecimal.valueOf(transactionAmount).setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 
     @Override

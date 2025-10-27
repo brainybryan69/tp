@@ -16,10 +16,19 @@ public class JsonAdaptedFollowUpTest {
 
     private static final String INVALID_URGENCY = "EXTREME";
     private static final String EMPTY_NAME = "   ";
+    private static final FollowUp FOLLOW_UP = new FollowUp(VALID_NAME, VALID_URGENCY);
 
     @Test
     public void toModelType_validFollowUpDetails_success() throws Exception {
         JsonAdaptedFollowUp adapted = new JsonAdaptedFollowUp(VALID_NAME, VALID_URGENCY);
+        FollowUp modelFollowUp = adapted.toModelType();
+        assertEquals(VALID_NAME, modelFollowUp.getFollowUpName());
+        assertEquals(VALID_URGENCY, modelFollowUp.getUrgency().toString());
+    }
+
+    @Test
+    public void toModelType_validFollowUpDetailsUsingOtherConstructor_success() throws Exception {
+        JsonAdaptedFollowUp adapted = new JsonAdaptedFollowUp(FOLLOW_UP);
         FollowUp modelFollowUp = adapted.toModelType();
         assertEquals(VALID_NAME, modelFollowUp.getFollowUpName());
         assertEquals(VALID_URGENCY, modelFollowUp.getUrgency().toString());
