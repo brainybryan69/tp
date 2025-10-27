@@ -6,6 +6,18 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [General Commands](#general-commands)
+- [Person Management Commands](#person-management-commands)
+- [Transaction Management Commands](#transaction-management-commands)
+- [Follow-up Management Commands](#follow-up-management-commands)
+- [Data Management](#data-management)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -64,8 +76,8 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
-
-### General Commands
+--------------------------------------------------------------------------------------------------------------------
+## General Commands
 
 #### Viewing help : `help`
 
@@ -94,8 +106,8 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 Format `summary`
 
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
-
-### Person Management Commands
+--------------------------------------------------------------------------------------------------------------------
+## Person Management Commands
 
 #### Adding a person: `add`
 
@@ -210,9 +222,9 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+--------------------------------------------------------------------------------------------------------------------
 
-
-### Transaction Management Commands
+## Transaction Management Commands
 
 #### Adding a transaction : `addtxn`
 
@@ -374,7 +386,9 @@ Action     | Format, Examples
 -----------|------------------
 **Help**   | `help`
 **Clear**  | `clear`
+**Summary**| `summary`
 **Exit**   | `exit`
+
 
 ### Person Management Commands
 
@@ -393,3 +407,17 @@ Action                 | Format, Examples
 **Add Transaction**    | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
 **Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
+**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/NAME] [a/AMOUNT]`
+
+### Follow-up Management Commands
+Action       | Format, Examples
+-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add Follow-up**      | `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
+**Delete Follow-up**     | `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+
+### Data Management Commands
+Action       | Format, Examples
+-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Archive**      | `archive`
+**Unarchive**     | `unarchive`
+           
