@@ -1,6 +1,14 @@
 # Atlas User Guide
 
-Atlas is a **desktop app for managing contacts and transactions for F&B business owners, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Atlas can get your contact and transaction management tasks done faster than traditional GUI apps.
+As a Food and Beverage (F&B) business owner, we understand that **managing suppliers**, **monitoring business finances** and **keeping track of deliverables** can 
+be challenging and hectic!
+
+Let Atlas streamline your workflow so that you can focus more effort on running your business instead of admin tasks.
+
+Atlas is a **desktop app** for managing contacts and transactions for **F&B business owners** to efficiently manage
+customers, suppliers, various stakeholders, and daily transactions - **ALL IN ONE PLACE!**
+
+*Atlas - Your Recipe for Faster, Smarter F&B Management*
 
 <!-- * Table of Contents -->
 <page-nav-print />
