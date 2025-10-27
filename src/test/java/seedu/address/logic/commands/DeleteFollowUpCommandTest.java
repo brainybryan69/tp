@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration and unit tests for {@code DeleteFollowUpCommand}.
@@ -109,6 +111,18 @@ public class DeleteFollowUpCommandTest {
         DeleteFollowUpCommand command = new DeleteFollowUpCommand(personIndex, invalidFollowUpIndex);
 
         assertCommandFailure(command, model, DeleteFollowUpCommand.MESSAGE_INVALID_FOLLOWUP_INDEX);
+    }
+
+    @Test
+    public void execute_validPersonIndexButEmptyFollowUp_throwsCommandException() {
+        model.addPerson(new PersonBuilder(BOB).build());
+        Index personIndex = Index.fromOneBased(2);
+        Index invalidFollowUpIndex = Index.fromOneBased(1); // out of bounds
+
+        DeleteFollowUpCommand command = new DeleteFollowUpCommand(personIndex, invalidFollowUpIndex);
+
+        assertCommandFailure(command, model, DeleteFollowUpCommand.MESSAGE_INVALID_PERSON_INDEX);
+
     }
 
     @Test

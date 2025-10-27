@@ -45,8 +45,9 @@ public class DeleteFollowUpCommand extends Command {
             "Deleted follow up from Person: %1$s\nFollowUp: %2$s";
 
     /** Error message shown when a follow-up index is invalid. */
-    public static final String MESSAGE_INVALID_FOLLOWUP_INDEX = "The follow up index provided or "
-            + "the person index is invalid";
+    public static final String MESSAGE_INVALID_FOLLOWUP_INDEX = "The follow up index provided is invalid";
+
+    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided is invalid";
 
     private final Index personIndex;
     private final Index followUpIndex;
@@ -85,6 +86,10 @@ public class DeleteFollowUpCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
+
+        if (personToEdit.getFollowUps().isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+        }
 
         if (followUpIndex.getZeroBased() >= personToEdit.getFollowUps().size()) {
             throw new CommandException(MESSAGE_INVALID_FOLLOWUP_INDEX);
