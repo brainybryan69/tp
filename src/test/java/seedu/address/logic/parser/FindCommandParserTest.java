@@ -72,4 +72,40 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " n/Alice Bob t/supplier customer", expectedMultiCommand);
     }
 
+    @Test
+    public void parse_emptyTagValue_throwsParseException() {
+        // empty tag value
+        assertParseFailure(parser, " t/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // empty tag value with spaces
+        assertParseFailure(parser, " t/   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyNameValue_throwsParseException() {
+        // empty name value
+        assertParseFailure(parser, " n/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // empty name value with spaces
+        assertParseFailure(parser, " n/   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleTagPrefixes_returnsFindCommand() {
+        // multiple t/ prefixes with single keywords each
+        FindCommand expectedFindCommand =
+                new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("supplier", "customer")));
+        assertParseSuccess(parser, " t/supplier t/customer", expectedFindCommand);
+
+        // multiple t/ prefixes with multiple keywords
+        FindCommand expectedMultiCommand =
+                new FindCommand(new TagContainsKeywordsPredicate(
+                        Arrays.asList("supplier", "customer", "landlord", "employee")));
+        assertParseSuccess(parser, " t/supplier customer t/landlord employee", expectedMultiCommand);
+    }
+
 }
