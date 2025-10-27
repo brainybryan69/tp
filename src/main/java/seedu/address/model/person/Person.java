@@ -101,16 +101,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name and same phone or same email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getName().equals(getName()) && isSameContactDetails(otherPerson));
+    }
+
+    public boolean isSameContactDetails(Person otherPerson) {
+        boolean sameEmail = otherPerson.getEmail().equals(this.getEmail());
+        boolean samePhone = otherPerson.getPhone().equals(this.getPhone());
+        return sameEmail || samePhone;
     }
 
     /**

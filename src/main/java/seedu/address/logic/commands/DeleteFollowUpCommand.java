@@ -45,7 +45,8 @@ public class DeleteFollowUpCommand extends Command {
             "Deleted follow up from Person: %1$s\nFollowUp: %2$s";
 
     /** Error message shown when a follow-up index is invalid. */
-    public static final String MESSAGE_INVALID_FOLLOWUP_INDEX = "The follow up index provided is invalid";
+    public static final String MESSAGE_INVALID_FOLLOWUP_INDEX = "The follow up index provided or "
+            + "the person index is invalid";
 
     private final Index personIndex;
     private final Index followUpIndex;

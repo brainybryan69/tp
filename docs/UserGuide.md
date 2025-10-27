@@ -16,8 +16,10 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 
 3. Copy the file to the folder you want to use as the _home folder_ for Atlas.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar atlas.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
+   
    ![Ui](images/AtlasUi.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -67,7 +69,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message to redirect users to our help page.
 
 ![help message](images/helpMessage.png)
 
@@ -101,7 +103,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 **Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer, VIP).
 
-**Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**.
+**Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**. <br>
+
+**Note:** The `NAME` of a person is case-insensitive. `John Doe` is equal to `JOHN DOE`
+
+Example:
+1. `add n/John Doe p/98765432 e/johnd@example.com`
+2. `add n/John Doe p/88888888 e/johnd@example.com` is not allowed as they share the same email
+3. `add n/John Doe p/9765432 e/johnnydoe@another.com` is not allowed as they share the same contact number
 </box>
 
 Examples:
@@ -149,6 +158,17 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+#### Locating persons by tag: `find t/`
+
+Finds persons whose tag names correspond to the given tag keywords.
+
+Format: `find t/[TAG_NAME]`
+
+* The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
+* Multiple tag names can be used. e.g `find t/supplier t/delivery t/employee`
+* Only full tag names will be matched e.g. `supp` will not match `supplier`
+* Persons whose tag matches at least one of the tag names will be returned.
+
 #### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -162,6 +182,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 
 ### Transaction Management Commands
 
