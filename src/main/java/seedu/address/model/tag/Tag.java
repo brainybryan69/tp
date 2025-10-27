@@ -15,7 +15,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
     /** Error message for invalid tag names. */
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and not NULL";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should only contain alphabets (a-z) "
+            + "and must not be NULL";
     /** Error message for invalid tag types. */
     public static final String TYPE_CONSTRAINTS = "Each tag should only belong to one of the following: \n"
             + "-LANDLORD \n"

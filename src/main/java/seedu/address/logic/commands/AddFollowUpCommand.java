@@ -45,10 +45,10 @@ public class AddFollowUpCommand extends Command {
             + PREFIX_FOLLOWUP_URGENCY + "URGENCY (High, Medium or Low case insensitive)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
-            + PREFIX_FOLLOWUP_NAME + "Get price estimate for aircon repair"
+            + PREFIX_FOLLOWUP_NAME + "Get price estimate for aircon repair "
             + PREFIX_FOLLOWUP_URGENCY + "High OR "
             + PREFIX_INDEX + "2 "
-            + PREFIX_FOLLOWUP_NAME + "Ask about bread prices"
+            + PREFIX_FOLLOWUP_NAME + "Ask about bread prices "
             + PREFIX_FOLLOWUP_URGENCY + "Medium";
 
     public static final String MESSAGE_SUCCESS = "Added follow up to Person: %1$s\nFollowUp: %2$s";
