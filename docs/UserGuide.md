@@ -105,6 +105,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 **Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**. <br>
 
+**Note:** The `NAME` of a person is case-insensitive. `John Doe` is equal to `JOHN DOE`
 
 Example:
 1. `add n/John Doe p/98765432 e/johnd@example.com`
