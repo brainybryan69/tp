@@ -1,7 +1,5 @@
 package seedu.address.model.transaction;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Represents a Transaction in the address book.

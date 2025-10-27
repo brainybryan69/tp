@@ -103,7 +103,7 @@ public class EditTransactionCommand extends Command {
      */
     private static Transaction createEditedTransaction(Transaction transactionToEdit,
                                                        EditTransactionDescriptor editTransactionDescriptor)
-            throws CommandException{
+            throws CommandException {
         assert transactionToEdit != null;
 
         String updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getTransactionName());

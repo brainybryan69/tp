@@ -32,7 +32,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    
-   ![Ui](images/AtlasUi.png)
+   ![Ui](images/atlasui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -57,11 +57,11 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 Each Feature is represented by a command. In general, Atlas' features can be categorised into
 5 different aspects to tailor to the needs of our target users. <br>
 
-### 1. [General Commands](#general-commands)
-### 2. [Contact Management Commands](#contact-management-commands)
-### 3. [Transaction Management Commands](#transaction-management-commands)
-### 4. [Follow-Up Management Commands](#follow-up-management-commands)
-### 5. [Data Management Commands](#data-management)
+#### 1. [General Commands](#general-commands)
+#### 2. [Contact Management Commands](#contact-management-commands)
+#### 3. [Transaction Management Commands](#transaction-management-commands)
+#### 4. [Follow-Up Management Commands](#follow-up-management-commands)
+#### 5. [Data Management Commands](#data-management)
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -123,7 +123,8 @@ Adds a person to Atlas.
 <video width="600" autoplay loop muted>
     <source src="videos/addContact.mp4" type="video/mp4">
 </video>
-g
+<br>
+
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
@@ -169,6 +170,11 @@ Format: `list`
 
 Edits an existing person in the address book.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/editContact.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -185,6 +191,11 @@ Examples:
 #### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/findByName.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `find n/KEYWORD [MORE_KEYWORDS]`
 
@@ -203,6 +214,11 @@ Examples:
 
 Finds persons whose tag names correspond to the given tag keywords.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/findByTag.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `find t/[TAG_NAME]`
 
 * The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
@@ -213,6 +229,11 @@ Format: `find t/[TAG_NAME]`
 #### Locating persons by name AND tag: `find n/ t/` 
 
 Finds persons whose names and tag names correspond to the given name and tag keywords.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/findByNameAndTag.mp4" type="video/mp4">
+</video>
+<br>
 
 Format  `find n/[NAME] t/[TAG_NAME]`
 
@@ -225,6 +246,11 @@ Format  `find n/[NAME] t/[TAG_NAME]`
 #### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteContact.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `delete INDEX`
 
@@ -243,6 +269,11 @@ Examples:
 #### Adding a transaction : `addtxn`
 
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/addTransaction.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
@@ -268,6 +299,11 @@ Examples:
 
 Deletes a specified transaction from a contact.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteTransaction.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
 
 * Deletes the transaction at `TRANSACTION_INDEX` from the person at `PERSON_INDEX`.
@@ -282,6 +318,11 @@ Examples:
 #### Editing a transaction : `editTxn`
 
 Edits an existing transaction for a specific contact.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/editTransaction.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
 
@@ -309,6 +350,11 @@ Examples:
 
 Adds a followup task to a contact
 
+<video width="600" autoplay loop muted>
+    <source src="videos/addFollowUp.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 * adds a follow-up task to the contact at the specified `PERSON_INDEX`.
@@ -325,6 +371,11 @@ Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 Deletes a followup task from a contact
 
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteFollowUp.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 * deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
@@ -334,6 +385,37 @@ Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 --------------------------------------------------------------------------------------------------------------------
 
 ### Data Management
+
+#### Archiving data files : `archive`
+
+Archives all existing data into an archive file to clean up the contact list.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/archive.mp4" type="video/mp4">
+</video>
+<br>
+
+Format: `archive`
+
+* Prevents accidental deletion while keeping your active list clean
+* clears all contacts from the Atlas display and saves it into a -- file
+* the path to the archive file is `[JAR file location]/data/archive.json`
+* experienced users are likewise free to update the archive file directly
+
+#### Unarchive data files : `unarchive`
+
+Restores all data stored in the archive file into Atlas
+
+<video width="600" autoplay loop muted>
+    <source src="videos/unarchive.mp4" type="video/mp4">
+</video>
+<br>
+
+Format: `unarchive`
+
+* Allows easy reactivation of inactive stakeholder relationships
+* restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
+* the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
 #### Saving the data
 
@@ -349,27 +431,6 @@ Atlas data are saved automatically as a JSON file `[JAR file location]/data/addr
 If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-#### Archiving data files : `archive`
-
-Archives all existing data into an archive file to clean up the contact list.
-
-Format: `archive`
-
-* Prevents accidental deletion while keeping your active list clean
-* clears all contacts from the Atlas display and saves it into a -- file
-* the path to the archive file is `[JAR file location]/data/archive.json`
-* experienced users are likewise free to update the archive file directly
-
-#### Unarchive data files : `unarchive`
-
-Restores all data stored in the archive file into Atlas
-
-Format: `unarchive`
-
-* Allows easy reactivation of inactive stakeholder relationships
-* restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
-* the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
 --------------------------------------------------------------------------------------------------------------------
 
