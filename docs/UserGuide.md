@@ -87,6 +87,14 @@ Exits the program.
 
 Format: `exit`
 
+#### Checking net cashflow: `summary`
+
+Collates the sum of all transactions tied to every single person in Atlas and displays it as a lump sum 
+
+Format `summary`
+
+* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
+
 ### Person Management Commands
 
 #### Adding a person: `add`
@@ -98,10 +106,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
 * `ADDRESS` is **optional**. You can add contacts without an address.
 * Phone numbers must contain at least 3 digits.
+* Tags must be one of the tags listed below
+  1. LANDLORD
+  2. DELIVERY
+  3. SUPPLIER
+  4. CUSTOMER
+  5. REGULATORY
+  6. FINANCES
+  7. UTILITY
+  8. EMPLOYEE
+  9. OTHERS
 
-<box type="tip" seamless">
-
-**Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer, VIP).
+**Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer).
 
 **Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**. <br>
 
@@ -145,7 +161,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -168,6 +184,18 @@ Format: `find t/[TAG_NAME]`
 * Multiple tag names can be used. e.g `find t/supplier t/delivery t/employee`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
+
+#### Locating persons by name AND tag: `find n/ t/` 
+
+Finds persons whose names and tag names correspond to the given name and tag keywords.
+
+Format  `find n/[NAME] t/[TAG_NAME]`
+
+* The search is case-insensitive. e.g. `supplier` will match `SUPPLIER`
+* Multiple tag names can be used. e.g. `find t/supplier t/delivery t/employee`
+* Multiple names can be used. e.g. `find n/john n/mary`
+* Only full names and tag names will be matched e.g. `supp` will not match `supplier`
+* Persons whose name/tag matches at least one of the keywords will be returned.
 
 #### Deleting a person : `delete`
 
@@ -196,6 +224,7 @@ Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 * The `AMOUNT` determines the transaction type:
     * **Positive amount** (e.g., `50`) = INCOME transaction
     * **Negative amount** (e.g., `-50`) = EXPENSE transaction
+* Atlas will automatically recognise the amount and classify it as an INCOME or EXPENSE accordingly
 * The amount cannot be zero.
 * All transactions are saved automatically and will persist after restarting the app.
 
@@ -246,6 +275,34 @@ Examples:
 *   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
 *   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
 
+### Follow-up Management Commands
+
+#### Adding a follow-up : `addfu`
+
+Adds a followup task to a contact
+
+Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
+
+* adds a follow-up task to the contact at the specified `PERSON_INDEX`.
+* the PRIORITY field has to be one of the three priority levels
+  1. HIGH
+  2. MEDIUM
+  3. LOW
+* the follow-ups are color coded according to their priority levels for easier recognition by the user
+* PERSON_INDEX must be a positive integer
+
+**Note:** Followups are displayed on the contact card below their Transactions.
+
+#### deleting a follow-up : `deletefu`
+
+Deletes a followup task from a contact
+
+Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+
+* deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
+* there is no need to specify priority
+* Both indices **must be positive integers** 1, 2, 3, …​
+
 ### Data Management
 
 #### Saving the data
@@ -263,9 +320,26 @@ If your changes to the data file makes its format invalid, Atlas will discard al
 Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-#### Archiving data files `[coming in v2.0]`
+#### Archiving data files : `archive`
 
-_Details coming soon ..._
+Archives all existing data into an archive file to clean up the contact list.
+
+Format: `archive`
+
+* Prevents accidental deletion while keeping your active list clean
+* clears all contacts from the Atlas display and saves it into a -- file
+* the path to the archive file is `[JAR file location]/data/archive.json`
+* experienced users are likewise free to update the archive file directly
+
+#### Unarchive data files : `unarchive`
+
+Restores all data stored in the archive file into Atlas
+
+Format: `unarchive`
+
+* Allows easy reactivation of inactive stakeholder relationships
+* restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
+* the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
 --------------------------------------------------------------------------------------------------------------------
 
