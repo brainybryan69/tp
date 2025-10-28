@@ -6,17 +6,54 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Table of contents
 - [Quick Start](#quick-start)
 - [Features](#features)
-- [General Commands](#general-commands)
-- [Person Management Commands](#person-management-commands)
-- [Transaction Management Commands](#transaction-management-commands)
-- [Follow-up Management Commands](#follow-up-management-commands)
-- [Data Management](#data-management)
+- <details>
+  <summary>General Commands</summary>
+  
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Checking net cashflow: `summary`](#checking-net-cashflow-summary)
+  </details>
+- <details>
+  <summary>Person Management Commands</summary>
+   
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Listing all persons : `list`](#listing-all-persons--list) 
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Locating persons by name: `find`](#locating-persons-by-name-find)
+    - [Locating persons by tag: `find t/`](#locating-persons-by-tag-find-t)
+    - [Locating persons by name AND tag: `find n/ t/`](#locating-persons-by-name-and-tag-find-n-t)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+  </details>
+- <details>
+  <summary>Transaction Management Commands</summary>
+  
+    - [Adding a transaction : `addtxn`](#adding-a-transaction--addtxn)
+    - [Deleting a transaction : `deletetxn`](#deleting-a-transaction--deletetxn)
+    - [Editing a transaction : `editTxn`](#editing-a-transaction--edittxn)
+  </details>
+- <details>
+  <summary>Follow-up Management Commands</summary>
+  
+    - [Adding a follow-up : `addfu`](#adding-a-follow-up--addfu)
+    - [Deleting a follow-up : `deletefu`](#deleting-a-follow-up--deletefu)
+  </details>
+- <details>
+  <summary>Data Management</summary>
+  
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files : `archive`](#archiving-data-files--archive)
+    - [Unarchive data files : `unarchive`](#unarchive-data-files--unarchive)
+  </details>
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -86,7 +123,7 @@ Each Feature is represented by a command. In general, Atlas' features can be cat
 --------------------------------------------------------------------------------------------------------------------
 ## General Commands
 
-#### Viewing help : `help`
+### Viewing help : `help`
 
 Shows a message to redirect users to our help page.
 
@@ -94,19 +131,19 @@ Shows a message to redirect users to our help page.
 
 Format: `help`
 
-#### Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-#### Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-#### Checking net cashflow: `summary`
+### Checking net cashflow: `summary`
 
 Collates the sum of all transactions tied to every single person in Atlas and displays it as a lump sum 
 
@@ -116,7 +153,7 @@ Format `summary`
 --------------------------------------------------------------------------------------------------------------------
 ## Contact Management Commands
 
-#### Adding a person: `add`
+### Adding a person: `add`
 
 Adds a person to Atlas.
 
@@ -160,13 +197,13 @@ Examples:
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
-#### Listing all persons : `list`
+### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-#### Editing a person : `edit`
+### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -188,7 +225,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-#### Locating persons by name: `find`
+### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -210,7 +247,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Locating persons by tag: `find t/`
+### Locating persons by tag: `find t/`
 
 Finds persons whose tag names correspond to the given tag keywords.
 
@@ -226,7 +263,7 @@ Format: `find t/[TAG_NAME]`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
 
-#### Locating persons by name AND tag: `find n/ t/` 
+### Locating persons by name AND tag: `find n/ t/` 
 
 Finds persons whose names and tag names correspond to the given name and tag keywords.
 
@@ -243,7 +280,7 @@ Format  `find n/[NAME] t/[TAG_NAME]`
 * Only full names and tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose name/tag matches at least one of the keywords will be returned.
 
-#### Deleting a person : `delete`
+### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -266,7 +303,7 @@ Examples:
 
 ## Transaction Management Commands
 
-#### Adding a transaction : `addtxn`
+### Adding a transaction : `addtxn`
 
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
 
@@ -295,7 +332,7 @@ Examples:
 * `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
 * `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
 
-#### Deleting a transaction : `deletetxn`
+### Deleting a transaction : `deletetxn`
 
 Deletes a specified transaction from a contact.
 
@@ -315,7 +352,7 @@ Examples:
 * `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
 * `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
 
-#### Editing a transaction : `editTxn`
+### Editing a transaction : `editTxn`
 
 Edits an existing transaction for a specific contact.
 
@@ -346,7 +383,7 @@ Examples:
 
 ### Follow-up Management Commands
 
-#### Adding a follow-up : `addfu`
+### Adding a follow-up : `addfu`
 
 Adds a followup task to a contact
 
@@ -367,7 +404,7 @@ Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 **Note:** Followups are displayed on the contact card below their Transactions.
 
-#### deleting a follow-up : `deletefu`
+### deleting a follow-up : `deletefu`
 
 Deletes a followup task from a contact
 
@@ -386,7 +423,7 @@ Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 ### Data Management
 
-#### Archiving data files : `archive`
+### Archiving data files : `archive`
 
 Archives all existing data into an archive file to clean up the contact list.
 
@@ -402,7 +439,7 @@ Format: `archive`
 * the path to the archive file is `[JAR file location]/data/archive.json`
 * experienced users are likewise free to update the archive file directly
 
-#### Unarchive data files : `unarchive`
+### Unarchive data files : `unarchive`
 
 Restores all data stored in the archive file into Atlas
 
