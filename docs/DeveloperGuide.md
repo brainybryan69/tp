@@ -254,7 +254,7 @@ The archive management feature allows users to archive and unarchive persons in 
 
 #### Archive Command (`archive`)
 
-The `archive` command moves all the people from the active address book to the archived list. 
+The `archive` command moves all the people from the active address book to the archived list.
 
 The following sequence diagram illustrates the process:
 
@@ -786,38 +786,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Adding a person
-
-1. Adding a person with correct details
-   1. Prerequisites: List all persons using the `list` command.
-   2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-      Expected: A new contact 'John Doe' is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
-   3. Test case: `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 a/New Street, #02-02`
-      Expected: A new contact 'Betsy Crowe' is added to the list with the tag 'friend'.
-
-2. Adding a person with incorrect details
-   1. Prerequisites: List all persons using the `list` command.
-   2. Test case: `add n/John Doe p/98765432` (missing email)
-      Expected: No person is added. Error details shown in the status message.
-   3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (duplicate of a person already in the list)
-      Expected: No person is added. Error details shown in the status message.
-   4. Other incorrect add commands to try: `add`, `add n/`, `add n/John Doe p/abc`
-      Expected: Similar to previous.
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a person
 

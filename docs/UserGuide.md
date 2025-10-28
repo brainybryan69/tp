@@ -12,7 +12,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 - [Features](#features)
 - <details>
   <summary>General Commands</summary>
-  
+
     - [Viewing help : `help`](#viewing-help--help)
     - [Clearing all entries : `clear`](#clearing-all-entries--clear)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -20,9 +20,9 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
   </details>
 - <details>
   <summary>Person Management Commands</summary>
-   
+
     - [Adding a person: `add`](#adding-a-person-add)
-    - [Listing all persons : `list`](#listing-all-persons--list) 
+    - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
     - [Locating persons by name: `find`](#locating-persons-by-name-find)
     - [Locating persons by tag: `find t/`](#locating-persons-by-tag-find-t)
@@ -31,20 +31,20 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
   </details>
 - <details>
   <summary>Transaction Management Commands</summary>
-  
+
     - [Adding a transaction : `addtxn`](#adding-a-transaction--addtxn)
     - [Deleting a transaction : `deletetxn`](#deleting-a-transaction--deletetxn)
     - [Editing a transaction : `editTxn`](#editing-a-transaction--edittxn)
   </details>
 - <details>
   <summary>Follow-up Management Commands</summary>
-  
+
     - [Adding a follow-up : `addfu`](#adding-a-follow-up--addfu)
     - [Deleting a follow-up : `deletefu`](#deleting-a-follow-up--deletefu)
   </details>
 - <details>
   <summary>Data Management</summary>
-  
+
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Archiving data files : `archive`](#archiving-data-files--archive)
@@ -68,7 +68,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar atlas.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   
+
    ![Ui](images/atlasui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -145,11 +145,11 @@ Format: `exit`
 
 ### Checking net cashflow: `summary`
 
-Collates the sum of all transactions tied to every single person in Atlas and displays it as a lump sum 
+Collates the sum of all transactions tied to every single person in Atlas and displays it as a lump sum
 
 Format `summary`
 
-* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
+* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
 --------------------------------------------------------------------------------------------------------------------
 ## Contact Management Commands
 
@@ -263,7 +263,7 @@ Format: `find t/[TAG_NAME]`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
 
-### Locating persons by name AND tag: `find n/ t/` 
+### Locating persons by name AND tag: `find n/ t/`
 
 Finds persons whose names and tag names correspond to the given name and tag keywords.
 
@@ -536,4 +536,3 @@ Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      | `archive`
 **Unarchive**     | `unarchive`
-           
