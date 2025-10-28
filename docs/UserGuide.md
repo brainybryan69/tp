@@ -1,20 +1,29 @@
 # Atlas User Guide
 
-As a Food and Beverage (F&B) business owner, we understand that **managing suppliers**, **monitoring business finances** and **keeping track of deliverables** can 
-be challenging and hectic!
+## What is Atlas?
 
-Let Atlas streamline your workflow so that you can focus more effort on running your business instead of admin tasks.
+Running an F&B business means juggling relationships with suppliers, customers, and partners — all while keeping track of countless orders, payments, and deliveries.
 
-Atlas is a **desktop app** for managing contacts and transactions for **F&B business owners** to efficiently manage
-customers, suppliers, various stakeholders, and daily transactions - **ALL IN ONE PLACE!**
+Atlas helps you stay on top of it all.
 
-*Atlas - Your Recipe for Faster, Smarter F&B Management*
+Built specifically for **F&B business owners**, Atlas is a **desktop app** designed to streamline your daily operations through:
+
+1. **👥 Contact Management** – Keep detailed records of your suppliers, customers, and other key stakeholders in one organized place.
+
+2. **💳 Transaction Handling** – Record and monitor all transactions with each contact — from ingredient purchases to customer payments — for clear, effortless tracking.
+
+3. **🔔 Follow-Up Management** – Never miss a payment, delivery, or client check-in again with built-in reminders and follow-up tracking for every contact.
+
+With Atlas, you can cut through the clutter of admin work and focus on running and growing your F&B business with confidence.
+
+*Atlas – Your Recipe for Faster, Smarter F&B Management*
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-## Table of contents
+## Table of Contents
+
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [General Commands](#general-commands)
@@ -27,117 +36,225 @@ customers, suppliers, various stakeholders, and daily transactions - **ALL IN ON
 - [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+    <details>
+   <summary>Checking Java Version</summary>
+   <ul>
+        <li> Open Command Prompt (Windows)/ Terminal (MacOS)</li>
+        <li> Run the Command: <code>java -version</code></li>
+        <li> If you have Java <code>17</code> or above installed, the following output will be returned: <br>
+            <div>
+                <img style="text-align: left" src="images/javaVersion.png" width="600">
+                <p style="text-align: center; width: 600px; margin: 4px 0;">
+                    <em>Figure: Output at Command Terminal indicating Java 17 or above</em>
+                </p>
+            </div>
+        </li>
+   </ul>
+    </details>
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Atlas.
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-W13-3/tp/releases).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar atlas.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
+3. Create a folder in your computer for your application (Preferably *Desktop*).
+
+
+4. Copy the file to the folder you have created (This will be the _home folder_ for Atlas).
+
+
+5. Open the home folder using the command terminal.
+   <details>
+   <summary>Windows User:</summary>
+        Right-click on your home folder and select <code>Open in Terminal</code><br>
+        <div>
+            <img src="images/openCdWindows.png" width="200" height="300">
+                <p style="text-align: center; width: 200px; margin: 4px 0;">
+                    <em>Figure: Option to Open in Terminal for Windows</em>
+                </p>
+        </div>
+    </details>
+   <details>
+   <summary>MacOS User:</summary>
+        Right-click on your home folder and select <code>New Terminal at Folder</code><br>
+        <div>
+            <img src="images/openCdMac.jpg" width="200" height="300">
+                <p style="text-align: center; width: 200px; margin: 4px 0;">
+                    <em>Figure: Option to Open in Terminal for MacOS</em>
+                </p>
+        </div>
+    </details>
    
-   ![Ui](images/atlasui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Run: `java -jar atlas.jar` to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:<br>
+   <div>
+    <img src="images/atlasui.png" width="600"><br>
+    <p style="text-align: center; width: 600px; margin: 4px 0;">
+        <em>Figure: UI of Atlas upon Application Start</em>
+    </p>
+   </div><br>
+
+
+7. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all stakeholder contacts (i.e suppliers, landlords, delivery personnel, etc).
 
-    * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to Atlas.
+    * `add n/John Doe p/98765432 e/johnd@example.com` : Adds an unspecified stakeholder named `John Doe` to Atlas.
 
-    * `addtxn i/1 n/Coffee beans a/-50` : Adds an expense transaction to the 1st contact.
+    * `addtxn i/1 n/Coffee beans a/-50` : Adds an expense transaction to the 1st stakeholder.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-    * `clear` : Deletes all contacts.
+    * `delete 3` : Deletes the 3rd stakeholder shown in the current list.
 
     * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+
+8. Refer to the [Features](#features) below for details of each command.
+
+[↩️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-Each Feature is represented by a command. In general, Atlas' features can be categorised into
-5 different aspects to tailor to the needs of our target users. <br>
+Every feature in Atlas is designed around the real needs of F&B business owners — where efficiency, organisation, and relationships matter most.
+Each feature is represented by a command, allowing you to perform actions quickly and consistently.
 
-#### 1. [General Commands](#general-commands)
-#### 2. [Contact Management Commands](#contact-management-commands)
-#### 3. [Transaction Management Commands](#transaction-management-commands)
-#### 4. [Follow-Up Management Commands](#follow-up-management-commands)
-#### 5. [Data Management Commands](#data-management)
-<box type="info" seamless>
+Atlas’ capabilities can be grouped into five key categories, each addressing a specific aspect of running your business:
 
-**Notes about the command format:**<br>
+1. ⚙️ [General Commands](#general-commands):<br>
+Handle your everyday essentials — from viewing help guides to navigating the system — so you can focus on operations, not admin work.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+2. 👥 [Contact Management Commands](#contact-management-commands):<br>
+Keep track of your suppliers, customers, and stakeholders all in one place. Easily add, edit, or view contacts to maintain strong business relationships and never lose touch with key stakeholders.
+
+
+3. 💳 [Transaction Management Commands](#transaction-management-commands):<br>
+Record, review, and update your orders and payments per contact, ensuring you always have a clear view of your financial exchanges — whether it’s supplier invoices or customer payments.
+
+
+4. 🔔 [Follow-Up Management Commands](#follow-up-management-commands):<br>
+Stay on top of your commitments. Set and manage follow-ups with suppliers, customers or various stakeholders — like confirming deliveries or payment dates — so nothing slips through the cracks.
+
+
+5. 📦 [Data Management Commands](#data-management):<br>
+Manage your data efficiently — from saving backups to clearing outdated records — keeping your system organised and your workflow smooth.
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the attributes to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is an attribute which can be used as `add n/John Doe`, `n/` is its attribute prefix.
+
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/supplier` or as `n/John Doe`.
+
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/supplier`, `t/supplier t/utility` etc.
 
-* Parameters can be in any order.<br>
+
+* Attributes can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+
+* Extraneous attributes for commands that do not take in attributes (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+
+</div>
+
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## General Commands
 
-#### Viewing help : `help`
+### Viewing help: `help`
 
-Shows a message to redirect users to our help page.
+**Description**:<br>
+Displays a pop-up window, allowing users to copy the URL to Atlas' User Guide Page.
 
-![help message](images/helpMessage.png)
+**Format**:<br>
+`help`
+<br>
+<div>
+<img src="images/helpMessage.png" width="600">
+<br>
+<p style="text-align: center; width: 600px; margin: 4px 0;">
+    <em>Figure: UI of pop-up Window after executing help command</em>
+</p>
+</div><br>
 
-Format: `help`
+### Clearing all entries: `clear`
 
-#### Clearing all entries : `clear`
+<div markdown="block" class="alert alert-warning">
 
+**❗Warning**:
+
+* This command will **permanently** delete all contacts in the address book.
+* This action is **irreversible**.
+
+</div>
+
+**Description**:<br>
 Clears all entries from the address book.
 
-Format: `clear`
+**Format**:<br>
+`clear`
 
-#### Exiting the program : `exit`
+### Exiting the program: `exit`
 
+**Description**:<br>
 Exits the program.
 
-Format: `exit`
+**Format**:<br>
+`exit`
 
-#### Checking net cashflow: `summary`
+### Checking Net Cashflow: `summary`
 
+**Description**:<br>
 Collates the sum of all transactions tied to every single person in Atlas and displays it as a lump sum 
 
-Format `summary`
+**Format**:<br>
+`summary`
 
-* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
+* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
+
+
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 ## Contact Management Commands
 
-#### Adding a person: `add`
+### Adding a person: `add`
 
-Adds a person to Atlas.
+**Description**:<br>
+Adds a stakeholder to Atlas.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/addContact.mp4" type="video/mp4">
-</video>
-<br>
+**Format**:<br>
+`add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**
 
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
-* `ADDRESS` is **optional**. You can add contacts without an address.
+* `ADDRESS` is **optional**. You can add stakeholders without an address.
 * Phone numbers must contain at least 3 digits.
+* Tags must be valid.
+
+</div>
+
 * Tags must be one of the tags listed below:
   * `LANDLORD`
   * `DELIVERY`
@@ -168,13 +285,13 @@ Examples:
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
-#### Listing all persons : `list`
+### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-#### Editing a person : `edit`
+### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -196,7 +313,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-#### Locating persons by name: `find`
+### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -218,7 +335,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Locating persons by tag: `find t/`
+### Locating persons by tag: `find t/`
 
 Finds persons whose tag names correspond to the given tag keywords.
 
@@ -234,7 +351,7 @@ Format: `find t/[TAG_NAME]`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
 
-#### Locating persons by name AND tag: `find n/ t/` 
+### Locating persons by name AND tag: `find n/ t/` 
 
 Finds persons whose names and tag names correspond to the given name and tag keywords.
 
@@ -251,7 +368,7 @@ Format  `find n/[NAME] t/[TAG_NAME]`
 * Only full names and tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose name/tag matches at least one of the keywords will be returned.
 
-#### Deleting a person : `delete`
+### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -270,11 +387,13 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Transaction Management Commands
 
-#### Adding a transaction : `addtxn`
+### Adding a transaction : `addtxn`
 
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
 
@@ -303,7 +422,7 @@ Examples:
 * `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
 * `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
 
-#### Deleting a transaction : `deletetxn`
+### Deleting a transaction : `deletetxn`
 
 Deletes a specified transaction from a contact.
 
@@ -323,7 +442,7 @@ Examples:
 * `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
 * `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
 
-#### Editing a transaction : `editTxn`
+### Editing a transaction : `editTxn`
 
 Edits an existing transaction for a specific contact.
 
@@ -350,11 +469,13 @@ Examples:
 *   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
 *   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
 
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-### Follow-up Management Commands
+## Follow-up Management Commands
 
-#### Adding a follow-up : `addfu`
+### Adding a follow-up : `addfu`
 
 Adds a followup task to a contact
 
@@ -375,7 +496,7 @@ Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 **Note:** Followups are displayed on the contact card below their Transactions.
 
-#### deleting a follow-up : `deletefu`
+### deleting a follow-up : `deletefu`
 
 Deletes a followup task from a contact
 
@@ -390,11 +511,13 @@ Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 * there is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
 
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-### Data Management
+## Data Management
 
-#### Archiving data files : `archive`
+### Archiving data files : `archive`
 
 Archives all existing data into an archive file to clean up the contact list.
 
@@ -410,7 +533,7 @@ Format: `archive`
 * the path to the archive file is `[JAR file location]/data/archive.json`
 * experienced users are likewise free to update the archive file directly
 
-#### Unarchive data files : `unarchive`
+### Unarchive data files : `unarchive`
 
 Restores all data stored in the archive file into Atlas
 
@@ -425,11 +548,11 @@ Format: `unarchive`
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
-#### Saving the data
+### Saving the data
 
 Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### Editing the data file
+### Editing the data file
 
 Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -439,6 +562,8 @@ Atlas data are saved automatically as a JSON file `[JAR file location]/data/addr
 If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+[↩️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -456,12 +581,16 @@ Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., i
 **Q**: How do I view my transactions?<br>
 **A**: Transactions are automatically displayed on each person's contact card in the main list view.
 
+[↩️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[↩️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -507,4 +636,5 @@ Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      | `archive`
 **Unarchive**     | `unarchive`
-           
+
+[↩️ Back to Table of Contents](#table-of-contents)
