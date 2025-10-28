@@ -194,6 +194,24 @@ The following sequence diagram illustrates the process:
 4.  **Person Update:** A new `Person` object is created with the transaction removed from the transaction list.
 5.  **Model Update:** The `Model` is updated with the new `Person` object.
 
+#### Edit Transaction Command (`editTxn`)
+
+The `editTxn` command edits an existing transaction of a person. The implementation involves parsing the user input, creating an `EditTransactionDescriptor` object, and updating the transaction in the person's transaction list.
+
+The following sequence diagram illustrates the process:
+
+<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" />
+
+**Implementation Details:**
+
+1.  **Parsing:** The `AddressBookParser` identifies the `editTxn` command word and passes the arguments to the `EditTransactionCommandParser`.
+2.  **Index and Descriptor Creation:** The `EditTransactionCommandParser` parses the person's index, transaction index, and the fields to be edited to create an `EditTransactionCommand` object.
+3.  **Execution:** The `EditTransactionCommand` retrieves the `Person` from the `Model` using the provided index.
+4.  **Transaction Update:** A new `Transaction` object is created with the updated details.
+5.  **Person Update:** A new `Person` object is created with the updated transaction list.
+6.  **Model Update:** The `Model` is updated with the new `Person` object.
+
+
 ### FollowUp Management
 
 The follow up management feature allows users to add and delete follow up tasks associated with a person in the address book. This is useful for tracking follow up tasks related to a contact.
@@ -236,7 +254,7 @@ The archive management feature allows users to archive and unarchive persons in 
 
 #### Archive Command (`archive`)
 
-The `archive` command moves all the people from the active address book to the archived list. 
+The `archive` command moves all the people from the active address book to the archived list.
 
 The following sequence diagram illustrates the process:
 
@@ -265,17 +283,7 @@ The following sequence diagram illustrates the process:
 4.  **Person Update:** A new `Person` object is created with the archive status set to active.
 5.  **Model Update:** The `Model` is updated with the new `Person` object, moving them back to the active list.
 
-The `archive` command removes 
 
-The following sequence diagram illustrates the process:
-
-<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" />
-
-<box type="info" seamless>
-
-**Note:** This feature is not yet implemented.
-
-</box>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -779,30 +787,53 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Editing a person
 
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
+1. Editing a person while all persons are being shown
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `edit 1 n/new name`<br>
+      Expected: First contact's name is changed to "new name". Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `edit 0 p/12345678`<br>
+      Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a person
+
+1. Finding a person by name
+   1. Prerequisites: Add a person named "John Doe" to the list.
+   2. Test case: `find n/John`<br>
+      Expected: The contact "John Doe" is shown in the list.
+   3. Test case: `find n/Peter`<br>
+      Expected: An empty list is shown.
+
+### Managing transactions
+
+1. Adding a transaction
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `addtxn i/1 n/Coffee v/5.00`<br>
+      Expected: A new transaction "Coffee" with value "5.00" is added to the first person.
+   3. Test case: `addtxn i/1 n/Lunch v/-10.00`<br>
+      Expected: A new transaction "Lunch" with value "-10.00" is added to the first person.
+
+2. Deleting a transaction
+   1. Prerequisites: Add a transaction to the first person.
+   2. Test case: `deletetxn i/1 ti/1`<br>
+      Expected: The first transaction of the first person is deleted.
+
+3. Editing a transaction
+   1. Prerequisites: Add a transaction to the first person.
+   2. Test case: `edittxn i/1 ti/1 n/new name`<br>
+      Expected: The first transaction of the first person is renamed to "new name".
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Simulate a missing data file by renaming `addressbook.json` to `addressbook.json.bak`.
+      Expected: The app should launch with an empty contact list.
+   2. Simulate a corrupted data file by adding invalid text to `addressbook.json`.
+      Expected: The app should launch with an empty contact list. A backup of the corrupted file should be created.
 
 1. _{ more test cases …​ }_
 
