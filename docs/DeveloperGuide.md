@@ -819,10 +819,44 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+### Editing a person
+
+1. Editing a person while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `edit 1 n/new name`<br>
+      Expected: First contact's name is changed to "new name". Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `edit 0 p/12345678`<br>
+      Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a person
+
+1. Finding a person by name
+   1. Prerequisites: Add a person named "John Doe" to the list.
+   2. Test case: `find n/John`<br>
+      Expected: The contact "John Doe" is shown in the list.
+   3. Test case: `find n/Peter`<br>
+      Expected: An empty list is shown.
+
+### Managing transactions
+
+1. Adding a transaction
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `addtxn i/1 n/Coffee v/5.00`<br>
+      Expected: A new transaction "Coffee" with value "5.00" is added to the first person.
+   3. Test case: `addtxn i/1 n/Lunch v/-10.00`<br>
+      Expected: A new transaction "Lunch" with value "-10.00" is added to the first person.
+
+2. Deleting a transaction
+   1. Prerequisites: Add a transaction to the first person.
+   2. Test case: `deletetxn i/1 ti/1`<br>
+      Expected: The first transaction of the first person is deleted.
+
+3. Editing a transaction
+   1. Prerequisites: Add a transaction to the first person.
+   2. Test case: `edittxn i/1 ti/1 n/new name`<br>
+      Expected: The first transaction of the first person is renamed to "new name".
 
 ### Saving data
 
