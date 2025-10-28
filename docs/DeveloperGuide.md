@@ -283,17 +283,7 @@ The following sequence diagram illustrates the process:
 4.  **Person Update:** A new `Person` object is created with the archive status set to active.
 5.  **Model Update:** The `Model` is updated with the new `Person` object, moving them back to the active list.
 
-The `archive` command removes 
 
-The following sequence diagram illustrates the process:
-
-<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" />
-
-<box type="info" seamless>
-
-**Note:** This feature is not yet implemented.
-
-</box>
 
 
 --------------------------------------------------------------------------------------------------------------------
