@@ -194,6 +194,24 @@ The following sequence diagram illustrates the process:
 4.  **Person Update:** A new `Person` object is created with the transaction removed from the transaction list.
 5.  **Model Update:** The `Model` is updated with the new `Person` object.
 
+#### Edit Transaction Command (`editTxn`)
+
+The `editTxn` command edits an existing transaction of a person. The implementation involves parsing the user input, creating an `EditTransactionDescriptor` object, and updating the transaction in the person's transaction list.
+
+The following sequence diagram illustrates the process:
+
+<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" />
+
+**Implementation Details:**
+
+1.  **Parsing:** The `AddressBookParser` identifies the `editTxn` command word and passes the arguments to the `EditTransactionCommandParser`.
+2.  **Index and Descriptor Creation:** The `EditTransactionCommandParser` parses the person's index, transaction index, and the fields to be edited to create an `EditTransactionCommand` object.
+3.  **Execution:** The `EditTransactionCommand` retrieves the `Person` from the `Model` using the provided index.
+4.  **Transaction Update:** A new `Transaction` object is created with the updated details.
+5.  **Person Update:** A new `Person` object is created with the updated transaction list.
+6.  **Model Update:** The `Model` is updated with the new `Person` object.
+
+
 ### FollowUp Management
 
 The follow up management feature allows users to add and delete follow up tasks associated with a person in the address book. This is useful for tracking follow up tasks related to a contact.
@@ -781,6 +799,24 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person with correct details
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+      Expected: A new contact 'John Doe' is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 a/New Street, #02-02`
+      Expected: A new contact 'Betsy Crowe' is added to the list with the tag 'friend'.
+
+2. Adding a person with incorrect details
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `add n/John Doe p/98765432` (missing email)
+      Expected: No person is added. Error details shown in the status message.
+   3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (duplicate of a person already in the list)
+      Expected: No person is added. Error details shown in the status message.
+   4. Other incorrect add commands to try: `add`, `add n/`, `add n/John Doe p/abc`
+      Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -802,7 +838,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Simulate a missing data file by renaming `addressbook.json` to `addressbook.json.bak`.
+      Expected: The app should launch with an empty contact list.
+   2. Simulate a corrupted data file by adding invalid text to `addressbook.json`.
+      Expected: The app should launch with an empty contact list. A backup of the corrupted file should be created.
 
 1. _{ more test cases …​ }_
 
