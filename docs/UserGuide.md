@@ -27,7 +27,7 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [General Commands](#general-commands)
-- [Person Management Commands](#person-management-commands)
+- [Contact Management Commands](#contact-management-commands)
 - [Transaction Management Commands](#transaction-management-commands)
 - [Follow-up Management Commands](#follow-up-management-commands)
 - [Data Management](#data-management)
@@ -287,20 +287,20 @@ Examples:
 
 ### Listing all persons : `list`
 
+**Description**:<br>
 Shows a list of all persons in the address book.
 
-Format: `list`
+**Format**:<br>
+`list`
 
 ### Editing a person : `edit`
 
+**Description**:<br>
 Edits an existing person in the address book.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/editContact.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format**:<br>
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -315,14 +315,12 @@ Examples:
 
 ### Locating persons by name: `find`
 
+**Description**:<br>
 Finds persons whose names contain any of the given keywords.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/findByName.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `find n/KEYWORD [MORE_KEYWORDS]`
+**Format**:<br>
+`find n/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -337,14 +335,11 @@ Examples:
 
 ### Locating persons by tag: `find t/`
 
+**Description**:<br>
 Finds persons whose tag names correspond to the given tag keywords.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/findByTag.mp4" type="video/mp4">
-</video>
-<br>
-
-Format: `find t/[TAG_NAME]`
+**Format**:<br>
+`find t/[TAG_NAME]`
 
 * The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
 * Multiple tag names can be used. e.g `find t/supplier t/delivery t/employee`
@@ -353,14 +348,11 @@ Format: `find t/[TAG_NAME]`
 
 ### Locating persons by name AND tag: `find n/ t/` 
 
+**Description**:<br>
 Finds persons whose names and tag names correspond to the given name and tag keywords.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/findByNameAndTag.mp4" type="video/mp4">
-</video>
-<br>
-
-Format  `find n/[NAME] t/[TAG_NAME]`
+**Format**:<br>
+`find n/[NAME] t/[TAG_NAME]`
 
 * The search is case-insensitive. e.g. `supplier` will match `SUPPLIER`
 * Multiple tag names can be used. e.g. `find t/supplier t/delivery t/employee`
@@ -370,14 +362,11 @@ Format  `find n/[NAME] t/[TAG_NAME]`
 
 ### Deleting a person : `delete`
 
+**Description**:<br>
 Deletes the specified person from the address book.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/deleteContact.mp4" type="video/mp4">
-</video>
-<br>
-
-Format: `delete INDEX`
+**Format**:<br>
+`delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -395,14 +384,12 @@ Examples:
 
 ### Adding a transaction : `addtxn`
 
+**Description**:<br>
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/addTransaction.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
+**Format**:<br>
+`addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
 * Adds a transaction to the contact at the specified `PERSON_INDEX`.
 * The `AMOUNT` determines the transaction type:
@@ -424,14 +411,12 @@ Examples:
 
 ### Deleting a transaction : `deletetxn`
 
+**Description**:<br>
 Deletes a specified transaction from a contact.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/deleteTransaction.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
+**Format**:<br>
+`deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
 
 * Deletes the transaction at `TRANSACTION_INDEX` from the person at `PERSON_INDEX`.
 * The person index refers to the index shown in the displayed person list.
@@ -444,14 +429,12 @@ Examples:
 
 ### Editing a transaction : `editTxn`
 
+**Description**:<br>
 Edits an existing transaction for a specific contact.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/editTransaction.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
+**Format**:<br>
+`editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
 
 *   Edits the transaction at the specified `TRANSACTION_INDEX` for the person at the specified `PERSON_INDEX`.
 *   Both indices must be positive integers (1, 2, 3, ...).
@@ -477,14 +460,12 @@ Examples:
 
 ### Adding a follow-up : `addfu`
 
+**Description**:<br>
 Adds a followup task to a contact
 
-<video width="600" autoplay loop muted>
-    <source src="videos/addFollowUp.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
+**Format**:<br>
+`addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 * adds a follow-up task to the contact at the specified `PERSON_INDEX`.
 * the PRIORITY field has to be one of the three priority levels
@@ -496,16 +477,13 @@ Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 **Note:** Followups are displayed on the contact card below their Transactions.
 
-### deleting a follow-up : `deletefu`
+### Deleting a follow-up : `deletefu`
 
+**Description**:<br>
 Deletes a followup task from a contact
 
-<video width="600" autoplay loop muted>
-    <source src="videos/deleteFollowUp.mp4" type="video/mp4">
-</video>
-<br>
-
-Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+**Format**:<br>
+`deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 * deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
 * there is no need to specify priority
@@ -519,14 +497,12 @@ Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 ### Archiving data files : `archive`
 
+**Description**:<br>
 Archives all existing data into an archive file to clean up the contact list.
 
-<video width="600" autoplay loop muted>
-    <source src="videos/archive.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `archive`
+**Format**:<br>
+`archive`
 
 * Prevents accidental deletion while keeping your active list clean
 * clears all contacts from the Atlas display and saves it into a -- file
@@ -535,14 +511,12 @@ Format: `archive`
 
 ### Unarchive data files : `unarchive`
 
+**Description**:<br>
 Restores all data stored in the archive file into Atlas
 
-<video width="600" autoplay loop muted>
-    <source src="videos/unarchive.mp4" type="video/mp4">
-</video>
-<br>
 
-Format: `unarchive`
+**Format**:<br>
+`unarchive`
 
 * Allows easy reactivation of inactive stakeholder relationships
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
