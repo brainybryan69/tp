@@ -22,18 +22,54 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-## Table of Contents
 
+## Table of contents
 - [Quick Start](#quick-start)
 - [Features](#features)
-- [General Commands](#general-commands)
-- [Contact Management Commands](#contact-management-commands)
-- [Transaction Management Commands](#transaction-management-commands)
-- [Follow-up Management Commands](#follow-up-management-commands)
-- [Data Management](#data-management)
+- <details>
+  <summary>General Commands</summary>
+
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Checking net cashflow: `summary`](#checking-net-cashflow-summary)
+  </details>
+- <details>
+  <summary>Person Management Commands</summary>
+
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Listing all persons : `list`](#listing-all-persons--list)
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Locating persons by name: `find`](#locating-persons-by-name-find)
+    - [Locating persons by tag: `find t/`](#locating-persons-by-tag-find-t)
+    - [Locating persons by name AND tag: `find n/ t/`](#locating-persons-by-name-and-tag-find-n-t)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+  </details>
+- <details>
+  <summary>Transaction Management Commands</summary>
+
+    - [Adding a transaction : `addtxn`](#adding-a-transaction--addtxn)
+    - [Deleting a transaction : `deletetxn`](#deleting-a-transaction--deletetxn)
+    - [Editing a transaction : `editTxn`](#editing-a-transaction--edittxn)
+  </details>
+- <details>
+  <summary>Follow-up Management Commands</summary>
+
+    - [Adding a follow-up : `addfu`](#adding-a-follow-up--addfu)
+    - [Deleting a follow-up : `deletefu`](#deleting-a-follow-up--deletefu)
+  </details>
+- <details>
+  <summary>Data Management</summary>
+
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files : `archive`](#archiving-data-files--archive)
+    - [Unarchive data files : `unarchive`](#unarchive-data-files--unarchive)
+  </details>
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
