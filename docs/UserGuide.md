@@ -69,7 +69,7 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    
-   ![Ui](images/AtlasUi.png)
+   ![Ui](images/atlasui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -91,7 +91,14 @@ Atlas is a **desktop app for managing contacts and transactions for F&B business
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+Each Feature is represented by a command. In general, Atlas' features can be categorised into
+5 different aspects to tailor to the needs of our target users. <br>
 
+#### 1. [General Commands](#general-commands)
+#### 2. [Contact Management Commands](#contact-management-commands)
+#### 3. [Transaction Management Commands](#transaction-management-commands)
+#### 4. [Follow-Up Management Commands](#follow-up-management-commands)
+#### 5. [Data Management Commands](#data-management)
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -144,31 +151,38 @@ Format `summary`
 
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user 
 --------------------------------------------------------------------------------------------------------------------
-## Person Management Commands
+## Contact Management Commands
 
 ### Adding a person: `add`
 
 Adds a person to Atlas.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/addContact.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
 * `ADDRESS` is **optional**. You can add contacts without an address.
 * Phone numbers must contain at least 3 digits.
-* Tags must be one of the tags listed below
-  1. LANDLORD
-  2. DELIVERY
-  3. SUPPLIER
-  4. CUSTOMER
-  5. REGULATORY
-  6. FINANCES
-  7. UTILITY
-  8. EMPLOYEE
-  9. OTHERS
+* Tags must be one of the tags listed below:
+  * `LANDLORD`
+  * `DELIVERY`
+  * `SUPPLIER`
+  * `CUSTOMER`
+  * `REGULATORY`
+  * `FINANCES`
+  * `UTILITY`
+  * `EMPLOYEE`
+  * `OTHERS`
+
+<box type="info" seamless>
 
 **Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer).
 
-**Note:** A person cannot be added if another contact already exists with the **same name AND either the same phone number or the same email address**. <br>
+**Note:** A person cannot be added if another contact already exists with **either the same phone number or the same email address**. <br>
 
 **Note:** The `NAME` of a person is case-insensitive. `John Doe` is equal to `JOHN DOE`
 
@@ -180,7 +194,7 @@ Example:
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/friend t/supplier`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
 ### Listing all persons : `list`
@@ -192,6 +206,11 @@ Format: `list`
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/editContact.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -210,6 +229,11 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/findByName.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `find n/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -227,6 +251,11 @@ Examples:
 
 Finds persons whose tag names correspond to the given tag keywords.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/findByTag.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `find t/[TAG_NAME]`
 
 * The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
@@ -237,6 +266,11 @@ Format: `find t/[TAG_NAME]`
 ### Locating persons by name AND tag: `find n/ t/` 
 
 Finds persons whose names and tag names correspond to the given name and tag keywords.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/findByNameAndTag.mp4" type="video/mp4">
+</video>
+<br>
 
 Format  `find n/[NAME] t/[TAG_NAME]`
 
@@ -250,6 +284,11 @@ Format  `find n/[NAME] t/[TAG_NAME]`
 
 Deletes the specified person from the address book.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteContact.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -259,6 +298,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Transaction Management Commands
@@ -266,6 +306,11 @@ Examples:
 ### Adding a transaction : `addtxn`
 
 Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/addTransaction.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
@@ -291,6 +336,11 @@ Examples:
 
 Deletes a specified transaction from a contact.
 
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteTransaction.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
 
 * Deletes the transaction at `TRANSACTION_INDEX` from the person at `PERSON_INDEX`.
@@ -305,6 +355,11 @@ Examples:
 ### Editing a transaction : `editTxn`
 
 Edits an existing transaction for a specific contact.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/editTransaction.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
 
@@ -323,12 +378,19 @@ Examples:
 *   `editTxn i/1 t/1 n/Coffee Powder` - Edits the name of the 1st transaction of the 1st person to "Coffee Powder".
 *   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
 *   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
+
 --------------------------------------------------------------------------------------------------------------------
+
 ### Follow-up Management Commands
 
 ### Adding a follow-up : `addfu`
 
 Adds a followup task to a contact
+
+<video width="600" autoplay loop muted>
+    <source src="videos/addFollowUp.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
@@ -346,32 +408,29 @@ Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
 Deletes a followup task from a contact
 
+<video width="600" autoplay loop muted>
+    <source src="videos/deleteFollowUp.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 * deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
 * there is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Data Management
-
-### Saving the data
-
-Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
 
 ### Archiving data files : `archive`
 
 Archives all existing data into an archive file to clean up the contact list.
+
+<video width="600" autoplay loop muted>
+    <source src="videos/archive.mp4" type="video/mp4">
+</video>
+<br>
 
 Format: `archive`
 
@@ -384,11 +443,31 @@ Format: `archive`
 
 Restores all data stored in the archive file into Atlas
 
+<video width="600" autoplay loop muted>
+    <source src="videos/unarchive.mp4" type="video/mp4">
+</video>
+<br>
+
 Format: `unarchive`
 
 * Allows easy reactivation of inactive stakeholder relationships
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
+
+#### Saving the data
+
+Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Editing the data file
+
+Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
