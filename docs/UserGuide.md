@@ -231,6 +231,9 @@ Displays a pop-up window, allowing users to copy the URL to Atlas' User Guide Pa
 </p>
 </div><br>
 
+
+
+
 ### Clearing all entries: `clear`
 
 <div markdown="block" class="alert alert-warning">
@@ -248,6 +251,9 @@ Clears all entries from the address book.
 **Format**:<br>
 `clear`
 
+
+
+
 ### Exiting the program: `exit`
 
 **Description**:<br>
@@ -255,6 +261,9 @@ Exits the program.
 
 **Format**:<br>
 `exit`
+
+
+
 
 ### Checking Net Cashflow: `summary`
 
@@ -268,6 +277,7 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Contact Management Commands
@@ -321,6 +331,9 @@ Examples:
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
 * `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
 
+
+
+
 ### Listing all persons : `list`
 
 **Description**:<br>
@@ -328,6 +341,9 @@ Shows a list of all persons in the address book.
 
 **Format**:<br>
 `list`
+
+
+
 
 ### Editing a person : `edit`
 
@@ -349,6 +365,9 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+
+
+
 ### Locating persons by name: `find`
 
 **Description**:<br>
@@ -369,6 +388,9 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+
+
+
 ### Locating persons by tag: `find t/`
 
 **Description**:<br>
@@ -381,6 +403,9 @@ Finds persons whose tag names correspond to the given tag keywords.
 * Multiple tag names can be used. e.g `find t/supplier t/delivery t/employee`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
+
+
+
 
 ### Locating persons by name AND tag: `find n/ t/` 
 
@@ -395,6 +420,9 @@ Finds persons whose names and tag names correspond to the given name and tag key
 * Multiple names can be used. e.g. `find n/john n/mary`
 * Only full names and tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose name/tag matches at least one of the keywords will be returned.
+
+
+
 
 ### Deleting a person : `delete`
 
@@ -413,6 +441,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -445,6 +474,9 @@ Examples:
 * `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
 * `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
 
+
+
+
 ### Deleting a transaction : `deletetxn`
 
 **Description**:<br>
@@ -462,6 +494,9 @@ Deletes a specified transaction from a contact.
 Examples:
 * `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
 * `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
+
+
+
 
 ### Editing a transaction : `editTxn`
 
@@ -490,6 +525,7 @@ Examples:
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Follow-up Management Commands
@@ -513,6 +549,9 @@ Adds a followup task to a contact
 
 **Note:** Followups are displayed on the contact card below their Transactions.
 
+
+
+
 ### Deleting a follow-up : `deletefu`
 
 **Description**:<br>
@@ -526,6 +565,7 @@ Deletes a followup task from a contact
 * Both indices **must be positive integers** 1, 2, 3, …​
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -545,6 +585,9 @@ Archives all existing data into an archive file to clean up the contact list.
 * the path to the archive file is `[JAR file location]/data/archive.json`
 * experienced users are likewise free to update the archive file directly
 
+
+
+
 ### Unarchive data files : `unarchive`
 
 **Description**:<br>
@@ -558,9 +601,15 @@ Restores all data stored in the archive file into Atlas
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
+
+
+
 ### Saving the data
 
 Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+
+
 
 ### Editing the data file
 
@@ -606,6 +655,7 @@ Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., i
 
 ## Command summary
 
+
 ### General Commands
 
 Action     | Format, Examples
@@ -626,6 +676,7 @@ Action       | Format, Examples
 **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete**   | `delete INDEX`<br> e.g., `delete 3`
 
+
 ### Transaction Management Commands
 
 Action                 | Format, Examples
@@ -635,11 +686,13 @@ Action                 | Format, Examples
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
 **Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/NAME] [a/AMOUNT]`
 
+
 ### Follow-up Management Commands
 Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Follow-up**      | `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 **Delete Follow-up**     | `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+
 
 ### Data Management Commands
 Action       | Format, Examples
