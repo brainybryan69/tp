@@ -50,7 +50,7 @@ public class FindCommandParserTest {
         // multiple tag keywords
         FindCommand expectedMultiTagCommand =
                 new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("supplier", "customer")));
-        assertParseSuccess(parser, " t/supplier customer", expectedMultiTagCommand);
+        assertParseSuccess(parser, " t/supplier t/customer", expectedMultiTagCommand);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class FindCommandParserTest {
                 new TagContainsKeywordsPredicate(Arrays.asList("supplier", "customer"));
         FindCommand expectedMultiCommand =
                 new FindCommand(new PersonMatchesPredicates(multiNamePredicate, multiTagPredicate));
-        assertParseSuccess(parser, " n/Alice Bob t/supplier customer", expectedMultiCommand);
+        assertParseSuccess(parser, " n/Alice Bob t/supplier t/customer", expectedMultiCommand);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class FindCommandParserTest {
         FindCommand expectedMultiCommand =
                 new FindCommand(new TagContainsKeywordsPredicate(
                         Arrays.asList("supplier", "customer", "landlord", "employee")));
-        assertParseSuccess(parser, " t/supplier customer t/landlord employee", expectedMultiCommand);
+        assertParseSuccess(parser, " t/supplier t/customer t/landlord t/employee", expectedMultiCommand);
     }
 
 }
