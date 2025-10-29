@@ -553,6 +553,8 @@ Edits an existing transaction for a specific stakeholder.
 
 <div markdown="block" class="alert alert-secondary">
 
+**📌 Things to Note:**
+
 *   Edits the transaction at the specified `TRANSACTION_INDEX` for the person at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
 *   Both indices **must be positive integers** 1, 2, 3, …​
 *   At least one of the optional fields (`n/` or `a/`) **must** be provided.
@@ -582,15 +584,23 @@ Adds a followup task to a contact
 **Format**:<br>
 `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
 
-* adds a follow-up task to the contact at the specified `PERSON_INDEX`.
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* adds a follow-up task to the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
 * the PRIORITY field has to be one of the three priority levels
   1. HIGH
   2. MEDIUM
   3. LOW
 * the follow-ups are color coded according to their priority levels for easier recognition by the user
-* PERSON_INDEX must be a positive integer
+* `PERSON_INDEX` must be a positive integer
+* Followups are displayed on the contact card below their [transactions](#transaction-management-commands).
+</div>
 
-**Note:** Followups are displayed on the contact card below their Transactions.
+**✅ Valid Examples**:<br>
+*   `addfu i/1 f/send invoice n/medium` adds a followup named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
+*   `addfu i/4 f/chase for payment n/high` adds a followup named `chase payment` with `HIGH` priority to the stakeholder with index `4`
 
 
 ### Deleting a follow-up: `deletefu`
@@ -598,12 +608,22 @@ Adds a followup task to a contact
 **Description**:<br>
 Deletes a followup task from a contact
 
+
 **Format**:<br>
 `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
-* deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`.
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
 * there is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
+* </div>
+
+**✅ Valid Examples**:<br>
+*   `deletefu i/1 f/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
+*   `deletefu i/4 f/6` deletes the follow-up with index number `6` from the stakeholder with index number `4`.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -621,11 +641,15 @@ Archives all existing data into an archive file to clean up the contact list.
 **Format**:<br>
 `archive`
 
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
 * Prevents accidental deletion while keeping your active list clean
 * clears all contacts from the Atlas display and saves it into a -- file
 * the path to the archive file is `[JAR file location]/data/archive.json`
 * experienced users are likewise free to update the archive file directly
-
+</div>
 
 
 
@@ -638,9 +662,14 @@ Restores all data stored in the archive file into Atlas
 **Format**:<br>
 `unarchive`
 
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
 * Allows easy reactivation of inactive stakeholder relationships
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
+</div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
