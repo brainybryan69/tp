@@ -29,42 +29,51 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 - <details>
   <summary>General Commands</summary>
 
-    - [Viewing help : `help`](#viewing-help--help)
-    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Viewing help : `help`](#viewing-help-help)
+    - [Clearing all entries : `clear`](#clearing-all-entries-clear)
+    - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Checking net cashflow: `summary`](#checking-net-cashflow-summary)
   </details>
 - <details>
   <summary>Person Management Commands</summary>
 
     - [Adding a person: `add`](#adding-a-person-add)
-    - [Listing all persons : `list`](#listing-all-persons--list)
-    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Listing all persons : `list`](#listing-all-persons-list)
+    - [Editing a person : `edit`](#editing-a-person-edit)
     - [Locating persons by name: `find`](#locating-persons-by-name-find)
     - [Locating persons by tag: `find t/`](#locating-persons-by-tag-find-t)
-    - [Locating persons by name AND tag: `find n/ t/`](#locating-persons-by-name-and-tag-find-n-t)
-    - [Deleting a person : `delete`](#deleting-a-person--delete)
+    - [Locating persons by name AND tag: `find n/ t/`](#locating-persons-by-name-and-tag-find-n-t-)
+    - [Deleting a person : `delete`](#deleting-a-person-delete)
   </details>
 - <details>
   <summary>Transaction Management Commands</summary>
 
-    - [Adding a transaction : `addtxn`](#adding-a-transaction--addtxn)
-    - [Deleting a transaction : `deletetxn`](#deleting-a-transaction--deletetxn)
-    - [Editing a transaction : `editTxn`](#editing-a-transaction--edittxn)
+    - [Adding a transaction : `addtxn`](#adding-a-transaction-addtxn)
+    - [Deleting a transaction : `deletetxn`](#deleting-a-transaction-deletetxn)
+    - [Editing a transaction : `editTxn`](#editing-a-transaction-edittxn)
   </details>
 - <details>
   <summary>Follow-up Management Commands</summary>
 
-    - [Adding a follow-up : `addfu`](#adding-a-follow-up--addfu)
-    - [Deleting a follow-up : `deletefu`](#deleting-a-follow-up--deletefu)
+    - [Adding a follow-up : `addfu`](#adding-a-follow-up-addfu)
+    - [Deleting a follow-up : `deletefu`](#deleting-a-follow-up-deletefu)
   </details>
 - <details>
   <summary>Data Management</summary>
+  
+    - [Archiving data files : `archive`](#archiving-data-files-archive)
+    - [Unarchive data files : `unarchive`](#unarchive-data-files-unarchive)
 
+  </details>
+- <details>
+  <summary>Additional Information</summary>
+  
+    - [Index Numbers](#index-number)
+    - [Valid Tags](#valid-tags)
+    - [Transaction Amounts](#transaction-amounts)
+    - [Duplicate Stakeholders](#duplicate-stakeholders)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files : `archive`](#archiving-data-files--archive)
-    - [Unarchive data files : `unarchive`](#unarchive-data-files--unarchive)
   </details>
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
@@ -297,55 +306,37 @@ Adds a stakeholder to Atlas.
 * `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
 * `ADDRESS` is **optional**. You can add stakeholders without an address.
 * Phone numbers must contain at least 3 digits.
-* Tags must be valid.
+* Tags must be [valid](#valid-tags).
 
 </div>
 
-* Tags must be one of the tags listed below:
-  * `LANDLORD`
-  * `DELIVERY`
-  * `SUPPLIER`
-  * `CUSTOMER`
-  * `REGULATORY`
-  * `FINANCES`
-  * `UTILITY`
-  * `EMPLOYEE`
-  * `OTHERS`
+<div markdown="block" class="alert alert-secondary">
 
-<box type="info" seamless>
+**📌 Things to Note:**
 
-**Tip:** A person can have any number of tags (including 0). Tags help you categorize your contacts (e.g., supplier, customer).
+* Each stakeholder may have multiple tags (including 0)
+* [Duplicate stakeholder contacts](#duplicate-stakeholders) are not allowed.
+* The `NAME` of a person is case-insensitive. (i.e`JOHN` is equal to `John`)
 
-**Note:** A person cannot be added if another contact already exists with **either the same phone number or the same email address**. <br>
+</div>
 
-**Note:** The `NAME` of a person is case-insensitive. `John Doe` is equal to `JOHN DOE`
-
-Example:
-1. `add n/John Doe p/98765432 e/johnd@example.com`
-2. `add n/John Doe p/88888888 e/johnd@example.com` is not allowed as they share the same email
-3. `add n/John Doe p/9765432 e/johnnydoe@another.com` is not allowed as they share the same contact number
-</box>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com t/utility t/supplier`
-* `add n/Alex Supplier p/91234567 e/alex@supplier.com` (without address)
+**✅ Valid Examples**:<br>
+The following commands successfully adds stakeholders to Atlas:
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123m #01-01`
+- `add n/Betsy Crowe p/99991234 e/betsycrowe@example.com t/supplier`
+- `add n/Alex Yeoh p/91234567 e/alex@supplier.com`
 
 
-
-
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 **Description**:<br>
-Shows a list of all persons in the address book.
+Shows the list of all unarchived [non-duplicate](#duplicate-stakeholders) stakeholders in Atlas.
 
 **Format**:<br>
 `list`
 
 
-
-
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 **Description**:<br>
 Edits an existing person in the address book.
@@ -354,21 +345,28 @@ Edits an existing person in the address book.
 **Format**:<br>
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* Edits the stakeholder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​<br>
+* **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without
+* You can **remove all** the person's tags by typing `t/` without
   specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+</div>
+
+**✅ Valid Examples**:<br>
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the stakeholder at index `1` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the stakeholder at index `2` to be `Betsy Crower` and clears all existing tags.
 
 
 
 
-### Locating persons by name: `find`
+### Locating persons by name: `find n/`
 
 **Description**:<br>
 Finds persons whose names contain any of the given keywords.
@@ -377,19 +375,22 @@ Finds persons whose names contain any of the given keywords.
 **Format**:<br>
 `find n/KEYWORD [MORE_KEYWORDS]`
 
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Stakeholder names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+</div>
+
+**✅ Valid Examples**:<br>
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
-
-
 
 ### Locating persons by tag: `find t/`
 
@@ -397,14 +398,27 @@ Examples:
 Finds persons whose tag names correspond to the given tag keywords.
 
 **Format**:<br>
-`find t/[TAG_NAME]`
+`find t/TAG_NAME`
+
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
 
 * The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
-* Multiple tag names can be used. e.g `find t/supplier t/delivery t/employee`
+* Multiple [valid tag](#valid-tags) names can be used. e.g. `find t/supplier t/delivery t/employee`
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
+* Tag names cannot be empty after `t/` is declared.
 
+**❌ Invalid Examples**:
+* `find t/owner` is invalid since `OWNER` is not a [valid tag](#valid-tags). 
+* `find t/` is invalid since `TAG_NAME` field is empty.
 
+</div>
+
+**✅ Valid Examples**:<br>
+* `find t/supplier` returns a list of stakeholders who have tags `SUPPLIER`
+* `find t/supplier t/employee` returns a combined list of stakeholders who either have tags `SUPPLIER` or `EMPLOYEE` or both.
 
 
 ### Locating persons by name AND tag: `find n/ t/` 
@@ -413,18 +427,39 @@ Finds persons whose tag names correspond to the given tag keywords.
 Finds persons whose names and tag names correspond to the given name and tag keywords.
 
 **Format**:<br>
-`find n/[NAME] t/[TAG_NAME]`
+`find n/NAME [MORE_NAMES] t/[TAG_NAME]`
 
-* The search is case-insensitive. e.g. `supplier` will match `SUPPLIER`
-* Multiple tag names can be used. e.g. `find t/supplier t/delivery t/employee`
-* Multiple names can be used. e.g. `find n/john n/mary`
-* Only full names and tag names will be matched e.g. `supp` will not match `supplier`
-* Persons whose name/tag matches at least one of the keywords will be returned.
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* The search is case-insensitive. e.g `supplier` will match `SUPPLIER`
+* Multiple [valid tag](#valid-tags) names can be used. e.g. `find n/alice t/supplier t/delivery t/employee`
+* Multiple names can be used. e.g. `find n/john mary alice`
+* Persons whose tag matches at least one of the tag names will be returned.
+* Tag names cannot be empty after `t/` is declared.
+* Only full names will be matched. e.g. `Ali` will not match `Alice`
+* Persons whose names matches one of the `NAME` keywords and one of the `TAG_NAME` keywords will be returned.
+
+</div>
+
+<div>
+<img src="images/uiContainingThreeAmigos.png" width="600">
+<br>
+<p style="text-align: center; width: 600px; margin: 4px 0;">
+    <em>Figure: UI of Atlas containing Three Contacts for Example</em>
+</p>
+</div>
+
+**✅ Valid Examples**:<br>
+Using the diagram above:
+* `find n/alice bernice t/supplier` returns a list containing only `Alice` and `Bernice` since they have tags `SUPPLIER`
+* `find n/irfan bernice t/utility` returns a list containing only `Bernice` and `Irfan` since they have tags `UTILITY`.
+* `find n/alice bernice irfan t/utility` returns a list containing only `Bernice` and `Irfan` since they have tags `UTILITY`.
+* `find n/alice bernice irfan t/utility t/supplier` returns a list containing `Alice`, `Bernice` and `Irfan`.
 
 
-
-
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 **Description**:<br>
 Deletes the specified person from the address book.
@@ -432,13 +467,17 @@ Deletes the specified person from the address book.
 **Format**:<br>
 `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+<div markdown="block" class="alert alert-secondary">
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**📌 Things to Note:**
+
+* Deletes the person at the specified `INDEX`. [See index information](#index_information) for more details.
+
+</div>
+
+**✅ Valid Examples**:<br>
+* `delete 2` deletes the stakeholder whose index number is `2` in Atlas.
+* `find Betsy` followed by `delete 1` deletes the stakeholder whose index number is `1` in the filtered list.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -447,81 +486,85 @@ Examples:
 
 ## Transaction Management Commands
 
-### Adding a transaction : `addtxn`
+### Adding a transaction: `addtxn`
 
 **Description**:<br>
-Adds a transaction to a specified contact. Useful for tracking purchases from suppliers or sales to customers.
+Adds a transaction to a specified stakeholder. Useful for tracking purchases from suppliers or sales to customers.
 
 
 **Format**:<br>
 `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT`
 
-* Adds a transaction to the contact at the specified `PERSON_INDEX`.
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* Adds a transaction to the contact at the specified `PERSON_INDEX`. [See index information](#index_information) for more details.
 * The `AMOUNT` determines the transaction type:
-    * **Positive amount** (e.g., `50`) = INCOME transaction
-    * **Negative amount** (e.g., `-50`) = EXPENSE transaction
-* Atlas will automatically recognise the amount and classify it as an INCOME or EXPENSE accordingly
-* The amount cannot be zero.
-* All transactions are saved automatically and will persist after restarting the app.
+    * **Positive amount** (e.g., `50`): *INCOME* transaction
+    * **Negative amount** (e.g., `-50`): *EXPENSE* transaction
+* [See Transaction Amount](#transaction-amounts) for more details.
+* Transactions are displayed below email addresses and above [follow ups](#follow-up-management-commands).
 
-<box type="info" seamless>
 
-**Note:** Transactions are displayed on the contact card below their email address.
-</box>
+</div>
 
-Examples:
-* `addtxn i/1 n/Coffee beans a/-150.50` - Adds an expense of $150.50 for coffee beans to contact #1
-* `addtxn i/2 n/Monthly payment a/500` - Adds an income of $500 for monthly payment to contact #2
-* `addtxn i/3 n/Equipment purchase a/-2000` - Adds an expense of $2000 for equipment to contact #3
+**✅ Valid Examples**:<br>
+* `addtxn i/1 n/Coffee beans a/-150.50` adds an expense of `$150.50` for `Coffee beans` under stakeholder with index number `2`.
+* `addtxn i/2 n/Monthly payment a/500` adds an income of `$500` for `Monthly payment` under stakeholder with index number `2`.
 
 
 
 
-### Deleting a transaction : `deletetxn`
+### Deleting a transaction: `deletetxn`
 
 **Description**:<br>
-Deletes a specified transaction from a contact.
+Deletes a specified transaction from a specified stakeholder.
 
 
 **Format**:<br>
 `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX`
 
-* Deletes the transaction at `TRANSACTION_INDEX` from the person at `PERSON_INDEX`.
-* The person index refers to the index shown in the displayed person list.
-* The transaction index refers to the transaction number shown on the person's card (starting from 1).
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* Deletes the transaction at `TRANSACTION_INDEX` from the stakeholder at `PERSON_INDEX`. See [index information](#index_information) for more details.
+* The `TRANSACTION_INDEX` refers to the index number of the transaction displayed under the specified stakeholder.
 * Both indices **must be positive integers** 1, 2, 3, …​
 
-Examples:
-* `deletetxn i/1 t/2` - Deletes the 2nd transaction from the 1st contact
-* `deletetxn i/3 t/1` - Deletes the 1st transaction from the 3rd contact
+</div>
+
+**✅ Valid Examples**:<br>
+* `deletetxn i/1 t/2` deletes the transaction with index number `2` from the stakeholder with index number `1`.
+* `deletetxn i/3 t/1` deletes the transaction with index number `1` from the stakeholder with index number `3`.
 
 
 
 
-### Editing a transaction : `editTxn`
+### Editing a transaction: `editTxn`
 
 **Description**:<br>
-Edits an existing transaction for a specific contact.
+Edits an existing transaction for a specific stakeholder.
 
 
 **Format**:<br>
 `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
 
-*   Edits the transaction at the specified `TRANSACTION_INDEX` for the person at the specified `PERSON_INDEX`.
-*   Both indices must be positive integers (1, 2, 3, ...).
-*   At least one of the optional fields (`n/` or `a/`) must be provided.
+<div markdown="block" class="alert alert-secondary">
+
+*   Edits the transaction at the specified `TRANSACTION_INDEX` for the person at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
+*   Both indices **must be positive integers** 1, 2, 3, …​
+*   At least one of the optional fields (`n/` or `a/`) **must** be provided.
 *   Existing values will be overwritten by the new input values.
 *   The `AMOUNT` can be a decimal number.
+</div>
 
-<box type="info" seamless>
 
-**Note:** Upon successful execution, a confirmation message is displayed, showing the contact's details and the updated transaction. For example: `Edited transaction for Person: John Doe; ... Transaction: Coffee: $1.00 (EXPENSE)`
-</box>
-
-Examples:
-*   `editTxn i/1 t/1 n/Coffee Powder` - Edits the name of the 1st transaction of the 1st person to "Coffee Powder".
-*   `editTxn i/2 t/3 a/25` - Edits the amount of the 3rd transaction of the 2nd person to 25.
-*   `editTxn i/3 t/2 n/Monthly Rent a/-1200` - Edits both the name and amount of the 2nd transaction of the 3rd person.
+**✅ Valid Examples**:<br>
+*   `editTxn i/1 t/1 n/Coffee Powder` edits the name of the transaction with index `1` under stakeholder with index `1` to `Coffee Powder`
+*   `editTxn i/2 t/3 a/25` edits the amount of transaction with index `3` under stakeholder with index `2` to `25`
+*   `editTxn i/3 t/2 n/Monthly Rent a/-1200` edits both the name and amount of the transaction with index `2` under stakeholder with index `3` to `Monthly Rent` and `-1200` respectively.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -530,7 +573,7 @@ Examples:
 
 ## Follow-up Management Commands
 
-### Adding a follow-up : `addfu`
+### Adding a follow-up: `addfu`
 
 **Description**:<br>
 Adds a followup task to a contact
@@ -552,7 +595,7 @@ Adds a followup task to a contact
 
 
 
-### Deleting a follow-up : `deletefu`
+### Deleting a follow-up: `deletefu`
 
 **Description**:<br>
 Deletes a followup task from a contact
@@ -571,7 +614,7 @@ Deletes a followup task from a contact
 
 ## Data Management
 
-### Archiving data files : `archive`
+### Archiving data files: `archive`
 
 **Description**:<br>
 Archives all existing data into an archive file to clean up the contact list.
@@ -588,7 +631,7 @@ Archives all existing data into an archive file to clean up the contact list.
 
 
 
-### Unarchive data files : `unarchive`
+### Unarchive data files: `unarchive`
 
 **Description**:<br>
 Restores all data stored in the archive file into Atlas
@@ -601,17 +644,59 @@ Restores all data stored in the archive file into Atlas
 * restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
 
+[↩️ Back to Table of Contents](#table-of-contents)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+## Additional Information
+
+### Index Numbers:
+<div id="index_information">
+
+Index Numbers are indicated beside each stakeholders' names:<br>
+  <img src="images/uiIndicatingIndex.jpg" width="600" align="text-center">
+  <br>
+<p style="text-align: center; width: 600px; margin: 4px 0;">
+    <em>Figure: UI of Atlas (Numbers circled in red are the Index Numbers)</em>
+</p>
+
+Use the **relative indexing** of any given list:
+* In the case of a [`find` command](#locating-persons-by-name-find-n) returning a filtered list, use the Index Number of the stakeholders in the **filtered list**.
+</div>
+
+### Valid Tags:
+Tag names must belong to one of the following stakeholders (listed below):
+* `LANDLORD`
+* `DELIVERY`
+* `SUPPLIER`
+* `CUSTOMER`
+* `REGULATORY`
+* `FINANCES`
+* `UTILITY`
+* `EMPLOYEE`
+* `OTHERS`
+
+Tag names are not case-sensitive. (i.e `supplier` and `SUPPLIER` are both valid tag names)
+
+Any other tag names will be **invalid**.
+
+### Transaction Amounts:
+Transaction amounts **CANNOT** be zero.
+* Transaction Amounts are **rounded off to 2 decimal places** before checking for non-zero amount.
+* `0.004` will be rounded to `0.00` and will be **invalid**.
+* `0.005` will be rounded to `0.01` and will be **valid**.
 
 
+### Duplicate Stakeholders:
 
-### Saving the data
+### Saving the data:
 
 Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 
 
-### Editing the data file
+### Editing the data file:
 
 Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
