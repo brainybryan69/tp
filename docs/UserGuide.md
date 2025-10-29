@@ -593,8 +593,6 @@ Adds a followup task to a contact
 **Note:** Followups are displayed on the contact card below their Transactions.
 
 
-
-
 ### Deleting a follow-up: `deletefu`
 
 **Description**:<br>
@@ -688,24 +686,39 @@ Transaction amounts **CANNOT** be zero.
 
 
 ### Duplicate Stakeholders:
+Two stakeholders are considered duplicates if either their **contact number** or their **email addresses** are equal.
+
+Given the following stakeholder as shown below:
+<div>
+<img src="images/exampleJohnUi.png" width="600">
+<br>
+<p style="text-align: center; width: 600px; margin: 4px 0;">
+    <em>Figure: Close-up UI of a Stakeholder in Atlas</em>
+</p>
+</div>
+
+❌ The following `add` commands will fail as they are considered duplicates:
+* `add n/Jane Doe p/98765432 e/johnd@example.com t/supplier` has the same contact number and email address.
+* `add n/John Doe p/99998888 e/johnd@example.com` has the same email address.
+* `add n/John Doe p/98765432 e/johnnydoe@example.com` has the same contact number.
 
 ### Saving the data:
 
 Atlas data (including all contacts and transactions) are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
-
-
 ### Editing the data file:
 
 Atlas data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<div markdown="block" class="alert alert-warning">
 
-**Caution:**
+**❗Warning**:
+
 If your changes to the data file makes its format invalid, Atlas will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+
+</div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
