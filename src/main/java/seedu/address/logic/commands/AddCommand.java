@@ -35,7 +35,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "supplier";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book! "
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person has already been added to the address book "
+            + "(or archive) "
             + "(either with the same email or same contact number)";
 
     private final Person toAdd;
