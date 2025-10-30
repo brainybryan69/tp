@@ -578,7 +578,7 @@ Edits an existing transaction for a specific stakeholder.
 ### Adding a follow-up: `addfu`
 
 **Description**:<br>
-Adds a followup task to a contact
+Adds a followup task to a stakeholder
 
 
 **Format**:<br>
@@ -606,7 +606,7 @@ Adds a followup task to a contact
 ### Deleting a follow-up: `deletefu`
 
 **Description**:<br>
-Deletes a followup task from a contact
+Deletes a followup task from a stakeholder
 
 
 **Format**:<br>
