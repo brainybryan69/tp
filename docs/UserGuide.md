@@ -617,7 +617,8 @@ Deletes a followup task from a stakeholder
 * Deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
 * There is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
-* </div>
+
+</div>
 
 **✅ Valid Examples**:<br>
 *   `deletefu i/1 f/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
