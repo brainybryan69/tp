@@ -27,7 +27,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="550" />
 
 The **Architecture Diagram** given above explains the high-level design of the App.
 
@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="550" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -61,7 +61,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="550" />
 
 The sections below give more details of each component.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" width="550"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g., `CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -92,7 +92,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" width="550" />
 
 <box type="info" seamless>
 
@@ -109,7 +109,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="550"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="550" />
 
 </box>
 
@@ -168,7 +168,7 @@ The `addtxn` command adds a new transaction to a person. The implementation invo
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/AddTransactionSequenceDiagram.puml" alt="Add Transaction Sequence Diagram" />
+<puml src="diagrams/AddTransactionSequenceDiagram.puml" alt="Add Transaction Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -184,7 +184,7 @@ The `deletetxn` command removes a transaction from a person. The implementation 
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/DeleteTransactionSequenceDiagram.puml" alt="Delete Transaction Sequence Diagram" />
+<puml src="diagrams/DeleteTransactionSequenceDiagram.puml" alt="Delete Transaction Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -200,7 +200,7 @@ The `editTxn` command edits an existing transaction of a person. The implementat
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" />
+<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -222,7 +222,7 @@ The `addfu` command adds a new follow-up to a person. The implementation involve
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/AddFollowUpSequenceDiagram.puml" alt="Add Follow Up Sequence Diagram" />
+<puml src="diagrams/AddFollowUpSequenceDiagram.puml" alt="Add Follow Up Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -238,7 +238,7 @@ The `deletefu` command removes a follow-up from a person. The implementation is 
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/DeleteFollowUpSequenceDiagram.puml" alt="Delete FollowUp Sequence Diagram" />
+<puml src="diagrams/DeleteFollowUpSequenceDiagram.puml" alt="Delete FollowUp Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -258,7 +258,7 @@ The `archive` command moves all the people from the active address book to the a
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" />
+<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
@@ -273,7 +273,7 @@ The `unarchive` command restores a person from the archived list back to the act
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/UnarchiveSequenceDiagram.puml" alt="Unarchive Sequence Diagram" />
+<puml src="diagrams/UnarchiveSequenceDiagram.puml" alt="Unarchive Sequence Diagram" width="550" />
 
 **Implementation Details:**
 
