@@ -786,7 +786,7 @@ Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., i
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Atlas home folder.
 
 **Q**: What happens if I try to add a person with the same name?<br>
-**A**: Atlas will reject the addition and show an error message. Each person must have a unique name.
+**A**: Atlas allows the addition as long as they are not considered [duplicates](#duplicate-stakeholders).
 
 **Q**: Can I add a contact without an address?<br>
 **A**: Yes! Only name, phone number, and email are required. Address is optional.
