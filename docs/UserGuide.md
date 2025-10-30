@@ -40,7 +40,7 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
     - [Editing a person : `edit`](#editing-a-person-edit)
-    - [Locating persons by name: `find`](#locating-persons-by-name-find)
+    - [Locating persons by name: `find`](#locating-persons-by-name-find-n)
     - [Locating persons by tag: `find t/`](#locating-persons-by-tag-find-t)
     - [Locating persons by name AND tag: `find n/ t/`](#locating-persons-by-name-and-tag-find-n-t-)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
@@ -68,7 +68,7 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 - <details>
   <summary>Additional Information</summary>
   
-    - [Index Numbers](#index-number)
+    - [Index Numbers](#index-numbers)
     - [Valid Tags](#valid-tags)
     - [Transaction Amounts](#transaction-amounts)
     - [Duplicate Stakeholders](#duplicate-stakeholders)
@@ -504,7 +504,7 @@ Adds a transaction to a specified stakeholder. Useful for tracking purchases fro
     * **Positive amount** (e.g., `50`): *INCOME* transaction
     * **Negative amount** (e.g., `-50`): *EXPENSE* transaction
 * [See Transaction Amount](#transaction-amounts) for more details.
-* Transactions are displayed below email addresses and above [follow ups](#follow-up-management-commands).
+* Transactions are displayed below email addresses and above [follow-ups](#follow-up-management-commands).
 
 
 </div>
@@ -588,19 +588,17 @@ Adds a followup task to a stakeholder
 
 **📌 Things to Note:**
 
-* adds a follow-up task to the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
-* the PRIORITY field has to be one of the three priority levels
-  1. HIGH
-  2. MEDIUM
-  3. LOW
-* the follow-ups are color coded according to their priority levels for easier recognition by the user
-* `PERSON_INDEX` must be a positive integer
-* Followups are displayed on the contact card below their [transactions](#transaction-management-commands).
+* Adds a follow-up task to the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
+* The `PRIORITY` field has to be one of the three priority levels
+  1. `HIGH` 🔴
+  2. `MEDIUM` 🟠
+  3. `LOW` 🟡
+* Follow-ups are displayed on the contact card below their [transactions](#transaction-management-commands).
 </div>
 
 **✅ Valid Examples**:<br>
-*   `addfu i/1 f/send invoice n/medium` adds a followup named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
-*   `addfu i/4 f/chase for payment n/high` adds a followup named `chase payment` with `HIGH` priority to the stakeholder with index `4`
+*   `addfu i/1 f/send invoice n/medium` adds a follow-up named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
+*   `addfu i/4 f/chase for payment n/high` adds a follow-up named `chase for payment` with `HIGH` priority to the stakeholder with index `4`
 
 
 ### Deleting a follow-up: `deletefu`
@@ -616,8 +614,8 @@ Deletes a followup task from a stakeholder
 
 **📌 Things to Note:**
 
-* deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
-* there is no need to specify priority
+* Deletes a follow-up task specified by `FOLLOWUP_INDEX` from the contact at the specified `PERSON_INDEX`. See [index information](#index_information) for more details.
+* There is no need to specify priority
 * Both indices **must be positive integers** 1, 2, 3, …​
 * </div>
 
@@ -646,9 +644,10 @@ Archives all existing data into an archive file to clean up the contact list.
 **📌 Things to Note:**
 
 * Prevents accidental deletion while keeping your active list clean
-* clears all contacts from the Atlas display and saves it into a -- file
-* the path to the archive file is `[JAR file location]/data/archive.json`
-* experienced users are likewise free to update the archive file directly
+* Clears all contacts from the Atlas display and saves it into a JSON file
+* The path to the archive file is `[JAR file location]/data/archive.json`
+* Experienced users are free to update the archive file directly
+* Archived stakeholders are still checked for [duplicates](#duplicate-stakeholders).
 </div>
 
 
@@ -667,8 +666,9 @@ Restores all data stored in the archive file into Atlas
 **📌 Things to Note:**
 
 * Allows easy reactivation of inactive stakeholder relationships
-* restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
-* the contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run
+* Restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
+* The contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run.
+* Archived stakeholders are still checked for [duplicates](#duplicate-stakeholders).
 </div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
@@ -716,6 +716,15 @@ Transaction amounts **CANNOT** be zero.
 
 ### Duplicate Stakeholders:
 Two stakeholders are considered duplicates if either their **contact number** or their **email addresses** are equal.
+
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
+* Atlas checks for duplicates in both the main `addressbook.json` and `archive.json`
+ files.
+
+</div>
 
 Given the following stakeholder as shown below:
 <div>
