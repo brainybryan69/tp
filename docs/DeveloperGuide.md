@@ -11,19 +11,19 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 ### Architecture
 
@@ -154,7 +154,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -288,7 +288,7 @@ The following sequence diagram illustrates the process:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -298,7 +298,7 @@ The following sequence diagram illustrates the process:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -335,8 +335,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `Atlas` and the **Actor** is the `user`, unless specified otherwise)
-
-# Use Cases
 
 ## General Commands
 
@@ -761,7 +759,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -839,55 +837,44 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## Appendix: Project Effort
 
-### Difficulty Level and Challenges
+### Overview
+The development of Atlas represented a significant step-up in complexity from the AddressBook-Level3 (AB3) project. While AB3 manages a single entity (`Person`), Atlas is designed to handle multiple, interconnected entities: `Person`, `Transaction`, and `FollowUp`. This multi-entity architecture introduced substantial challenges and required a greater development effort.
 
-The development of Atlas represented a **significant increase in complexity** compared to AB3. While AB3 focuses on managing a single entity type (persons), Atlas required us to manage **multiple interconnected entities**: persons, transactions, follow-ups, and archive data. This multi-entity architecture presented several key challenges:
+### Key Challenges
+*   **Complex Data Modeling**: The core challenge was designing and implementing the one-to-many relationships between a `Person` and their associated `Transaction` and `FollowUp` entities. This required careful data structure design and robust dependency management for all CRUD (Create, Read, Update, Delete) operations.
+*   **Feature Complexity**:
+    *   **Financial Tracking**: We built a complete transaction management system from the ground up, including logic for income/expense tracking, balance calculations, and a `summary` command for net cash flow analysis.
+    *   **Task Management**: The priority-based `FollowUp` system, with its color-coded UI and persistent storage, added another layer of complexity not present in AB3.
+    *   **Data Archiving**: The `archive` and `unarchive` features required implementing a dual-storage strategy, careful state management, and robust file I/O to prevent data loss.
 
-* **Complex Data Relationships**: Implementing one-to-many relationships between persons and their transactions/follow-ups required careful design of data structures and careful management of dependencies during add, edit, and delete operations.
+### Effort Breakdown
+The estimated effort distribution for major components is as follows:
+*   **Core Entity Management (30%)**: Extending the single-entity architecture to support multiple related entities.
+*   **Financial Transaction System (25%)**: Implementing transaction logic, CRUD operations, and summary calculations.
+*   **Follow-up Management (20%)**: Building the priority-based task system and UI integration.
+*   **Archive System (15%)**: Developing the archive/unarchive functionality and file management.
+*   **UI/UX Enhancements (10%)**: Adapting the GUI to display nested entity lists within the main contact cards.
 
-* **Transaction Management System**: Building a comprehensive financial tracking system with both income and expense tracking, automatic balance calculations, and the `summary` command for net cashflow required significant effort in implementing robust business logic and ensuring data integrity.
+### Strategic Reuse
+We leveraged existing libraries and patterns to focus our efforts on core features, saving an estimated **15% of development time**.
+*   **Jackson Library**: Utilized for JSON serialization and deserialization for both primary (`addressbook.json`) and archive (`archive.json`) data. Our custom adaptations are encapsulated in the `JsonUtil` class and associated entity-specific serializers.
+*   **JavaFX & Command Pattern**: We reused the foundational UI components and command architecture from AB3. However, these were significantly extended. For example, the `PersonCard` was heavily modified to display nested data, and numerous complex commands (`AddTransactionCommand`, `ArchiveCommand`, etc.) were built on top of the base pattern.
 
-* **Priority-Based Follow-up System**: Designing and implementing a color-coded, priority-based follow-up management system (HIGH, MEDIUM, LOW) with proper UI rendering and data persistence added considerable complexity beyond AB3's capabilities.
+### Summary of Achievements
+Despite the increased complexity, we successfully delivered a robust application with:
+*   A **fully functional multi-entity management system** for contacts, transactions, and follow-ups.
+*   **Integrated financial tracking** with summary reporting.
+*   **Intuitive, priority-driven task management**.
+*   **Safe data preservation** through an archive/unarchive system.
+*   **Comprehensive test coverage** that meets AB3's high standards while covering all new features.
 
-* **Archive/Unarchive Feature**: Creating a dual-storage system that allows users to archive and restore entire contact lists while maintaining data integrity was a novel challenge requiring careful state management and file I/O operations.
-
-### Effort Required
-
-The estimated effort breakdown is as follows:
-
-* **Core Entity Management** (30%): Extending AB3's single-entity architecture to support transactions and follow-ups as child entities
-* **Financial Transaction System** (25%): Implementing transaction CRUD operations, amount validation, and summary calculations
-* **Follow-up Management** (20%): Building the priority system, color-coding logic, and integration with person cards
-* **Archive System** (15%): Developing the archive/unarchive functionality with separate JSON file management
-* **UI/UX Enhancements** (10%): Adapting the GUI to display nested entities (transactions and follow-ups) within person cards
-
-### Reuse and Efficiency
-
-We leveraged approximately **15% of development effort** through strategic reuse:
-
-* **Jackson Library for JSON Processing**: Used for both primary data storage (`addressbook.json`) and archive storage (`archive.json`). Our adaptation work is contained in the `JsonUtil` class and custom serializers/deserializers for our entity classes.
-
-* **JavaFX Components**: Reused AB3's foundational UI components but significantly extended them. The `PersonCard` component was enhanced to display nested transaction and follow-up lists with custom styling.
-
-* **Command Pattern**: AB3's command architecture was reused as the foundation, though we added substantial complexity with commands like `AddTransactionCommand`, `EditTransactionCommand`, `AddFollowUpCommand`, and `ArchiveCommand`.
-
-### Achievements
-
-Despite the increased complexity, we successfully delivered:
-
-* A **fully functional multi-entity management system** handling 3 entity types with proper CRUD operations
-* **Robust financial tracking** with automatic calculations and summary reporting
-* **Intuitive follow-up management** with visual priority indicators
-* **Data preservation through archiving** without data loss
-* **Comprehensive test coverage** maintaining AB3's high testing standards while covering new features
-
-The final product demonstrates that while AB3 provided a solid foundation, Atlas required roughly **2.5x the implementation effort** due to the multi-entity architecture, financial logic, and advanced data management features.
+In summary, while AB3 provided a solid architectural foundation, Atlas required approximately **2.5 times the implementation effort** due to its multi-entity data model, complex business logic, and advanced data management features.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Planned Enhancements**
+## Appendix: Planned Enhancements
 
 **Team size:** 5
 
