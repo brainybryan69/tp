@@ -550,7 +550,7 @@ Deletes a specified transaction from a specified stakeholder.
 * `deletetxn i/3 t/1` deletes the transaction with index number `1` from the stakeholder with index number `3`.
 
 
-
+<div style="page-break-after: always;"></div>
 
 ### Editing a transaction: `editTxn`
 
