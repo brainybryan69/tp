@@ -286,7 +286,13 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 **Format**:<br>
 `summary`
 
+<div markdown="block" class="alert alert-secondary">
+
+**📌 Things to Note:**
+
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
+
+</div>
 
 
 [↩️ Back to Table of Contents](#table-of-contents)
