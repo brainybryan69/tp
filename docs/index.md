@@ -29,4 +29,4 @@ If you're comfortable typing, you can manage your operations significantly faste
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-* Based on AB3
+* Based on [AB3](https://se-education.org/addressbook-level3/)
