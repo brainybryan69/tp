@@ -162,6 +162,8 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -219,6 +221,8 @@ Manage your data efficiently — from saving backups to clearing outdated record
 </div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -287,6 +291,7 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Contact Management Commands
@@ -362,8 +367,6 @@ Edits an existing person in the address book.
 **✅ Valid Examples**:<br>
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the stakeholder at index `1` to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the stakeholder at index `2` to be `Betsy Crower` and clears all existing tags.
-
-
 
 
 ### Locating persons by name: `find n/`
@@ -481,6 +484,7 @@ Deletes the specified person from the address book.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -570,6 +574,7 @@ Edits an existing transaction for a specific stakeholder.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -626,6 +631,7 @@ Deletes a followup task from a stakeholder
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -673,6 +679,8 @@ Restores all data stored in the archive file into Atlas
 </div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -761,6 +769,8 @@ Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., i
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -787,6 +797,8 @@ Furthermore, certain edits can cause Atlas to behave in unexpected ways (e.g., i
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 [↩️ Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
