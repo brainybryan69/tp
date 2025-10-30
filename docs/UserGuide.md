@@ -722,6 +722,7 @@ Transaction amounts **CANNOT** be zero.
 * `0.004` will be rounded to `0.00` and will be **invalid**.
 * `0.005` will be rounded to `0.01` and will be **valid**.
 
+<div style="page-break-after: always;"></div>
 
 ### Duplicate Stakeholders:
 Two stakeholders are considered duplicates if either their **contact number** or their **email addresses** are equal.
