@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Atlas` and the **Actor** is the `user`, unless specified otherwise)
 
-## General Commands
+#### General Commands
 
 **Use case: UC01 - View help**
 
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Contact Management Commands
+#### Contact Management Commands
 
 **Use case: UC05 - Add a contact**
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Transaction Management Commands
+#### Transaction Management Commands
 
 **Use case: UC12 - Add a transaction**
 
@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Follow-up Management Commands
+#### Follow-up Management Commands
 
 **Use case: UC15 - Add a follow-up**
 
@@ -698,7 +698,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## Data Management Commands
+#### Data Management Commands
 
 **Use case: UC17 - Archive all data**
 
