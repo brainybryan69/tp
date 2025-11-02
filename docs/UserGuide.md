@@ -310,21 +310,12 @@ Adds a stakeholder to Atlas.
 **Format**:<br>
 `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**
-
-* `NAME`, `PHONE_NUMBER`, and `EMAIL` are **required fields**.
-* `ADDRESS` is **optional**. You can add stakeholders without an address.
-* Phone numbers must contain at least 3 digits.
-* Tags must be [valid](#valid-tags).
-
-</div>
-
 <div markdown="block" class="alert alert-secondary">
 
 **📌 Things to Note:**
 
+* Phone numbers must contain at least 3 digits.
+* Tags must be [valid](#valid-tags).
 * Each stakeholder may have multiple tags (including 0)
 * [Duplicate stakeholder contacts](#duplicate-stakeholders) are not allowed.
 * The `NAME` of a person is case-insensitive. (i.e`JOHN` is equal to `John`)
@@ -481,6 +472,7 @@ Deletes the specified person from the address book.
 **📌 Things to Note:**
 
 * Deletes the person at the specified `INDEX`. [See index information](#index_information) for more details.
+* The index **must be a positive integer** 1, 2, 3, …​<br>
 
 </div>
 
@@ -510,6 +502,7 @@ Adds a transaction to a specified stakeholder. Useful for tracking purchases fro
 **📌 Things to Note:**
 
 * Adds a transaction to the contact at the specified `PERSON_INDEX`. [See index information](#index_information) for more details.
+* The index **must be a positive integer** 1, 2, 3, …​<br>
 * The `AMOUNT` determines the transaction type:
     * **Positive amount** (e.g., `50`): *INCOME* transaction
     * **Negative amount** (e.g., `-50`): *EXPENSE* transaction
@@ -520,7 +513,7 @@ Adds a transaction to a specified stakeholder. Useful for tracking purchases fro
 </div>
 
 **✅ Valid Examples**:<br>
-* `addtxn i/1 n/Coffee beans a/-150.50` adds an expense of `$150.50` for `Coffee beans` under stakeholder with index number `2`.
+* `addtxn i/1 n/Coffee beans a/-150.50` adds an expense of `$150.50` for `Coffee beans` under stakeholder with index number `1`.
 * `addtxn i/2 n/Monthly payment a/500` adds an income of `$500` for `Monthly payment` under stakeholder with index number `2`.
 
 
@@ -608,8 +601,8 @@ Adds a followup task to a stakeholder
 </div>
 
 **✅ Valid Examples**:<br>
-*   `addfu i/1 f/send invoice n/medium` adds a follow-up named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
-*   `addfu i/4 f/chase for payment n/high` adds a follow-up named `chase for payment` with `HIGH` priority to the stakeholder with index `4`
+*   `addfu i/1 f/send invoice u/medium` adds a follow-up named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
+*   `addfu i/4 f/chase for payment u/high` adds a follow-up named `chase for payment` with `HIGH` priority to the stakeholder with index `4`
 
 
 ### Deleting a follow-up: `deletefu`
@@ -619,7 +612,7 @@ Deletes a followup task from a stakeholder
 
 
 **Format**:<br>
-`deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+`deletefu i/PERSON_INDEX fi/FOLLOWUP_INDEX`
 
 <div markdown="block" class="alert alert-secondary">
 
@@ -632,8 +625,8 @@ Deletes a followup task from a stakeholder
 </div>
 
 **✅ Valid Examples**:<br>
-*   `deletefu i/1 f/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
-*   `deletefu i/4 f/6` deletes the follow-up with index number `6` from the stakeholder with index number `4`.
+*   `deletefu i/1 fi/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
+*   `deletefu i/4 fi/6` deletes the follow-up with index number `6` from the stakeholder with index number `4`.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -829,7 +822,7 @@ Action       | Format, Examples
 **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/supplier`
 **List**     | `list`
 **Edit**     | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**     | `find n/KEYWORD [t/MORE_KEYWORDS]`<br> e.g., `find n/James t/supplier` *OR* `find t/KEYWORD [n/MORE_KEYWORDS]`<br> e.g., `find t/supplier n/James`
 **Delete**   | `delete INDEX`<br> e.g., `delete 3`
 
 
@@ -838,16 +831,16 @@ Action       | Format, Examples
 Action                 | Format, Examples
 -----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Transaction**    | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
-**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
+**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
-**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/NAME] [a/AMOUNT]`
+
 
 
 ### Follow-up Management Commands
 Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Follow-up**      | `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
-**Delete Follow-up**     | `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
+**Delete Follow-up**     | `deletefu i/PERSON_INDEX fi/FOLLOWUP_INDEX`
 
 
 ### Data Management Commands
