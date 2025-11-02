@@ -22,6 +22,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount cannot be zero.";
+    public static final String MESSAGE_INVALID_TRANSACTION_FORMAT = "Transaction amount must be a valid number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -142,7 +143,7 @@ public class ParserUtil {
             }
             return parsedAmount;
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
+            throw new ParseException(MESSAGE_INVALID_TRANSACTION_FORMAT);
         }
     }
 }

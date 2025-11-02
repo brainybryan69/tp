@@ -98,4 +98,15 @@ public class AddFollowUpCommandParserTest {
         // When parsing the input, then expect a ParseException
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
+
+    @Test
+    public void parse_invalidUrgency_throwsParseException() {
+        // Given input with invalid urgency value
+        String userInput = " " + PREFIX_INDEX + "1 "
+                + PREFIX_FOLLOWUP_NAME + "Get price estimate "
+                + PREFIX_FOLLOWUP_URGENCY + "RANDOM";
+
+        // When parsing the input, then expect a ParseException with appropriate message
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
 }

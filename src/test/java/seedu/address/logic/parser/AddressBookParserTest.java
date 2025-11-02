@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -43,7 +45,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " help"));
     }
 
     @Test
@@ -65,7 +68,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ExitCommand.COMMAND_WORD + " help"));
     }
 
     @Test
@@ -79,13 +83,29 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " help"));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " ajfnaejef"));
+    }
+
+    @Test
+    public void parseCommand_archive() throws Exception {
+        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ArchiveCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ArchiveCommand.COMMAND_WORD + " help"));
+    }
+
+    @Test
+    public void parseCommand_unarchive() throws Exception {
+        assertTrue(parser.parseCommand(UnarchiveCommand.COMMAND_WORD) instanceof UnarchiveCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(UnarchiveCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(UnarchiveCommand.COMMAND_WORD + " help"));
     }
 
     @Test

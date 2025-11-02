@@ -46,7 +46,12 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isPresent()) {
-            editTransactionDescriptor.setName(argMultimap.getValue(PREFIX_TRANSACTION_NAME).get());
+            String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
+            if (transactionName.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditTransactionCommand.MESSAGE_USAGE));
+            }
+            editTransactionDescriptor.setName(transactionName);
         }
         if (argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isPresent()) {
             editTransactionDescriptor.setAmount(

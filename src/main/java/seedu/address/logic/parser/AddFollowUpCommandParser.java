@@ -45,9 +45,12 @@ public class AddFollowUpCommandParser implements Parser<AddFollowUpCommand> {
         String followUpName = argMultimap.getValue(PREFIX_FOLLOWUP_NAME).get();
         String followUpUrgency = argMultimap.getValue(PREFIX_FOLLOWUP_URGENCY).get();
 
-        FollowUp followUp = new FollowUp(followUpName, followUpUrgency);
-
-        return new AddFollowUpCommand(index, followUp);
+        try {
+            FollowUp followUp = new FollowUp(followUpName, followUpUrgency);
+            return new AddFollowUpCommand(index, followUp);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**

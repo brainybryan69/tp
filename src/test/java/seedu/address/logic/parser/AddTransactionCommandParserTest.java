@@ -46,15 +46,24 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddTransactionCommand.MESSAGE_USAGE);
+
         // invalid person index
         assertParseFailure(parser, " i/a n/Coffee a/150.50", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid amount (non-numeric)
-        assertParseFailure(parser, " i/1 n/Coffee a/abc", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser, " i/1 n/Coffee a/abc", ParserUtil.MESSAGE_INVALID_TRANSACTION_FORMAT);
 
         // zero amount
         assertParseFailure(parser, " i/1 n/Coffee a/0", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
         assertParseFailure(parser, " i/1 n/Coffee a/0.001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
         assertParseFailure(parser, " i/1 n/Coffee a/0.00000001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+
+        // empty transaction name
+        assertParseFailure(parser, " i/1 n/ a/10", expectedMessage);
+
+        // whitespace only transaction name
+        assertParseFailure(parser, " i/1 n/   a/10", expectedMessage);
     }
 }

@@ -115,4 +115,16 @@ public class EditTransactionCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_TRANSACTION_AMOUNT));
 
     }
+
+    @Test
+    public void parse_emptyTransactionName_failure() {
+        // empty transaction name
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = " i/" + targetIndex.getOneBased() + " t/1 n/";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // whitespace only transaction name
+        userInput = " i/" + targetIndex.getOneBased() + " t/1 n/   ";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
 }

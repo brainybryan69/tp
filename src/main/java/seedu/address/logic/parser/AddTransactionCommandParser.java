@@ -41,6 +41,10 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
 
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
+        if (transactionName.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTransactionCommand.MESSAGE_USAGE));
+        }
         double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
                 .get());
         if (roundOffAmount(transactionAmount) == 0f) {

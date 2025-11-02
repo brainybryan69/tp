@@ -71,21 +71,37 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ClearCommand.MESSAGE_USAGE));
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListCommand.MESSAGE_USAGE));
+            }
             return new ListCommand();
 
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExitCommand.MESSAGE_USAGE));
+            }
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        HelpCommand.MESSAGE_USAGE));
+            }
             return new HelpCommand();
 
         case AddTransactionCommand.COMMAND_WORD:
@@ -104,9 +120,17 @@ public class AddressBookParser {
             return new DeleteFollowUpCommandParser().parse(arguments);
 
         case ArchiveCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ArchiveCommand.MESSAGE_USAGE));
+            }
             return new ArchiveCommand();
 
         case UnarchiveCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        UnarchiveCommand.MESSAGE_USAGE));
+            }
             return new UnarchiveCommand();
 
         default:

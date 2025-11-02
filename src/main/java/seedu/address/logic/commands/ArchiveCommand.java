@@ -23,6 +23,10 @@ public class ArchiveCommand extends Command {
 
     public static final String COMMAND_WORD = "archive";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Archives all contacts in the address book.\n"
+            + "Example: " + COMMAND_WORD;
+
     public static final String MESSAGE_SUCCESS = "Successfully archived %d contacts.";
 
     public static final String MESSAGE_EMPTY_LIST =
