@@ -21,8 +21,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount cannot be zero "
-            + ", larger than $100,000 or smaller than -$100,000. (rounded to 2 decimal places)";
+    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount MUST be strictly NUMERICAL "
+            + "and NON-ZERO. "
+            + "Range from [$1 to $100000] or [-$1 to -$100000]. (rounded off to 2 decimal places)";
     public static final String MESSAGE_INVALID_TRANSACTION_FORMAT = "Transaction amount must be a valid number.";
 
     /**
@@ -137,6 +138,9 @@ public class ParserUtil {
     public static double parseTransactionAmount(String amount) throws ParseException {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
+        if (!trimmedAmount.matches("\\d+(\\.\\d+)?")) {
+            throw new ParseException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        }
         try {
             double parsedAmount = Double.parseDouble(trimmedAmount);
             if (parsedAmount == 0) {
