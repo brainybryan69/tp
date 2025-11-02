@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TRANSACTION_NAME = new Prefix("n/");
     public static final Prefix PREFIX_TRANSACTION_AMOUNT = new Prefix("a/");
     public static final Prefix PREFIX_TRANSACTION_NUMBER = new Prefix("t/");
-    public static final Prefix PREFIX_FOLLOWUP_NAME = new Prefix("f/");
+    public static final Prefix PREFIX_FOLLOWUP_NAME = new Prefix("n/");
     public static final Prefix PREFIX_FOLLOWUP_URGENCY = new Prefix("u/");
     public static final Prefix PREFIX_FOLLOWUP_INDEX = new Prefix("f/");
 }
