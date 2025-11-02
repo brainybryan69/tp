@@ -54,7 +54,7 @@ public class AddTransactionCommandParserTest {
         assertParseFailure(parser, " i/a n/Coffee a/150.50", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid amount (non-numeric)
-        assertParseFailure(parser, " i/1 n/Coffee a/abc", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        assertParseFailure(parser, " i/1 n/Coffee a/abc", ParserUtil.MESSAGE_INVALID_TRANSACTION_FORMAT);
 
         // zero amount
         assertParseFailure(parser, " i/1 n/Coffee a/0", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
