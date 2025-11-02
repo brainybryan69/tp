@@ -83,6 +83,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // Check if edited person's contact details conflict with any other person
+        for (Person person : model.getAddressBook().getPersonList()) {
+            if (!person.equals(personToEdit) && editedPerson.isSameContactDetails(person)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));

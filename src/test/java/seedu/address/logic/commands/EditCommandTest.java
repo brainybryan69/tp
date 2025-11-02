@@ -125,6 +125,24 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicateContactDetails_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        // edit first person to have same phone as second person
+        EditPersonDescriptor descriptorWithSamePhone = new EditPersonDescriptorBuilder()
+                .withPhone(secondPerson.getPhone().value).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptorWithSamePhone);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+
+        // edit first person to have same email as second person
+        EditPersonDescriptor descriptorWithSameEmail = new EditPersonDescriptorBuilder()
+                .withEmail(secondPerson.getEmail().value).build();
+        editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptorWithSameEmail);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
