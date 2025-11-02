@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.EditTransactionCommand.roundOffAmount;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
@@ -62,8 +63,14 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
             editTransactionDescriptor.setName(transactionName);
         }
         if (argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isPresent()) {
-            editTransactionDescriptor.setAmount(
-                    ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get()));
+
+            double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
+                    .get());
+            if (roundOffAmount(transactionAmount) == 0f || roundOffAmount(transactionAmount) > 100000f
+                    || roundOffAmount(transactionAmount) < -100000f) {
+                throw new ParseException(ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+            }
+            editTransactionDescriptor.setAmount(roundOffAmount(transactionAmount));
         }
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap
