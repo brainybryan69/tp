@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/atlasui.png)
 
 * This is a address book and task manager for FnB business owners<br>
   Example usages:

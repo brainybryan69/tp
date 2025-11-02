@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -45,10 +47,22 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         }
         double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
                 .get());
-
+        if (roundOffAmount(transactionAmount) == 0f) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+        }
         Transaction transaction = new Transaction(transactionName, transactionAmount);
 
         return new AddTransactionCommand(index, transaction);
+    }
+
+    /**
+     * Rounds off a given double to 2 decimal places
+     *
+     * @param transactionAmount a double transaction amount.
+     */
+    public double roundOffAmount(double transactionAmount) {
+        return BigDecimal.valueOf(transactionAmount).setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 
     /**

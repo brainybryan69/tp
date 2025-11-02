@@ -15,6 +15,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMatchesPredicates;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -62,6 +63,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                 if (trimmedValue.isEmpty()) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                }
+                if (!Tag.isValidTagType(trimmedValue)) {
+                    throw new ParseException(
+                            String.format(Tag.TYPE_CONSTRAINTS));
                 }
                 // Split by whitespace and add all keywords
                 String[] keywords = trimmedValue.split("\\s+");
