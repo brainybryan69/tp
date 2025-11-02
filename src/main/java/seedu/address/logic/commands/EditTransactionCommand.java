@@ -43,7 +43,7 @@ public class EditTransactionCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_TRANSACTION_INDEX = "The transaction index provided is invalid.";
     public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "The transaction amount provided cannot be zero "
-            + "(2 decimal places).";
+            + "or greater than $100,000 (rounded off to 2 decimal places).";
 
     private final Index personIndex;
     private final Index transactionIndex;
@@ -108,10 +108,10 @@ public class EditTransactionCommand extends Command {
 
         String updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getTransactionName());
         double updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getTransactionAmount());
-        if (roundOffAmount(updatedAmount) == 0f) {
+        if (roundOffAmount(updatedAmount) == 0f || roundOffAmount(updatedAmount) > 100000f) {
             throw new CommandException(MESSAGE_INVALID_TRANSACTION_AMOUNT);
         }
-        return new Transaction(updatedName, updatedAmount);
+        return new Transaction(updatedName, roundOffAmount(updatedAmount));
     }
 
     /**

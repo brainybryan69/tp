@@ -21,7 +21,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount cannot be zero.";
+    public static final String MESSAGE_INVALID_TRANSACTION_AMOUNT = "Transaction amount cannot be zero "
+            + "or larger than $100,000. (rounded to 2 decimal places)";
     public static final String MESSAGE_INVALID_TRANSACTION_FORMAT = "Transaction amount must be a valid number.";
 
     /**

@@ -47,10 +47,10 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         }
         double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
                 .get());
-        if (roundOffAmount(transactionAmount) == 0f) {
+        if (roundOffAmount(transactionAmount) == 0f || roundOffAmount(transactionAmount) > 100000f) {
             throw new ParseException(ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
         }
-        Transaction transaction = new Transaction(transactionName, transactionAmount);
+        Transaction transaction = new Transaction(transactionName, roundOffAmount(transactionAmount));
 
         return new AddTransactionCommand(index, transaction);
     }
