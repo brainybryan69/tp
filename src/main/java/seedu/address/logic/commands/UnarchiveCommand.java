@@ -24,6 +24,10 @@ public class UnarchiveCommand extends Command {
 
     public static final String COMMAND_WORD = "unarchive";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Restores all archived contacts back to the address book.\n"
+            + "Example: " + COMMAND_WORD;
+
     public static final String MESSAGE_SUCCESS = "Successfully unarchived %d contacts.";
 
     public static final String MESSAGE_EMPTY_LIST =

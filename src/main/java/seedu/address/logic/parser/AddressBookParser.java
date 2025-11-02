@@ -104,9 +104,17 @@ public class AddressBookParser {
             return new DeleteFollowUpCommandParser().parse(arguments);
 
         case ArchiveCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ArchiveCommand.MESSAGE_USAGE));
+            }
             return new ArchiveCommand();
 
         case UnarchiveCommand.COMMAND_WORD:
+            if (!arguments.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        UnarchiveCommand.MESSAGE_USAGE));
+            }
             return new UnarchiveCommand();
 
         default:
