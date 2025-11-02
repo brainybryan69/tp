@@ -137,7 +137,7 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
 6. Run: `java -jar atlas.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:<br>
    <div>
-    <img src="images/atlasui.png" width="600"><br>
+    <img src="images/Ui.png" width="600"><br>
     <p style="text-align: center; width: 600px; margin: 4px 0;">
         <em>Figure: UI of Atlas upon Application Start</em>
     </p>

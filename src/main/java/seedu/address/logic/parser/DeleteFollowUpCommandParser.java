@@ -32,6 +32,12 @@ public class DeleteFollowUpCommandParser implements Parser<DeleteFollowUpCommand
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_FOLLOWUP_INDEX);
 
+        if (argMultimap.getValue(PREFIX_INDEX).get().isBlank()) {
+            throw new ParseException(DeleteFollowUpCommand.MESSAGE_INVALID_PERSON_INDEX);
+        }
+        if (argMultimap.getValue(PREFIX_FOLLOWUP_INDEX).get().isBlank()) {
+            throw new ParseException(DeleteFollowUpCommand.MESSAGE_INVALID_FOLLOWUP_INDEX);
+        }
         Index personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         Index followUpIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_FOLLOWUP_INDEX).get());
 
