@@ -52,6 +52,7 @@ public class AddFollowUpCommand extends Command {
             + PREFIX_FOLLOWUP_URGENCY + "Medium";
 
     public static final String MESSAGE_SUCCESS = "Added follow up to Person: %1$s\nFollowUp: %2$s";
+    public static final String MESSAGE_INVALID_FOLLOWUP_NAME = "Follow Up name must no be empty.";
 
     private final Index index;
     private final FollowUp followUp;

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,7 +28,7 @@ import seedu.address.model.transaction.Transaction;
 public class SummaryCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAddressBook_success() throws CommandException {
         Model model = new ModelManager(new AddressBook(), new UserPrefs(), new AddressBook());
         CommandResult result = new SummaryCommand().execute(model);
         String expectedMessage = "Total cashflow from all contacts: +$0.00";
@@ -34,7 +36,7 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_personWithNoTransactions_success() {
+    public void execute_personWithNoTransactions_success() throws CommandException {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person person = new Person(new Name("Alice"), new Phone("12345"), new Email("a@a.com"),
@@ -46,7 +48,7 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_singlePersonWithPositiveCashflow_success() {
+    public void execute_singlePersonWithPositiveCashflow_success() throws CommandException {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person person = new Person(new Name("Bob"), new Phone("23456"), new Email("b@b.com"),
@@ -60,7 +62,7 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_singlePersonWithNegativeCashflow_success() {
+    public void execute_singlePersonWithNegativeCashflow_success() throws CommandException {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person person = new Person(new Name("Charlie"), new Phone("34567"), new Email("c@c.com"),
@@ -74,7 +76,7 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_multiplePersonsWithMixedCashflow_success() {
+    public void execute_multiplePersonsWithMixedCashflow_success() throws CommandException {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
@@ -91,5 +93,34 @@ public class SummaryCommandTest {
         CommandResult result = new SummaryCommand().execute(model);
         String expectedMessage = "Total cashflow from all contacts: +$500.45"; // 1000.00 - 450.55 - 49.00
         assertEquals(expectedMessage, result.getFeedbackToUser());
+    }
+
+
+    @Test
+    public void execute_cashflowExceedsMaxAmount_error() {
+        AddressBook ab = new AddressBook();
+        Model model = new ModelManager(ab, new UserPrefs(), ab);
+        Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
+                new Address("123 sesame street"), new HashSet<>(),
+                Collections.singletonList(new Transaction("Freelance",
+                        SummaryCommand.MAX_TOTAL_TRANSACTION_AMOUNT)),
+                new ArrayList<>());
+        model.addPerson(p1);
+        CommandException ce = assertThrows(CommandException.class, () -> new SummaryCommand().execute(model));
+        assertEquals(SummaryCommand.MAX_AMOUNT_MESSAGE, ce.getMessage());
+    }
+
+    @Test
+    public void execute_cashflowExceedsMinAmount_error() {
+        AddressBook ab = new AddressBook();
+        Model model = new ModelManager(ab, new UserPrefs(), ab);
+        Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
+                new Address("123 sesame street"), new HashSet<>(),
+                Collections.singletonList(new Transaction("Freelance",
+                        SummaryCommand.MIN_TOTAL_TRANSACTION_AMOUNT)),
+                new ArrayList<>());
+        model.addPerson(p1);
+        CommandException ce = assertThrows(CommandException.class, () -> new SummaryCommand().execute(model));
+        assertEquals(SummaryCommand.MIN_AMOUNT_MESSAGE, ce.getMessage());
     }
 }

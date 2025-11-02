@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.EditTransactionCommand.roundOffAmount;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NUMBER;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,6 +40,12 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
                     EditTransactionCommand.MESSAGE_USAGE));
         }
         try {
+            if (argMultimap.getValue(PREFIX_INDEX).get().isBlank()) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            if (argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get().isBlank()) {
+                throw new ParseException(EditTransactionCommand.MESSAGE_INVALID_TRANSACTION_INDEX);
+            }
             personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             transactionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TRANSACTION_NUMBER).get());
         } catch (ParseException pe) {
@@ -48,14 +57,19 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isPresent()) {
             String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
             if (transactionName.trim().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditTransactionCommand.MESSAGE_USAGE));
+                throw new ParseException(AddTransactionCommand.MESSAGE_INVALID_TRANSACTION_NAME);
             }
             editTransactionDescriptor.setName(transactionName);
         }
         if (argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).isPresent()) {
-            editTransactionDescriptor.setAmount(
-                    ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT).get()));
+
+            double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
+                    .get());
+            if (roundOffAmount(transactionAmount) == 0f || roundOffAmount(transactionAmount) > 100000f
+                    || roundOffAmount(transactionAmount) < -100000f) {
+                throw new ParseException(ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
+            }
+            editTransactionDescriptor.setAmount(roundOffAmount(transactionAmount));
         }
 
         if (argMultimap.getValue(PREFIX_TRANSACTION_NAME).isEmpty() && argMultimap

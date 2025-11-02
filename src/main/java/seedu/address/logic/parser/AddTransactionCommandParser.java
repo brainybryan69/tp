@@ -42,15 +42,16 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
         if (transactionName.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddTransactionCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    AddTransactionCommand.MESSAGE_INVALID_TRANSACTION_NAME);
         }
         double transactionAmount = ParserUtil.parseTransactionAmount(argMultimap.getValue(PREFIX_TRANSACTION_AMOUNT)
                 .get());
-        if (roundOffAmount(transactionAmount) == 0f) {
+        if (roundOffAmount(transactionAmount) == 0f || roundOffAmount(transactionAmount) > 100000f
+                || roundOffAmount(transactionAmount) < -100000f) {
             throw new ParseException(ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
         }
-        Transaction transaction = new Transaction(transactionName, transactionAmount);
+        Transaction transaction = new Transaction(transactionName, roundOffAmount(transactionAmount));
 
         return new AddTransactionCommand(index, transaction);
     }

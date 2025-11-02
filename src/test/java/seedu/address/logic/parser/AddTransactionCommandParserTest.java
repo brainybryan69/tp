@@ -31,6 +31,7 @@ public class AddTransactionCommandParserTest {
     public void parse_missingFields_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTransactionCommand.MESSAGE_USAGE);
+
         // missing person index
         assertParseFailure(parser, " n/Coffee beans a/150.50", expectedMessage);
 
@@ -48,6 +49,7 @@ public class AddTransactionCommandParserTest {
     public void parse_invalidValue_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTransactionCommand.MESSAGE_USAGE);
+        String invalidNameMessage = AddTransactionCommand.MESSAGE_INVALID_TRANSACTION_NAME;
 
         // invalid person index
         assertParseFailure(parser, " i/a n/Coffee a/150.50", ParserUtil.MESSAGE_INVALID_INDEX);
@@ -61,9 +63,9 @@ public class AddTransactionCommandParserTest {
         assertParseFailure(parser, " i/1 n/Coffee a/0.00000001", ParserUtil.MESSAGE_INVALID_TRANSACTION_AMOUNT);
 
         // empty transaction name
-        assertParseFailure(parser, " i/1 n/ a/10", expectedMessage);
+        assertParseFailure(parser, " i/1 n/ a/10", invalidNameMessage);
 
         // whitespace only transaction name
-        assertParseFailure(parser, " i/1 n/   a/10", expectedMessage);
+        assertParseFailure(parser, " i/1 n/   a/10", invalidNameMessage);
     }
 }

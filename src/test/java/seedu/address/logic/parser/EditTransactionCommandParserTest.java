@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import seedu.address.testutil.EditTransactionDescriptorBuilder;
@@ -19,6 +20,8 @@ public class EditTransactionCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
+
+    private static final String INVALID_NAME_MESSAGE = AddTransactionCommand.MESSAGE_INVALID_TRANSACTION_NAME;
 
     private EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
@@ -121,10 +124,10 @@ public class EditTransactionCommandParserTest {
         // empty transaction name
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = " i/" + targetIndex.getOneBased() + " t/1 n/";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, INVALID_NAME_MESSAGE);
 
         // whitespace only transaction name
         userInput = " i/" + targetIndex.getOneBased() + " t/1 n/   ";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, INVALID_NAME_MESSAGE);
     }
 }
