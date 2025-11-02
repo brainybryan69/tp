@@ -20,12 +20,12 @@ public class SummaryCommand extends Command {
 
     public static final Integer MIN_TOTAL_TRANSACTION_AMOUNT = -1000000000;
 
-    public static final String MAX_AMOUNT_MESSAGE = "Congratulations!" +
-            " You have reached the maximum total cashflow limit of $1,000,000,000. "
+    public static final String MAX_AMOUNT_MESSAGE = "Congratulations!"
+            + " You have reached the maximum total cashflow limit of $1,000,000,000. "
             + "Further additions will be capped at this limit.";
 
-    public static final String MIN_AMOUNT_MESSAGE = "Unfortunately!" +
-            " You have reached the minimum total cashflow limit of -$1,000,000,000. "
+    public static final String MIN_AMOUNT_MESSAGE = "Unfortunately!"
+            + " You have reached the minimum total cashflow limit of -$1,000,000,000. "
             + "Further deductions will be capped at this limit.";
 
     public static final String MESSAGE_SUCCESS = "Total cashflow from all contacts: %1$s";

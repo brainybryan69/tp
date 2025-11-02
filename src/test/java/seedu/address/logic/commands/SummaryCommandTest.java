@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,13 +97,13 @@ public class SummaryCommandTest {
 
 
     @Test
-    public void execute_totalCashflow_exceeds_max_amount_throws_error() {
+    public void execute_cashflowExceedsMaxAmount_error() {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Collections.singletonList(new Transaction("Freelance"
-                        , SummaryCommand.MAX_TOTAL_TRANSACTION_AMOUNT)),
+                Collections.singletonList(new Transaction("Freelance",
+                        SummaryCommand.MAX_TOTAL_TRANSACTION_AMOUNT)),
                 new ArrayList<>());
         model.addPerson(p1);
         CommandException ce = assertThrows(CommandException.class, () -> new SummaryCommand().execute(model));
@@ -112,13 +111,13 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_totalCashflow_exceeds_min_amount_throws_error() {
+    public void execute_cashflowExceedsMinAmount_error() {
         AddressBook ab = new AddressBook();
         Model model = new ModelManager(ab, new UserPrefs(), ab);
         Person p1 = new Person(new Name("David"), new Phone("45678"), new Email("d@d.com"),
                 new Address("123 sesame street"), new HashSet<>(),
-                Collections.singletonList(new Transaction("Freelance"
-                        , SummaryCommand.MIN_TOTAL_TRANSACTION_AMOUNT)),
+                Collections.singletonList(new Transaction("Freelance",
+                        SummaryCommand.MIN_TOTAL_TRANSACTION_AMOUNT)),
                 new ArrayList<>());
         model.addPerson(p1);
         CommandException ce = assertThrows(CommandException.class, () -> new SummaryCommand().execute(model));

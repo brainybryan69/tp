@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TRANSACTION_NUMBER;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
