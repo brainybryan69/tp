@@ -291,6 +291,16 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 **📌 Things to Note:**
 
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
+* the maximum sum to be displayed is capped at positive or negative 1 billion.
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Notes about the Summary command format:**<br>
+
+* Words after the command keyword `summary` will be ignored.<br>
+  e.g. `summary 123` will be interpreted as `summary`
 
 </div>
 
@@ -508,6 +518,8 @@ Adds a transaction to a specified stakeholder. Useful for tracking purchases fro
     * **Negative amount** (e.g., `-50`): *EXPENSE* transaction
 * [See Transaction Amount](#transaction-amounts) for more details.
 * Transactions are displayed below email addresses and above [follow-ups](#follow-up-management-commands).
+* The `AMOUNT` can be a decimal number.
+* All values are rounded off to 2 decimal places before being saved
 
 
 </div>
@@ -545,14 +557,14 @@ Deletes a specified transaction from a specified stakeholder.
 
 <div style="page-break-after: always;"></div>
 
-### Editing a transaction: `editTxn`
+### Editing a transaction: `edittxn`
 
 **Description**:<br>
 Edits an existing transaction for a specific stakeholder.
 
 
 **Format**:<br>
-`editTxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
+`edittxn i/PERSON_INDEX t/TRANSACTION_INDEX [n/TRANSACTION_NAME] [a/AMOUNT]`
 
 <div markdown="block" class="alert alert-secondary">
 
@@ -563,13 +575,15 @@ Edits an existing transaction for a specific stakeholder.
 *   At least one of the optional fields (`n/` or `a/`) **must** be provided.
 *   Existing values will be overwritten by the new input values.
 *   The `AMOUNT` can be a decimal number.
+*   All values are rounded off to 2 decimal places before being saved
+
 </div>
 
 
 **✅ Valid Examples**:<br>
-*   `editTxn i/1 t/1 n/Coffee Powder` edits the name of the transaction with index `1` under stakeholder with index `1` to `Coffee Powder`
-*   `editTxn i/2 t/3 a/25` edits the amount of transaction with index `3` under stakeholder with index `2` to `25`
-*   `editTxn i/3 t/2 n/Monthly Rent a/-1200` edits both the name and amount of the transaction with index `2` under stakeholder with index `3` to `Monthly Rent` and `-1200` respectively.
+*   `edittxn i/1 t/1 n/Coffee Powder` edits the name of the transaction with index `1` under stakeholder with index `1` to `Coffee Powder`
+*   `edittxn i/2 t/3 a/25` edits the amount of transaction with index `3` under stakeholder with index `2` to `25`
+*   `edittxn i/3 t/2 n/Monthly Rent a/-1200` edits both the name and amount of the transaction with index `2` under stakeholder with index `3` to `Monthly Rent` and `-1200` respectively.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -586,7 +600,7 @@ Adds a followup task to a stakeholder
 
 
 **Format**:<br>
-`addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
+`addfu i/PERSON_INDEX n/FOLLOWUP_NAME u/PRIORITY`
 
 <div markdown="block" class="alert alert-secondary">
 
@@ -598,11 +612,13 @@ Adds a followup task to a stakeholder
   2. `MEDIUM` 🟠
   3. `LOW` 🟡
 * Follow-ups are displayed on the contact card below their [transactions](#transaction-management-commands).
+* Duplicate checks are **not** carried out for follow-ups, there can be multiple of the same followups tied to the same person
+
 </div>
 
 **✅ Valid Examples**:<br>
-*   `addfu i/1 f/send invoice u/medium` adds a follow-up named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
-*   `addfu i/4 f/chase for payment u/high` adds a follow-up named `chase for payment` with `HIGH` priority to the stakeholder with index `4`
+*   `addfu i/1 n/send invoice u/medium` adds a follow-up named `send invoice` with `MEDIUM` priority to the stakeholder with index `1` 
+*   `addfu i/4 n/chase for payment u/high` adds a follow-up named `chase for payment` with `HIGH` priority to the stakeholder with index `4`
 
 
 ### Deleting a follow-up: `deletefu`
@@ -612,7 +628,7 @@ Deletes a followup task from a stakeholder
 
 
 **Format**:<br>
-`deletefu i/PERSON_INDEX fi/FOLLOWUP_INDEX`
+`deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 <div markdown="block" class="alert alert-secondary">
 
@@ -625,8 +641,8 @@ Deletes a followup task from a stakeholder
 </div>
 
 **✅ Valid Examples**:<br>
-*   `deletefu i/1 fi/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
-*   `deletefu i/4 fi/6` deletes the follow-up with index number `6` from the stakeholder with index number `4`.
+*   `deletefu i/1 f/2` deletes the follow-up with index number `2` from the stakeholder with index number `1`.
+*   `deletefu i/4 f/6` deletes the follow-up with index number `6` from the stakeholder with index number `4`.
 
 [↩️ Back to Table of Contents](#table-of-contents)
 
@@ -675,6 +691,16 @@ Restores all data stored in the archive file into Atlas
 * Restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * The contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run.
 * Archived stakeholders are still checked for [duplicates](#duplicate-stakeholders).
+</div>
+
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Notes about the Data Management command format:**<br>
+
+* Words after the command keyword `archive` and `unarchive` will be ignored.<br>
+    e.g. `archive 123` will be interpreted as `archive`
+
 </div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
@@ -831,7 +857,7 @@ Action       | Format, Examples
 Action                 | Format, Examples
 -----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Transaction**    | `addtxn i/PERSON_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `addtxn i/1 n/Coffee beans a/-150.50`
-**Edit Transaction**   | `editTxn i/PERSON_INDEX t/TRANSACTION_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
+**Edit Transaction**   | `edittxn i/PERSON_INDEX t/TRANSACTION_INDEX n/TRANSACTION_NAME a/AMOUNT` <br> e.g., `editTxn i/1 t/1 n/Coffee Powder a/10`
 **Delete Transaction** | `deletetxn i/PERSON_INDEX t/TRANSACTION_INDEX` <br> e.g., `deletetxn i/1 t/2`
 
 
@@ -839,8 +865,8 @@ Action                 | Format, Examples
 ### Follow-up Management Commands
 Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Follow-up**      | `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY`
-**Delete Follow-up**     | `deletefu i/PERSON_INDEX fi/FOLLOWUP_INDEX`
+**Add Follow-up**      | `addfu i/PERSON_INDEX n/FOLLOWUP_NAME u/PRIORITY`
+**Delete Follow-up**     | `deletefu i/PERSON_INDEX f/FOLLOWUP_INDEX`
 
 
 ### Data Management Commands
