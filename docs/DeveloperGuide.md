@@ -505,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find contacts by providing both name and tag keywords.
-2. System searches for contacts whose names or tags match any of the given keywords.
+2. System searches for contacts whose names contain any of the given name keywords and whose tags match any of the given tag keywords.
 3. System displays the list of matching contacts.
 
    Use case ends.
