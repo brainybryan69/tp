@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As an F&B business owner  | record sales and expense transactions linked to my stakeholders (e.g., daily sales, supplier payments, utility bills) | monitor my business finances accurately                                                  |
 | `* * *`  | As an F&B business owner  | delete incorrect or duplicate sales and expense transactions                                                          | keep my financial records clean and accurate                                             |
 | `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | clear my active contact list without permanently deleting valuable business relationships |
-| `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | quickly resume business relationships without re-entering contact information            |
+| `* * *` | As an F&B business owner | unarchive my contacts | quickly resume business relationships without re-entering contact information |
 | `* * *`  | As an F&B business owner  | add follow-up tasks with urgency levels to my contacts                                                                | track important actions I need to take with each business relationship                   |
 | `* * *`  | As an F&B business owner  | delete specific follow-up tasks from contacts                                                                         | keep my task list current and remove completed items                    |
 
@@ -505,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find contacts by providing both name and tag keywords.
-2. System searches for contacts whose names or tags match any of the given keywords.
+2. System searches for contacts whose names contain any of the given name keywords and whose tags match any of the given tag keywords.
 3. System displays the list of matching contacts.
 
    Use case ends.
@@ -805,24 +805,54 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `find n/Peter`<br>
       Expected: An empty list is shown.
 
+2. Finding a person by tag
+   1. Prerequisites: Add a person named "Alice" with tag "friends" and "Bob" with tag "colleagues".
+   2. Test case: `find t/friends`<br>
+      Expected: The contact "Alice" is shown in the list.
+   3. Test case: `find t/family`<br>
+      Expected: An empty list is shown.
+
+3. Finding a person by name and tag
+   1. Prerequisites: Add a person named "Charlie" with tag "clients" and "David" with tag "clients".
+   2. Test case: `find n/Charlie t/clients`<br>
+      Expected: The contact "Charlie" is shown in the list.
+   3. Test case: `find n/Eve t/clients`<br>
+      Expected: An empty list is shown.
+   4. Test case: `find n/Charlie t/friends`<br>
+      Expected: An empty list is shown.
+
 ### Managing transactions
 
 1. Adding a transaction
    1. Prerequisites: List all persons using the `list` command.
-   2. Test case: `addtxn i/1 n/Coffee v/5.00`<br>
+   2. Test case: `addtxn i/1 n/Coffee a/5.00`<br>
       Expected: A new transaction "Coffee" with value "5.00" is added to the first person.
-   3. Test case: `addtxn i/1 n/Lunch v/-10.00`<br>
+   3. Test case: `addtxn i/1 n/Lunch a/-10.00`<br>
       Expected: A new transaction "Lunch" with value "-10.00" is added to the first person.
 
 2. Deleting a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `deletetxn i/1 ti/1`<br>
+   2. Test case: `deletetxn i/1 t/1`<br>
       Expected: The first transaction of the first person is deleted.
 
 3. Editing a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `edittxn i/1 ti/1 n/new name`<br>
+   2. Test case: `edittxn i/1 t/1 n/new name`<br>
       Expected: The first transaction of the first person is renamed to "new name".
+
+### Managing follow-ups
+
+1. Adding a follow-up
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `addfu i/1 f/Follow up on invoice u/HIGH`<br>
+      Expected: A new follow-up "Follow up on invoice" with HIGH priority is added to the first person.
+   3. Test case: `addfu i/1 f/Another follow up u/LOW`<br>
+      Expected: A new follow-up "Another follow up" with LOW priority is added to the first person.
+
+2. Deleting a follow-up
+   1. Prerequisites: Add a follow-up to the first person.
+   2. Test case: `deletefu i/1 f/1`<br>
+      Expected: The first follow-up of the first person is deleted.
 
 ### Saving data
 
@@ -872,81 +902,4 @@ Despite the increased complexity, we successfully delivered a robust application
 
 In summary, while AB3 provided a solid architectural foundation, Atlas required approximately **2.5 times the implementation effort** due to its multi-entity data model, complex business logic, and advanced data management features.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Planned Enhancements
-
-**Team size:** 5
-
-1. **Add confirmation dialog for archive command:** Currently, the `archive` command immediately clears all contacts from the display without asking for confirmation. We plan to add a confirmation prompt that displays the number of contacts to be archived and requires explicit user confirmation before proceeding. For example:
-   ```
-   > archive
-   Warning: You are about to archive 25 contacts. This will clear your current contact list.
-   Type 'archive confirm' to proceed, or any other command to cancel.
-   ```
-
-2. **Make unarchive handle merge conflicts:** Currently, if the user has active contacts and runs `unarchive`, the behavior when contacts with duplicate phone numbers or emails exist is undefined. We plan to implement a merge strategy that shows a warning message listing conflicting contacts and asks the user whether to skip duplicates or replace existing contacts. For example:
-   ```
-   > unarchive
-   Warning: 3 contacts in the archive conflict with existing contacts:
-   - John Doe (same email: john@example.com)
-   - Jane Smith (same phone: 91234567)
-   Would you like to: [skip/replace/merge]
-   ```
-
-3. **Allow editing of follow-up priority:** Currently, once a follow-up is added, users cannot change its priority level without deleting and re-adding it. We plan to add an `editfu` command that allows users to modify the follow-up name and/or priority. Format: `editfu i/PERSON_INDEX f/FOLLOWUP_INDEX [n/NEW_NAME] [u/NEW_PRIORITY]`. For example:
-   ```
-   > editfu i/1 f/2 u/HIGH
-   Follow-up priority updated: "Check delivery status" changed from MEDIUM to HIGH priority
-   ```
-
-4. **Add follow-up sorting by priority:** Currently, follow-ups are displayed in the order they were added, which may not reflect their urgency. We plan to automatically sort follow-ups on each contact card by priority (HIGH first, then MEDIUM, then LOW) to make urgent tasks more visible. The display will show:
-   ```
-   Follow-ups:
-   [RED] Call supplier urgently (HIGH)
-   [RED] Confirm order details (HIGH)
-   [YELLOW] Review contract (MEDIUM)
-   [GREEN] Send thank you note (LOW)
-   ```
-
-5. **Make archive operations preserve contact order:** Currently, when using `unarchive`, contacts may not be restored in their original order. We plan to preserve the exact ordering of contacts as they appeared before archiving, including any custom sorting that was applied. This will maintain visual consistency for users who rely on contact positioning.
-
-6. **Add validation for duplicate follow-up names per contact:** Currently, users can add multiple follow-ups with identical names to the same contact, which can cause confusion. We plan to add validation that prevents adding a follow-up if another follow-up with the exact same name (case-insensitive) already exists for that contact. For example:
-   ```
-   > addfu i/1 f/Call supplier u/HIGH
-   Error: A follow-up named "Call supplier" already exists for this contact.
-   Please use a different name or delete the existing follow-up first.
-   ```
-
-7. **Enhance transaction summary to show income vs expense breakdown:** Currently, the `summary` command only shows the net cashflow as a single number. We plan to enhance it to display a breakdown showing total income, total expenses, and net cashflow separately. For example:
-   ```
-   > summary
-   Financial Summary:
-   Total Income: $5,250.00
-   Total Expenses: $3,120.50
-   Net Cashflow: +$2,129.50
-   ```
-
-8. **Add date/timestamp to follow-ups:** Currently, follow-ups have no time tracking, making it difficult to know when they were created or when they should be completed. We plan to add an optional due date field when creating follow-ups and display creation timestamps. Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY [d/DUE_DATE]`. Display example:
-   ```
-   Follow-ups:
-   [RED] Call supplier urgently (HIGH) - Due: 2025-11-05, Created: 2025-10-28
-   ```
-
-9. **Make follow-up deletion request confirmation for HIGH priority tasks:** Currently, deleting any follow-up happens immediately without confirmation, which could lead to accidental deletion of critical tasks. We plan to add a confirmation step only for HIGH priority follow-ups. For example:
-   ```
-   > deletefu i/1 f/1
-   Warning: You are about to delete a HIGH priority follow-up: "Call supplier urgently"
-   Type 'deletefu i/1 f/1 confirm' to proceed, or any other command to cancel.
-   ```
-
-10. **Add archive information display command:** Currently, users cannot view what's in the archive without running `unarchive`, which would overwrite their current contacts. We plan to add an `archiveinfo` command that displays summary information about archived contacts without loading them. For example:
-   ```
-   > archiveinfo
-   Archive Summary:
-   Total Contacts: 45
-   Last Archived: 2025-09-15 14:30
-   Total Transactions: 128
-   Total Follow-ups: 23 (8 HIGH, 10 MEDIUM, 5 LOW)
-   Archive Location: /data/archive.json
-   ```
