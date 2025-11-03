@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As an F&B business owner  | record sales and expense transactions linked to my stakeholders (e.g., daily sales, supplier payments, utility bills) | monitor my business finances accurately                                                  |
 | `* * *`  | As an F&B business owner  | delete incorrect or duplicate sales and expense transactions                                                          | keep my financial records clean and accurate                                             |
 | `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | clear my active contact list without permanently deleting valuable business relationships |
-| `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | quickly resume business relationships without re-entering contact information            |
+| `* * *` | As an F&B business owner | unarchive my contacts | quickly resume business relationships without re-entering contact information |
 | `* * *`  | As an F&B business owner  | add follow-up tasks with urgency levels to my contacts                                                                | track important actions I need to take with each business relationship                   |
 | `* * *`  | As an F&B business owner  | delete specific follow-up tasks from contacts                                                                         | keep my task list current and remove completed items                    |
 
@@ -507,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find contacts by providing both name and tag keywords.
-2. System searches for contacts whose names or tags match any of the given keywords.
+2. System searches for contacts whose names contain any of the given name keywords and whose tags match any of the given tag keywords.
 3. System displays the list of matching contacts.
 
    Use case ends.
@@ -807,24 +807,54 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `find n/Peter`<br>
       Expected: An empty list is shown.
 
+2. Finding a person by tag
+   1. Prerequisites: Add a person named "Alice" with tag "friends" and "Bob" with tag "colleagues".
+   2. Test case: `find t/friends`<br>
+      Expected: The contact "Alice" is shown in the list.
+   3. Test case: `find t/family`<br>
+      Expected: An empty list is shown.
+
+3. Finding a person by name and tag
+   1. Prerequisites: Add a person named "Charlie" with tag "clients" and "David" with tag "clients".
+   2. Test case: `find n/Charlie t/clients`<br>
+      Expected: The contact "Charlie" is shown in the list.
+   3. Test case: `find n/Eve t/clients`<br>
+      Expected: An empty list is shown.
+   4. Test case: `find n/Charlie t/friends`<br>
+      Expected: An empty list is shown.
+
 ### Managing transactions
 
 1. Adding a transaction
    1. Prerequisites: List all persons using the `list` command.
-   2. Test case: `addtxn i/1 n/Coffee v/5.00`<br>
+   2. Test case: `addtxn i/1 n/Coffee a/5.00`<br>
       Expected: A new transaction "Coffee" with value "5.00" is added to the first person.
-   3. Test case: `addtxn i/1 n/Lunch v/-10.00`<br>
+   3. Test case: `addtxn i/1 n/Lunch a/-10.00`<br>
       Expected: A new transaction "Lunch" with value "-10.00" is added to the first person.
 
 2. Deleting a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `deletetxn i/1 ti/1`<br>
+   2. Test case: `deletetxn i/1 t/1`<br>
       Expected: The first transaction of the first person is deleted.
 
 3. Editing a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `edittxn i/1 ti/1 n/new name`<br>
+   2. Test case: `edittxn i/1 t/1 n/new name`<br>
       Expected: The first transaction of the first person is renamed to "new name".
+
+### Managing follow-ups
+
+1. Adding a follow-up
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `addfu i/1 f/Follow up on invoice u/HIGH`<br>
+      Expected: A new follow-up "Follow up on invoice" with HIGH priority is added to the first person.
+   3. Test case: `addfu i/1 f/Another follow up u/LOW`<br>
+      Expected: A new follow-up "Another follow up" with LOW priority is added to the first person.
+
+2. Deleting a follow-up
+   1. Prerequisites: Add a follow-up to the first person.
+   2. Test case: `deletefu i/1 f/1`<br>
+      Expected: The first follow-up of the first person is deleted.
 
 ### Saving data
 
@@ -874,7 +904,6 @@ Despite the increased complexity, we successfully delivered a robust application
 
 In summary, while AB3 provided a solid architectural foundation, Atlas required approximately **2.5 times the implementation effort** due to its multi-entity data model, complex business logic, and advanced data management features.
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Appendix: Planned Enhancements
 
