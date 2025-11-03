@@ -215,8 +215,11 @@ Manage your data efficiently — from saving backups to clearing outdated record
 * Extraneous attributes for commands that do not take in attributes (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* All field names are capped at **250 chars**, an error `Character count of <field type> name exceeded 250 characters!` will be thrown depending on which field exceeds 250 chars
+
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 
 </div>
 
