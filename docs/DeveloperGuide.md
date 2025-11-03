@@ -992,9 +992,7 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    [RED] Call supplier urgently (HIGH) - Due: 2025-11-05, Created: 2025-10-28
    ```
 
-9. **Make follow-up deletion request confirmation for HIGH priority tasks:** Currently, deleting any follow-up happens immediately without confirmation, which could lead to accidental deletion of critical tasks. We plan to add a confirmation step only for HIGH priority follow-ups. For example:
+9. **Add index out of bounds message for `delete`, `edittxn`, `deletetxn` and `deletefu` commands:** Currently, providing an index number greater than the size of the address book says `index provided is invalid`. We plan to make the error message more specific for the user. For example:
    ```
-   > deletefu i/1 f/1
-   Warning: You are about to delete a HIGH priority follow-up: "Call supplier urgently"
-   Type 'deletefu i/1 f/1 confirm' to proceed, or any other command to cancel.
+   Warning: The person index provided is out of bounds. Please provide an index between 1 and [CURRENT_ADDRESS_BOOK_SIZE].
    ```
