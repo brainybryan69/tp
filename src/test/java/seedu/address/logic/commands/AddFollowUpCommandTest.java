@@ -199,7 +199,7 @@ public class AddFollowUpCommandTest {
                 "HIGH");
         AddFollowUpCommand addFollowUpCommand = new AddFollowUpCommand(outOfBoundIndex, followUp);
 
-        assertCommandFailure(addFollowUpCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addFollowUpCommand, model, Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
@@ -214,7 +214,7 @@ public class AddFollowUpCommandTest {
                 "MEDIUM");
         AddFollowUpCommand addFollowUpCommand = new AddFollowUpCommand(outOfBoundIndex, followUp);
 
-        assertCommandFailure(addFollowUpCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addFollowUpCommand, model, Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
