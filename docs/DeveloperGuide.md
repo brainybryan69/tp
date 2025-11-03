@@ -825,19 +825,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a transaction
    1. Prerequisites: List all persons using the `list` command.
-   2. Test case: `addtxn i/1 n/Coffee v/5.00`<br>
+   2. Test case: `addtxn i/1 n/Coffee a/5.00`<br>
       Expected: A new transaction "Coffee" with value "5.00" is added to the first person.
-   3. Test case: `addtxn i/1 n/Lunch v/-10.00`<br>
+   3. Test case: `addtxn i/1 n/Lunch a/-10.00`<br>
       Expected: A new transaction "Lunch" with value "-10.00" is added to the first person.
 
 2. Deleting a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `deletetxn i/1 ti/1`<br>
+   2. Test case: `deletetxn i/1 t/1`<br>
       Expected: The first transaction of the first person is deleted.
 
 3. Editing a transaction
    1. Prerequisites: Add a transaction to the first person.
-   2. Test case: `edittxn i/1 ti/1 n/new name`<br>
+   2. Test case: `edittxn i/1 t/1 n/new name`<br>
       Expected: The first transaction of the first person is renamed to "new name".
 
 ### Managing follow-ups
