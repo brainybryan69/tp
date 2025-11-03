@@ -824,6 +824,20 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `edittxn i/1 ti/1 n/new name`<br>
       Expected: The first transaction of the first person is renamed to "new name".
 
+### Managing follow-ups
+
+1. Adding a follow-up
+   1. Prerequisites: List all persons using the `list` command.
+   2. Test case: `addfu i/1 f/Follow up on invoice u/HIGH`<br>
+      Expected: A new follow-up "Follow up on invoice" with HIGH priority is added to the first person.
+   3. Test case: `addfu i/1 f/Another follow up u/LOW`<br>
+      Expected: A new follow-up "Another follow up" with LOW priority is added to the first person.
+
+2. Deleting a follow-up
+   1. Prerequisites: Add a follow-up to the first person.
+   2. Test case: `deletefu i/1 f/1`<br>
+      Expected: The first follow-up of the first person is deleted.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
