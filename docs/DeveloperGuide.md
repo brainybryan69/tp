@@ -13,7 +13,9 @@
 
 ## Acknowledgements
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- Atlas's Logo is adapted from [this icon](https://www.svgrepo.com/svg/376908/globe-grid) by <a href="https://github.com/halfmage/pixelarticons?ref=svgrepo.com" target="_blank">Halfmage</a> in MIT License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
+- [ChatGPT-4](https://chatgpt.com/) was used to assist in generating JavaDoc Comments and create a skeleton for UML Diagrams.
+- [ChatGPT-4](https://chatgpt.com/) was used to assist in generating JUnit Test cases.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -903,3 +905,96 @@ Despite the increased complexity, we successfully delivered a robust application
 In summary, while AB3 provided a solid architectural foundation, Atlas required approximately **2.5 times the implementation effort** due to its multi-entity data model, complex business logic, and advanced data management features.
 
 
+## Appendix: Planned Enhancements
+
+**Team size:** 5
+
+1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user. 
+
+    For example:
+   ```
+   > add n/John Doe p/91234567 a/invalidaddress
+   Warning: The address provided is invalid. 
+   Please ensure it contains at least a street name and a number.
+   ```
+
+2. **Throw Error Message when Editing an Existing contact uses its Existing Values:** Currently, editing a person using its own existing values is valid even though we have not made any changes to the contact information. We plan to implement a check for any change in parameters provided. For example:
+   ```
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+   
+   > edit 1 n/John Doe p/91234567 e/johnny@gmail.com
+   Warning: The fields you have provided are the same as the existing contact details.:
+   - John Doe
+   - 91234567
+   ```
+
+3. **Prevent duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name. 
+
+    For example:
+   ```
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+    Transactions:
+      1. Office Supplies: $150.00
+   
+   > addtxn i/1 n/Office Supplies a/200.00
+   Error: A transaction named "Office Supplies" already exists for this contact.
+   Please use a different name or delete the existing transaction first.
+   ```
+
+4. **Add follow-up sorting by priority:** Currently, follow-ups are displayed in the order they were added, which may not reflect their urgency. We plan to automatically sort follow-ups on each contact card by priority (HIGH first, then MEDIUM, then LOW) to make urgent tasks more visible. The display will show:
+   ```
+   Follow-ups:
+   [RED] Call supplier urgently (HIGH)
+   [RED] Confirm order details (HIGH)
+   [YELLOW] Review contract (MEDIUM)
+   [GREEN] Send thank you note (LOW)
+   ```
+
+5. **Make Error Message for `edittxn` and `deletetxn` more specific** Currently, entering a person index greater than the size of contact list throws `invalid person index`. <br> Entering a valid person index without any transaction throws `invalid transaction index`. We plan to make the error messages more specific to help users identify the exact issue. For example:
+   ```
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+    Transactions:
+      1. Office Supplies: $150.00
+   
+   2. Mary Jane, Phone: 98765432, Email: mayj@gmail.com
+   
+   
+   > edittxn i/2 t/1 n/New Transaction Name
+   Error: Person index 1 does not have any transactions.
+   
+   > deletetxn i/2 t/3
+   Error: Person index 2 does not have any transactions.
+   
+   >deletetxn i/1 t/2
+   Error: Person index 1 only has 1 transaction. Transaction index 2 is invalid.
+   ```
+
+
+6. **Add validation for duplicate follow-up names per contact:** Currently, users can add multiple follow-ups with identical names to the same contact, which can cause confusion. We plan to add validation that prevents adding a follow-up if another follow-up with the exact same name (case-insensitive) already exists for that contact. For example:
+   ```
+   > addfu i/1 f/Call supplier u/HIGH
+   Error: A follow-up named "Call supplier" already exists for this contact.
+   Please use a different name or delete the existing follow-up first.
+   ```
+
+7. **Make `deletefu` Error Message more Specific:** Currently, the `deletefu i/ f/1` command throws the message `The person index provided has no follow ups to delete` even though the person index has not been provided. We plan to add another error message to indicate that the index provided is invalid.<br>For example:
+   ```
+   > deletefu i/ f/1
+   Error: Invalid person index. Please provide a valid positive integer for the person index.
+   ```
+
+8. **Add date/timestamp to follow-ups:** Currently, follow-ups have no time tracking, making it difficult to know when they were created or when they should be completed. We plan to add an optional due date field when creating follow-ups and display creation timestamps. Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY [d/DUE_DATE]`. Display example:
+   ```
+   Follow-ups:
+   [RED] Call supplier urgently (HIGH) - Due: 2025-11-05, Created: 2025-10-28
+   ```
+
+9. **Make follow-up deletion request confirmation for HIGH priority tasks:** Currently, deleting any follow-up happens immediately without confirmation, which could lead to accidental deletion of critical tasks. We plan to add a confirmation step only for HIGH priority follow-ups. For example:
+   ```
+   > deletefu i/1 f/1
+   Warning: You are about to delete a HIGH priority follow-up: "Call supplier urgently"
+   Type 'deletefu i/1 f/1 confirm' to proceed, or any other command to cancel.
+   ```
