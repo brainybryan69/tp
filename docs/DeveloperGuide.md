@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As an F&B business owner  | record sales and expense transactions linked to my stakeholders (e.g., daily sales, supplier payments, utility bills) | monitor my business finances accurately                                                  |
 | `* * *`  | As an F&B business owner  | delete incorrect or duplicate sales and expense transactions                                                          | keep my financial records clean and accurate                                             |
 | `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | clear my active contact list without permanently deleting valuable business relationships |
-| `* * *`  | As an F&B business owner  | archive all my current contacts with a single command                                                                 | quickly resume business relationships without re-entering contact information            |
+| `* * *` | As an F&B business owner | unarchive my contacts | quickly resume business relationships without re-entering contact information |
 | `* * *`  | As an F&B business owner  | add follow-up tasks with urgency levels to my contacts                                                                | track important actions I need to take with each business relationship                   |
 | `* * *`  | As an F&B business owner  | delete specific follow-up tasks from contacts                                                                         | keep my task list current and remove completed items                    |
 
@@ -803,6 +803,22 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `find n/John`<br>
       Expected: The contact "John Doe" is shown in the list.
    3. Test case: `find n/Peter`<br>
+      Expected: An empty list is shown.
+
+2. Finding a person by tag
+   1. Prerequisites: Add a person named "Alice" with tag "friends" and "Bob" with tag "colleagues".
+   2. Test case: `find t/friends`<br>
+      Expected: The contact "Alice" is shown in the list.
+   3. Test case: `find t/family`<br>
+      Expected: An empty list is shown.
+
+3. Finding a person by name and tag
+   1. Prerequisites: Add a person named "Charlie" with tag "clients" and "David" with tag "clients".
+   2. Test case: `find n/Charlie t/clients`<br>
+      Expected: The contact "Charlie" is shown in the list.
+   3. Test case: `find n/Eve t/clients`<br>
+      Expected: An empty list is shown.
+   4. Test case: `find n/Charlie t/friends`<br>
       Expected: An empty list is shown.
 
 ### Managing transactions
