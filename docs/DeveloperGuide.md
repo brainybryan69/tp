@@ -13,7 +13,9 @@
 
 ## Acknowledgements
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- Atlas's Logo is adapted from [this icon](https://www.svgrepo.com/svg/376908/globe-grid) by <a href="https://github.com/halfmage/pixelarticons?ref=svgrepo.com" target="_blank">Halfmage</a> in MIT License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
+- [ChatGPT-4](https://chatgpt.com/) was used to assist in generating JavaDoc Comments and create a skeleton for UML Diagrams.
+- [ChatGPT-4](https://chatgpt.com/) was used to assist in generating JUnit Test cases.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -878,26 +880,38 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
 
 **Team size:** 5
 
-1. **Add confirmation dialog for archive command:** Currently, the `archive` command immediately clears all contacts from the display without asking for confirmation. We plan to add a confirmation prompt that displays the number of contacts to be archived and requires explicit user confirmation before proceeding. For example:
+1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user. 
+
+    For example:
    ```
-   > archive
-   Warning: You are about to archive 25 contacts. This will clear your current contact list.
-   Type 'archive confirm' to proceed, or any other command to cancel.
+   > add n/John Doe p/91234567 a/invalidaddress
+   Warning: The address provided is invalid. 
+   Please ensure it contains at least a street name and a number.
    ```
 
-2. **Make unarchive handle merge conflicts:** Currently, if the user has active contacts and runs `unarchive`, the behavior when contacts with duplicate phone numbers or emails exist is undefined. We plan to implement a merge strategy that shows a warning message listing conflicting contacts and asks the user whether to skip duplicates or replace existing contacts. For example:
+2. **Throw Error Message when Editing an Existing contact uses its Existing Values:** Currently, editing a person using its own existing values is valid even though we have not made any changes to the contact information. We plan to implement a check for any change in parameters provided. For example:
    ```
-   > unarchive
-   Warning: 3 contacts in the archive conflict with existing contacts:
-   - John Doe (same email: john@example.com)
-   - Jane Smith (same phone: 91234567)
-   Would you like to: [skip/replace/merge]
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+   
+   > edit 1 n/John Doe p/91234567 e/johnny@gmail.com
+   Warning: The fields you have provided are the same as the existing contact details.:
+   - John Doe
+   - 91234567
    ```
 
-3. **Allow editing of follow-up priority:** Currently, once a follow-up is added, users cannot change its priority level without deleting and re-adding it. We plan to add an `editfu` command that allows users to modify the follow-up name and/or priority. Format: `editfu i/PERSON_INDEX f/FOLLOWUP_INDEX [n/NEW_NAME] [u/NEW_PRIORITY]`. For example:
+3. **Prevent duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name. 
+
+    For example:
    ```
-   > editfu i/1 f/2 u/HIGH
-   Follow-up priority updated: "Check delivery status" changed from MEDIUM to HIGH priority
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+    Transactions:
+      1. Office Supplies: $150.00
+   
+   > addtxn i/1 n/Office Supplies a/200.00
+   Error: A transaction named "Office Supplies" already exists for this contact.
+   Please use a different name or delete the existing transaction first.
    ```
 
 4. **Add follow-up sorting by priority:** Currently, follow-ups are displayed in the order they were added, which may not reflect their urgency. We plan to automatically sort follow-ups on each contact card by priority (HIGH first, then MEDIUM, then LOW) to make urgent tasks more visible. The display will show:
@@ -909,7 +923,26 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    [GREEN] Send thank you note (LOW)
    ```
 
-5. **Make archive operations preserve contact order:** Currently, when using `unarchive`, contacts may not be restored in their original order. We plan to preserve the exact ordering of contacts as they appeared before archiving, including any custom sorting that was applied. This will maintain visual consistency for users who rely on contact positioning.
+5. **Make Error Message for `edittxn` and `deletetxn` more specific** Currently, entering a person index greater than the size of contact list throws `invalid person index`. <br> Entering a valid person index without any transaction throws `invalid transaction index`. We plan to make the error messages more specific to help users identify the exact issue. For example:
+   ```
+   Address Book GUI:
+   1. John Doe, Phone: 91234567, Email: johnd@gmail.com
+    Transactions:
+      1. Office Supplies: $150.00
+   
+   2. Mary Jane, Phone: 98765432, Email: mayj@gmail.com
+   
+   
+   > edittxn i/2 t/1 n/New Transaction Name
+   Error: Person index 1 does not have any transactions.
+   
+   > deletetxn i/2 t/3
+   Error: Person index 2 does not have any transactions.
+   
+   >deletetxn i/1 t/2
+   Error: Person index 1 only has 1 transaction. Transaction index 2 is invalid.
+   ```
+
 
 6. **Add validation for duplicate follow-up names per contact:** Currently, users can add multiple follow-ups with identical names to the same contact, which can cause confusion. We plan to add validation that prevents adding a follow-up if another follow-up with the exact same name (case-insensitive) already exists for that contact. For example:
    ```
@@ -918,13 +951,10 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    Please use a different name or delete the existing follow-up first.
    ```
 
-7. **Enhance transaction summary to show income vs expense breakdown:** Currently, the `summary` command only shows the net cashflow as a single number. We plan to enhance it to display a breakdown showing total income, total expenses, and net cashflow separately. For example:
+7. **Make `deletefu` Error Message more Specific:** Currently, the `deletefu i/ f/1` command throws the message `The person index provided has no follow ups to delete` even though the person index has not been provided. We plan to add another error message to indicate that the index provided is invalid.<br>For example:
    ```
-   > summary
-   Financial Summary:
-   Total Income: $5,250.00
-   Total Expenses: $3,120.50
-   Net Cashflow: +$2,129.50
+   > deletefu i/ f/1
+   Error: Invalid person index. Please provide a valid positive integer for the person index.
    ```
 
 8. **Add date/timestamp to follow-ups:** Currently, follow-ups have no time tracking, making it difficult to know when they were created or when they should be completed. We plan to add an optional due date field when creating follow-ups and display creation timestamps. Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY [d/DUE_DATE]`. Display example:
@@ -938,15 +968,4 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    > deletefu i/1 f/1
    Warning: You are about to delete a HIGH priority follow-up: "Call supplier urgently"
    Type 'deletefu i/1 f/1 confirm' to proceed, or any other command to cancel.
-   ```
-
-10. **Add archive information display command:** Currently, users cannot view what's in the archive without running `unarchive`, which would overwrite their current contacts. We plan to add an `archiveinfo` command that displays summary information about archived contacts without loading them. For example:
-   ```
-   > archiveinfo
-   Archive Summary:
-   Total Contacts: 45
-   Last Archived: 2025-09-15 14:30
-   Total Transactions: 128
-   Total Follow-ups: 23 (8 HIGH, 10 MEDIUM, 5 LOW)
-   Archive Location: /data/archive.json
    ```
