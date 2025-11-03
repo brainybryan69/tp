@@ -211,11 +211,7 @@ Manage your data efficiently — from saving backups to clearing outdated record
 * Attributes can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-
-* Extraneous attributes for commands that do not take in attributes (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* All field names are capped at **250 chars**, an error `Character count of <field type> name exceeded 250 characters!` will be thrown depending on which field exceeds 250 chars
+* `NAME`, `EMAIL`, `ADDRESS`, `FOLLOWUP_NAME` and `TRANSACTION_NAME` fields are capped at **250 chars**, an error `Character count of <field type> name exceeded 250 characters!` will be thrown depending on which field exceeds 250 chars
 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -295,15 +291,6 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 
 * the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
 * the maximum sum to be displayed is capped at positive or negative 1 billion.
-
-</div>
-
-<div markdown="block" class="alert alert-primary">
-
-**:information_source: Notes about the Summary command format:**<br>
-
-* Words after the command keyword `summary` will be ignored.<br>
-  e.g. `summary 123` will be interpreted as `summary`
 
 </div>
 
@@ -694,16 +681,6 @@ Restores all data stored in the archive file into Atlas
 * Restores contacts from the Atlas archive file located in `[JAR file location]/data/archive.json`
 * The contacts displayed after the `unarchive` command will be in the same state as Atlas when the `archive` command was run.
 * Archived stakeholders are still checked for [duplicates](#duplicate-stakeholders).
-</div>
-
-
-<div markdown="block" class="alert alert-primary">
-
-**:information_source: Notes about the Data Management command format:**<br>
-
-* Words after the command keyword `archive` and `unarchive` will be ignored.<br>
-    e.g. `archive 123` will be interpreted as `archive`
-
 </div>
 
 [↩️ Back to Table of Contents](#table-of-contents)
