@@ -26,6 +26,7 @@ public class ParserUtil {
             + "Range from [$1 to $100000] or [-$1 to -$100000]. (rounded off to 2 decimal places)";
     public static final String MESSAGE_INVALID_TRANSACTION_FORMAT = "Transaction amount MUST be strictly NUMERICAL "
             + "and NON-ZERO.";
+    public static final String MESSAGE_EXCEED_MAX_CHAR = "Character count of 250 was exceeded for: %1$s!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -49,6 +50,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
+        if (isTooLong(trimmedName)) {
+            throw new ParseException(String.format(MESSAGE_EXCEED_MAX_CHAR, "Name"));
+        }
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -79,6 +85,11 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
+
+        if (isTooLong(trimmedAddress)) {
+            throw new ParseException(String.format(MESSAGE_EXCEED_MAX_CHAR, "Address"));
+        }
+
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -94,6 +105,11 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+
+        if (isTooLong(trimmedEmail)) {
+            throw new ParseException(String.format(MESSAGE_EXCEED_MAX_CHAR, "Email"));
+        }
+
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -151,5 +167,9 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_TRANSACTION_FORMAT);
         }
+    }
+
+    public static boolean isTooLong(String test) {
+        return test.length() > 250;
     }
 }

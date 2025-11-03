@@ -43,6 +43,10 @@ public class AddFollowUpCommandParser implements Parser<AddFollowUpCommand> {
 
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String followUpName = argMultimap.getValue(PREFIX_FOLLOWUP_NAME).get();
+        if (followUpName.length() > 250) {
+            throw new ParseException("Character count of follow up name exceeded 250 characters!");
+        }
+
         String followUpUrgency = argMultimap.getValue(PREFIX_FOLLOWUP_URGENCY).get();
 
         try {

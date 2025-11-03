@@ -41,6 +41,10 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
 
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String transactionName = argMultimap.getValue(PREFIX_TRANSACTION_NAME).get();
+        if (transactionName.length() > 250) {
+            throw new ParseException("Character count of transaction name exceeded 250 characters!");
+        }
+
         if (transactionName.trim().isEmpty()) {
             throw new ParseException(
                     AddTransactionCommand.MESSAGE_INVALID_TRANSACTION_NAME);
