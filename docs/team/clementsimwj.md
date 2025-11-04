@@ -15,7 +15,7 @@ Given below are my contributions to the project.
     * What it does: Allows F&B Business owners to archive data of past months/years to reduce clutter in the main data file.
     * Justification: This feature improves the product significantly because business owners can ensure auditability and keep track of past records for legal compliance. At the same time, clearing the main address book reduces cluttering of unnecessary data.
     * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: This feature relied on the implementation of the main address book. 
+    * Credits: This feature relied on the implementation of the main address book.
 
 
 * **Unarchive Feature**: Added the ability to restore data from an archived file.
