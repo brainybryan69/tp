@@ -29,7 +29,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="550" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="700" />
 
 The **Architecture Diagram** given above explains the high-level design of the App.
 
