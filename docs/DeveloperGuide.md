@@ -909,12 +909,12 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
 
 **Team size:** 5
 
-1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user. 
+1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user.
 
     For example:
    ```
    > add n/John Doe p/91234567 a/invalidaddress
-   Warning: The address provided is invalid. 
+   Warning: The address provided is invalid.
    Please ensure it contains at least a street name and a number.
    ```
 
@@ -929,7 +929,7 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    - 91234567
    ```
 
-3. **Add validation for duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name. 
+3. **Add validation for duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name.
 
     For example:
    ```
