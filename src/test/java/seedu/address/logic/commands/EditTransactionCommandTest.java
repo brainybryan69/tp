@@ -63,7 +63,7 @@ public class EditTransactionCommandTest {
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex,
                 Index.fromZeroBased(0), descriptor);
 
-        assertCommandFailure(editTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editTransactionCommand, model, Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUNDS);
     }
 
     /**
@@ -83,7 +83,7 @@ public class EditTransactionCommandTest {
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex,
                 Index.fromZeroBased(0), descriptor);
 
-        assertCommandFailure(editTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editTransactionCommand, model, Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
