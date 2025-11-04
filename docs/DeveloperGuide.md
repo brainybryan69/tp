@@ -978,3 +978,17 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
 
 
 8. **Restore the help window after minimising:** Tutors who minimise the help window cannot bring it back in the same session. The enhancement will ensure the window is reopened or refocused whenever help is invoked again.
+
+
+9. **Make `edit` error message more specific:** Currently, editing an index larger than the size of the contact list displays the message `Index is not a non-zero unsigned integer.` even though the index provided is a valid non-zero unsigned integer. We plan to correct this error message.<br> For Example:
+   ```
+   > edit i/100000 n/Jane Doe
+   Error: Index provided is larger that the size of the contact list.
+   ```
+
+
+10. **Throw Error for `find n/` command**: Currently, `find n/Alice n/Bernice` only finds contacts with the name "Bernice" if both "Alice" and "Bernice" are in the contact list. We plan to throw an error message when multiple `n/` keywords are provided in the `find n/` command.<br> For Example:
+   ```
+   > find n/Alice n/Bernice
+   Error: Multiple n/ detected. Please provide only one n/ keyword with multiple names separated by spaces.
+   ```

@@ -132,7 +132,6 @@ With Atlas, you can cut through the clutter of admin work and focus on running a
                 </p>
         </div>
     </details>
-   
 
 6. Run: `java -jar atlas.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:<br>
@@ -289,8 +288,10 @@ Collates the sum of all transactions tied to every single person in Atlas and di
 
 **📌 Things to Note:**
 
-* the sum displayed in the GUI will be positive or negative according to the total cashflow of the user
-* the maximum sum to be displayed is capped at positive or negative 1 billion.
+* The sum displayed in the GUI will be positive or negative according to the total cashflow of the user
+* The maximum sum to be displayed is capped at positive or negative 1 billion.
+* The summary calculated will be based off on the current filtered list of stakeholders displayed.<br>
+  e.g. if the user has filtered the list using `find t/supplier`, only transactions tied to stakeholders with the `SUPPLIER` tag will be considered in the summary calculation.
 
 </div>
 
@@ -385,12 +386,14 @@ Finds persons whose names contain any of the given keywords.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Stakeholder names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Using multiple `n/` prefixes will be resolved with the right most `n/`.
+  e.g. `find n/John n/Alice` is equivalent to `find n/Alice`
 
 </div>
 
 **✅ Valid Examples**:<br>
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Locating persons by tag: `find t/`
 
@@ -411,7 +414,7 @@ Finds persons whose tag names correspond to the given tag keywords.
 * Tag names cannot be empty after `t/` is declared.
 
 **❌ Invalid Examples**:
-* `find t/owner` is invalid since `OWNER` is not a [valid tag](#valid-tags). 
+* `find t/owner` is invalid since `OWNER` is not a [valid tag](#valid-tags).
 * `find t/` is invalid since `TAG_NAME` field is empty.
 
 </div>
