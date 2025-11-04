@@ -412,6 +412,8 @@ Finds persons whose tag names correspond to the given tag keywords.
 * Only full tag names will be matched e.g. `supp` will not match `supplier`
 * Persons whose tag matches at least one of the tag names will be returned.
 * Tag names cannot be empty after `t/` is declared.
+* For multiple tags, use multiple prefixes `/t`. e.g. `find t/supplier t/employee` returns persons with either `SUPPLIER` or `EMPLOYEE` tags.
+* Unlike [finding by name](#locating-persons-by-name-find-n), using multiple `t/` prefixes will **not** be resolved with the right most `t/`.
 
 **❌ Invalid Examples**:
 * `find t/owner` is invalid since `OWNER` is not a [valid tag](#valid-tags).
@@ -706,8 +708,9 @@ Index Numbers are indicated beside each stakeholders' names:<br>
     <em>Figure: UI of Atlas (Numbers circled in red are the Index Numbers)</em>
 </p>
 
+**EVERY** command that requires a `PERSON_INDEX` will be based on the **given displayed filtered list**.<br>
 Use the **relative indexing** of any given list:
-* In the case of a [`find` command](#locating-persons-by-name-find-n) returning a filtered list, use the Index Number of the stakeholders in the **filtered list**.
+* For example, in the case of a [`find` command](#locating-persons-by-name-find-n) returning a filtered list, use the Index Number of the stakeholders in the **filtered list**.
 </div>
 
 ### Valid Tags:
