@@ -168,7 +168,7 @@ The `addtxn` command adds a new transaction to a person. The implementation invo
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/AddTransactionSequenceDiagram.puml" alt="Add Transaction Sequence Diagram" width="550" />
+<puml src="diagrams/AddTransactionSequenceDiagram.puml" alt="Add Transaction Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -184,7 +184,7 @@ The `deletetxn` command removes a transaction from a person. The implementation 
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/DeleteTransactionSequenceDiagram.puml" alt="Delete Transaction Sequence Diagram" width="550" />
+<puml src="diagrams/DeleteTransactionSequenceDiagram.puml" alt="Delete Transaction Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -200,7 +200,7 @@ The `editTxn` command edits an existing transaction of a person. The implementat
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" width="550" />
+<puml src="diagrams/EditTransactionSequenceDiagram.puml" alt="Edit Transaction Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -222,7 +222,7 @@ The `addfu` command adds a new follow-up to a person. The implementation involve
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/AddFollowUpSequenceDiagram.puml" alt="Add Follow Up Sequence Diagram" width="550" />
+<puml src="diagrams/AddFollowUpSequenceDiagram.puml" alt="Add Follow Up Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -238,7 +238,7 @@ The `deletefu` command removes a follow-up from a person. The implementation is 
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/DeleteFollowUpSequenceDiagram.puml" alt="Delete FollowUp Sequence Diagram" width="550" />
+<puml src="diagrams/DeleteFollowUpSequenceDiagram.puml" alt="Delete FollowUp Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -258,7 +258,7 @@ The `archive` command moves all the people from the active address book to the a
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" width="550" />
+<puml src="diagrams/ArchiveSequenceDiagram.puml" alt="Archive Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
@@ -273,7 +273,7 @@ The `unarchive` command restores a person from the archived list back to the act
 
 The following sequence diagram illustrates the process:
 
-<puml src="diagrams/UnarchiveSequenceDiagram.puml" alt="Unarchive Sequence Diagram" width="550" />
+<puml src="diagrams/UnarchiveSequenceDiagram.puml" alt="Unarchive Sequence Diagram" width="800" />
 
 **Implementation Details:**
 
