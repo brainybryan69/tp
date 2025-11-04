@@ -47,7 +47,7 @@ public class DeleteFollowUpCommand extends Command {
     /** Error message shown when a follow-up index is invalid. */
     public static final String MESSAGE_INVALID_FOLLOWUP_INDEX = "The follow up index provided is invalid";
 
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "The person index provided has no follow ups to delete";
+    public static final String MESSAGE_INVALID_PERSON_INDEX = "Index provided is not a non-zero unsigned integer";
 
     private final Index personIndex;
     private final Index followUpIndex;
