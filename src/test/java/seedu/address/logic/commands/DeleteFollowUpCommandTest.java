@@ -100,7 +100,7 @@ public class DeleteFollowUpCommandTest {
 
         DeleteFollowUpCommand command = new DeleteFollowUpCommand(invalidPersonIndex, followUpIndex);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_PERSON_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
