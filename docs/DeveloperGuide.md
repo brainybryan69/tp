@@ -909,12 +909,12 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
 
 **Team size:** 5
 
-1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user. 
+1. **Add validation for address:** Currently, the `add` and `edit` command does not validate the address provided by the user. We plan to implement a simple validation that checks if the address contains at least a street name and a number. If the address is invalid, an error message will be shown to the user.
 
     For example:
    ```
    > add n/John Doe p/91234567 a/invalidaddress
-   Warning: The address provided is invalid. 
+   Warning: The address provided is invalid.
    Please ensure it contains at least a street name and a number.
    ```
 
@@ -929,7 +929,7 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    - 91234567
    ```
 
-3. **Prevent duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name. 
+3. **Add validation for duplicate of Transaction Names:** Currently, the same transaction names can be used and successfully added. We plan to add a transaction name validation that checks if the transaction to be added has a unique name.
 
     For example:
    ```
@@ -943,16 +943,7 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    Please use a different name or delete the existing transaction first.
    ```
 
-4. **Add follow-up sorting by priority:** Currently, follow-ups are displayed in the order they were added, which may not reflect their urgency. We plan to automatically sort follow-ups on each contact card by priority (HIGH first, then MEDIUM, then LOW) to make urgent tasks more visible. The display will show:
-   ```
-   Follow-ups:
-   [RED] Call supplier urgently (HIGH)
-   [RED] Confirm order details (HIGH)
-   [YELLOW] Review contract (MEDIUM)
-   [GREEN] Send thank you note (LOW)
-   ```
-
-5. **Make Error Message for `edittxn` and `deletetxn` more specific** Currently, entering a person index greater than the size of contact list throws `invalid person index`. <br> Entering a valid person index without any transaction throws `invalid transaction index`. We plan to make the error messages more specific to help users identify the exact issue. For example:
+4. **Make Error Message for `edittxn` and `deletetxn` more specific** Currently, entering a valid person index without any transaction throws `The transaction index provided is invalid`. We plan to make the error messages more specific to help users identify the exact issue. For example:
    ```
    Address Book GUI:
    1. John Doe, Phone: 91234567, Email: johnd@gmail.com
@@ -965,34 +956,25 @@ In summary, while AB3 provided a solid architectural foundation, Atlas required 
    > edittxn i/2 t/1 n/New Transaction Name
    Error: Person index 1 does not have any transactions.
    
-   > deletetxn i/2 t/3
+   >deletetxn i/2 t/1
    Error: Person index 2 does not have any transactions.
-   
-   >deletetxn i/1 t/2
-   Error: Person index 1 only has 1 transaction. Transaction index 2 is invalid.
    ```
 
 
-6. **Add validation for duplicate follow-up names per contact:** Currently, users can add multiple follow-ups with identical names to the same contact, which can cause confusion. We plan to add validation that prevents adding a follow-up if another follow-up with the exact same name (case-insensitive) already exists for that contact. For example:
+5. **Add validation for duplicate follow-up names per contact:** Currently, users can add multiple follow-ups with identical names to the same contact, which can cause confusion. We plan to add validation that prevents adding a follow-up if another follow-up with the exact same name (case-insensitive) already exists for that contact. For example:
    ```
    > addfu i/1 f/Call supplier u/HIGH
    Error: A follow-up named "Call supplier" already exists for this contact.
    Please use a different name or delete the existing follow-up first.
    ```
 
-7. **Make `deletefu` Error Message more Specific:** Currently, the `deletefu i/ f/1` command throws the message `The person index provided has no follow ups to delete` even though the person index has not been provided. We plan to add another error message to indicate that the index provided is invalid.<br>For example:
+6. **Make `deletefu` Error Message more Specific:** Currently, the `deletefu i/1 f/` command throws the message `The follow up index provided is invalid` even though the follow-up index has not been provided. We plan to add another error message to indicate that the index provided is invalid.<br>For example:
    ```
-   > deletefu i/ f/1
-   Error: Invalid person index. Please provide a valid positive integer for the person index.
-   ```
-
-8. **Add date/timestamp to follow-ups:** Currently, follow-ups have no time tracking, making it difficult to know when they were created or when they should be completed. We plan to add an optional due date field when creating follow-ups and display creation timestamps. Format: `addfu i/PERSON_INDEX f/FOLLOWUP_NAME u/PRIORITY [d/DUE_DATE]`. Display example:
-   ```
-   Follow-ups:
-   [RED] Call supplier urgently (HIGH) - Due: 2025-11-05, Created: 2025-10-28
+   > deletefu i/1 f/
+   Error: Index provided is not a non-zero unsigned integer.
    ```
 
-9. **Add index out of bounds message for `delete`, `edittxn`, `deletetxn` and `deletefu` commands:** Currently, providing an index number greater than the size of the address book says `index provided is invalid`. We plan to make the error message more specific for the user. For example:
-   ```
-   Warning: The person index provided is out of bounds. Please provide an index between 1 and [CURRENT_ADDRESS_BOOK_SIZE].
-   ```
+7. **Enhance email validation:** Currently, our email validation does basic validation for the email provided based on the format `xxx@xxx.xxx`. We plan to add a more extensive validation for email like domain checks.
+
+
+8. **Restore the help window after minimising:** Tutors who minimise the help window cannot bring it back in the same session. The enhancement will ensure the window is reopened or refocused whenever help is invoked again.
