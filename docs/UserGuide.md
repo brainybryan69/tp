@@ -420,6 +420,8 @@ Finds persons whose tag names correspond to the given tag keywords.
 * `find t/supplier` returns a list of stakeholders who have tags `SUPPLIER`
 * `find t/supplier t/employee` returns a combined list of stakeholders who either have tags `SUPPLIER` or `EMPLOYEE` or both.
 
+<div style="page-break-after: always;"></div>
+
 
 ### Locating persons by name AND tag: `find n/ t/` 
 
@@ -722,10 +724,12 @@ Tag names are not case-sensitive. (i.e `supplier` and `SUPPLIER` are both valid 
 Any other tag names will be **invalid**.
 
 ### Transaction Amounts:
-Transaction amounts **CANNOT** be zero.
+* Transaction amounts **CANNOT** be zero.
+* Transaction amounts cannot be greater than 100000 or lesser than -100000
 * Transaction Amounts are **rounded off to 2 decimal places** before checking for non-zero amount.
 * `0.004` will be rounded to `0.00` and will be **invalid**.
 * `0.005` will be rounded to `0.01` and will be **valid**.
+
 
 <div style="page-break-after: always;"></div>
 
